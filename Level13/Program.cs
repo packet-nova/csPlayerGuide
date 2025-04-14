@@ -80,4 +80,55 @@ int AskForNumber(string text, int min, int max)
 */
 
 // Using methods to improve previous programs
+//The Dominion of Kings (chapter 7)
 
+var estatePointValue = 1;
+var duchyPointValue = 3;
+var provincePointValue = 6;
+
+string[] cardTypes = new string[3] {$"Estate - {estatePointValue}", $"Duchy - {duchyPointValue}", $"Province - {provincePointValue}" };
+
+GetCardValues();
+
+Console.WriteLine("How many estates do you own?");
+var totalEstates = Convert.ToInt32(Console.ReadLine());
+
+Console.WriteLine("How many duchies do you own?");
+var totalDuchies = Convert.ToInt32(Console.ReadLine());
+
+Console.WriteLine("How many provinces do you own?");
+var totalProvinces = Convert.ToInt32(Console.ReadLine());
+
+var estatePoints = estatePointValue * totalEstates;
+var duchyPoints = duchyPointValue * totalDuchies;
+var provincesPoints = provincePointValue * totalProvinces;
+
+int intKingdomValue = GetKingdomIntValue();
+
+var totalKingdomValue = estatePoints + duchyPoints + provincesPoints;
+//Console.WriteLine($"The value of your kingdom is {totalKingdomValue}.");
+
+Console.WriteLine($"Using return int method: Your kingdom's value is {intKingdomValue}.");
+GetKingdomValue();
+
+// Get total kingdom value
+void GetKingdomValue()
+{
+    var totalKingdomValue = estatePoints + duchyPoints + provincesPoints;
+    Console.WriteLine($"Using void method: Your kingdom's value is {totalKingdomValue}.");
+}
+
+// Get total kingdom value but returning value
+int GetKingdomIntValue()
+{
+    var totalKingdomValue = estatePoints + duchyPoints + provincesPoints;
+    return totalKingdomValue;
+}
+
+void GetCardValues()
+{
+    foreach (var cardType in cardTypes)
+    {
+        Console.WriteLine(cardType);
+    }
+}
