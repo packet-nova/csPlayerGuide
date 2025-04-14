@@ -82,6 +82,9 @@ int AskForNumber(string text, int min, int max)
 // Using methods to improve previous programs
 // The Dominion of Kings (chapter 7)
 
+Console.Title = "Dominion of Kings";
+Console.ForegroundColor = ConsoleColor.Cyan;
+
 var estatePointValue = 1;
 var duchyPointValue = 3;
 var provincePointValue = 6;
