@@ -81,8 +81,3 @@ int AskForNumber(string text, int min, int max)
 
 // Using methods to improve previous programs
 
-Console.WriteLine("hello from PC");
-Console.WriteLine("hello from PC");
-Console.WriteLine("hello from PC");
-Console.WriteLine("hello from PC2");
-Console.WriteLine("hello from PC2");
