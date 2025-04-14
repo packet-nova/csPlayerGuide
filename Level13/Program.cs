@@ -139,7 +139,7 @@ void BuyCards(string text, int min, int max)
 
         if (choice == "estate" || choice == "duchy" || choice == "province")
         {
-            validChoice = true;  // Exit loop once a valid card type is selected
+            validChoice = true;
         }
         else
         {
