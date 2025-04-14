@@ -80,13 +80,13 @@ int AskForNumber(string text, int min, int max)
 */
 
 // Using methods to improve previous programs
-//The Dominion of Kings (chapter 7)
+// The Dominion of Kings (chapter 7)
 
 var estatePointValue = 1;
 var duchyPointValue = 3;
 var provincePointValue = 6;
 
-string[] cardTypes = new string[3] {$"Estate - {estatePointValue}", $"Duchy - {duchyPointValue}", $"Province - {provincePointValue}" };
+string[] cardTypes = new string[3] { $"Estate - {estatePointValue}", $"Duchy - {duchyPointValue}", $"Province - {provincePointValue}" };
 
 GetCardValues();
 
@@ -101,28 +101,18 @@ var totalProvinces = Convert.ToInt32(Console.ReadLine());
 
 var estatePoints = estatePointValue * totalEstates;
 var duchyPoints = duchyPointValue * totalDuchies;
-var provincesPoints = provincePointValue * totalProvinces;
+var provincePoints = provincePointValue * totalProvinces;
 
-int intKingdomValue = GetKingdomIntValue();
+int totalKingdomValue = GetKingdomValue(estatePoints, duchyPoints, provincePoints);
 
-var totalKingdomValue = estatePoints + duchyPoints + provincesPoints;
-//Console.WriteLine($"The value of your kingdom is {totalKingdomValue}.");
+Console.WriteLine($"Your kingdom's value is {totalKingdomValue}.");
 
-Console.WriteLine($"Using return int method: Your kingdom's value is {intKingdomValue}.");
-GetKingdomValue();
-
-// Get total kingdom value
-void GetKingdomValue()
-{
-    var totalKingdomValue = estatePoints + duchyPoints + provincesPoints;
-    Console.WriteLine($"Using void method: Your kingdom's value is {totalKingdomValue}.");
-}
+BuyCards("What card do you want to buy? ", 1, 10);
 
 // Get total kingdom value but returning value
-int GetKingdomIntValue()
+int GetKingdomValue(int estatePoints, int duchyPoints, int provincesPoints)
 {
-    var totalKingdomValue = estatePoints + duchyPoints + provincesPoints;
-    return totalKingdomValue;
+    return estatePoints + duchyPoints + provincesPoints;
 }
 
 void GetCardValues()
@@ -132,3 +122,67 @@ void GetCardValues()
         Console.WriteLine(cardType);
     }
 }
+
+void BuyCards(string text, int min, int max)
+{
+    bool validChoice = false;
+    string choice = "";
+
+    while (!validChoice)
+    {
+        GetCardValues();
+        Console.WriteLine(text);
+        choice = Console.ReadLine().Trim().ToLower();
+
+        if (choice == "estate" || choice == "duchy" || choice == "province")
+        {
+            validChoice = true;  // Exit loop once a valid card type is selected
+        }
+        else
+        {
+            Console.WriteLine("Incorrect option. Please choose 'estate', 'duchy', or 'province'.");
+        }
+    }
+
+    bool validCount = false;
+    int choiceCount = 0;
+
+    while (!validCount)
+    {
+        Console.WriteLine($"How many? Choose between {min} and {max}: ");
+        if (int.TryParse(Console.ReadLine(), out choiceCount) && choiceCount >= min && choiceCount <= max)
+        {
+            validCount = true;
+        }
+        else
+        {
+            Console.WriteLine("You've entered an invalid number. Try again.");
+        }
+    }
+
+    if (choice == "estate")
+    {
+        totalEstates += choiceCount;
+    }
+    else if (choice == "duchy")
+    {
+        totalDuchies += choiceCount;
+    }
+    else if (choice == "province")
+    {
+        totalProvinces += choiceCount;
+    }
+
+    estatePoints = estatePointValue * totalEstates;
+    duchyPoints = duchyPointValue * totalDuchies;
+    provincePoints = provincePointValue * totalProvinces;
+
+    totalKingdomValue = GetKingdomValue(estatePoints, duchyPoints, provincePoints);
+
+    Console.WriteLine($"You purchased {choiceCount} {choice}(s).");
+    Console.WriteLine($"Your updated totals are: Estates: {totalEstates}, Duchies: {totalDuchies}, Provinces: {totalProvinces}.");
+    Console.WriteLine($"Your kingdom's value is: {totalKingdomValue}.");
+}
+
+Console.WriteLine("Press any key to exit...");
+Console.ReadKey();
