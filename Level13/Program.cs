@@ -89,9 +89,17 @@ var estatePointValue = 1;
 var duchyPointValue = 3;
 var provincePointValue = 6;
 
-string[] cardTypes = new string[3] { $"Estate - {estatePointValue}", $"Duchy - {duchyPointValue}", $"Province - {provincePointValue}" };
+// you can use this new "collection expression" syntax to make initializing arrays easier
+string[] cardTypes = [
+    // style points - I like to put each element of the array on its own line to be a bit more tidy
+    $"Estate - {estatePointValue}", 
+    $"Duchy - {duchyPointValue}", 
+    $"Province - {provincePointValue}"
+];
 
-GetCardValues();
+// changed the name of this method to be a bit more clear
+// because generally I'm going to expect any function named "Get___" to return a value
+PrintCardValues();
 
 Console.WriteLine("How many estates do you own?");
 var totalEstates = Convert.ToInt32(Console.ReadLine());
@@ -110,7 +118,12 @@ int totalKingdomValue = GetKingdomValue(estatePoints, duchyPoints, provincePoint
 
 Console.WriteLine($"Your kingdom's value is {totalKingdomValue}.");
 
-BuyCards("What card do you want to buy? ", 1, 10);
+// since the `text` parameter of the `BuyCards` function
+// was only used to print this line, I moved it out here.
+// A good goal is to always try making our functions efficient,
+// doing one thing and doing it well. It's known as the "single responsibility principle" 
+Console.WriteLine("What card do you want to buy? ");
+BuyCards(1, 10);
 
 // Get total kingdom value but returning value
 int GetKingdomValue(int estatePoints, int duchyPoints, int provincesPoints)
@@ -118,7 +131,7 @@ int GetKingdomValue(int estatePoints, int duchyPoints, int provincesPoints)
     return estatePoints + duchyPoints + provincesPoints;
 }
 
-void GetCardValues()
+void PrintCardValues()
 {
     foreach (var cardType in cardTypes)
     {
@@ -126,56 +139,81 @@ void GetCardValues()
     }
 }
 
-void BuyCards(string text, int min, int max)
+void BuyCards(int min, int max)
 {
-    bool validChoice = false;
+    // another common preference is to prefix booleans with "is"
+    bool isValidChoice = false;
     string choice = "";
 
-    while (!validChoice)
+    while (!isValidChoice)
     {
-        GetCardValues();
-        Console.WriteLine(text);
+        PrintCardValues();
         choice = Console.ReadLine().Trim().ToLower();
 
-        if (choice == "estate" || choice == "duchy" || choice == "province")
+        // another nice syntax change I personally prefer instead of
+        // comparing the variable against each possible value with the `||` operator...
+        // just reads a bit easier, more like our natural language
+        
+        // an alternative might also be to use an array of acceptable values and compare the input, like this:
+        // string[] allowedChoices = ["estate", "duchy", "province"];
+        // if (allowedChoices.Contains(choice)) {
+        //     validChoice = true;
+        // }
+        
+        // I also tend to prefer assigning the value like this instead of inside the `if` block
+        isValidChoice = choice is "estate" or "duchy" or "province";
+        
+        if (!isValidChoice)
         {
-            validChoice = true;  // Exit loop once a valid card type is selected
-        }
-        else
-        {
+            // here's an example of where that array of `allowedChoices` could be handy.
+            // instead of repeating ourselves (and potentially misspelling or accidentally omitting an option)
+            // we could re-use that `allowedChoices` array to say:
+            // Console.WriteLine($"Incorrect option. Please choose one of: '{string.Join("', '", allowedChoices)}'");
             Console.WriteLine("Incorrect option. Please choose 'estate', 'duchy', or 'province'.");
         }
     }
 
-    bool validCount = false;
+    bool isValidCount = false;
     int choiceCount = 0;
 
-    while (!validCount)
+    while (!isValidCount)
     {
         Console.WriteLine($"How many? Choose between {min} and {max}: ");
-        if (int.TryParse(Console.ReadLine(), out choiceCount) && choiceCount >= min && choiceCount <= max)
-        {
-            validCount = true;
-        }
-        else
+        
+        // same recommendation here to assign the value like this instead of inside the `if` block: 
+        isValidCount = int.TryParse(Console.ReadLine(), out choiceCount) &&
+                       // I also tend to prefer putting each condition on its own line
+                       choiceCount >= min && 
+                       choiceCount <= max;
+        
+        // another syntax choice that I sometimes like better...
+        // sometimes it can be easy to miss the `!` negation at the beginning,
+        // reading it this way makes it more obvious we're checking for the `false` condition.
+        
+        // Though normally I would try to avoid this entirely by flipping the logic so that my
+        // `if` statements are always checking for a `true` condition. So this would become `isInvalidCount`
+        if (isValidCount is false)
         {
             Console.WriteLine("You've entered an invalid number. Try again.");
         }
     }
-
-    if (choice == "estate")
+    
+    // I find multiple if statements to be so ugly :) let's make it a switch!
+    switch (choice)
     {
-        totalEstates += choiceCount;
+        case "estate":
+            totalEstates += choiceCount;
+            break;
+        
+        case "duchy":
+            totalDuchies += choiceCount;
+            break;
+        
+        case "province":
+            totalProvinces += choiceCount;
+            break;
     }
-    else if (choice == "duchy")
-    {
-        totalDuchies += choiceCount;
-    }
-    else if (choice == "province")
-    {
-        totalProvinces += choiceCount;
-    }
-
+    
     estatePoints = estatePointValue * totalEstates;
     duchyPoints = duchyPointValue * totalDuchies;
     provincePoints = provincePointValue * totalProvinces;
