@@ -1,10 +1,11 @@
 ﻿Console.Title = "Hunting the Manticore";
 Console.ForegroundColor = ConsoleColor.Cyan;
 
+const int manticoreMaxHealth = 10;
+const int cityMaxHealth = 15;
+
 int manticoreCurrentHealth = 10;
-int manticoreMaxHealth = 10;
 int cityCurrentHealth = 15;
-int cityMaxHealth = 15;
 int gameRound = 1;
 int manticoreDistance;
 
@@ -51,6 +52,9 @@ void StartGame()
 
     manticoreDistance = SetManticoreDistance();
 
+    Console.WriteLine($"Press a key to begin...");
+    Console.ReadKey();
+
     Console.Clear();
     Console.ForegroundColor = ConsoleColor.Yellow;
     Console.WriteLine("Player 2, it is your turn.");
@@ -75,29 +79,14 @@ bool checkIfAlive(int health)
     }
 }
 
-static int SetManticoreDistance()
+int SetManticoreDistance()
 {
-    while (true)
-    {
-        Console.ForegroundColor = ConsoleColor.Yellow;
-        Console.WriteLine($"Player 1, it is your turn.");
-        Console.Write("Choose the distance from the city to deploy the Manticore (0-100): ");
-        int distance = Convert.ToInt32(Console.ReadLine());
-
-        if (distance >= 0 && distance <= 100)
-        {
-            Console.ForegroundColor = ConsoleColor.DarkGreen;
-            Console.WriteLine($"The Manticore is deployed a distance of {distance}.");
-            Console.WriteLine($"Press a key to begin...");
-            Console.ReadKey();
-            return distance;
-        }
-
-        else
-        {
-            Console.WriteLine("Invalid entry. Distance must be 0-100: ");
-        }
-    }
+    Console.ForegroundColor = ConsoleColor.Yellow;
+    Console.WriteLine($"Player 1, it is your turn.");
+    int distance = SetNumberInRange("How far do you want to deploy the Manticore from the city? ", 0, 100);
+    Console.ForegroundColor = ConsoleColor.DarkGreen;
+    Console.WriteLine($"The Manticore is deployed a distance of {distance}.");
+    return distance;
 }
 
 void RoundStart() // Primary game loop
@@ -110,6 +99,7 @@ void RoundStart() // Primary game loop
     Console.WriteLine("-------------------------------------------------------------------");
     Console.WriteLine("STATUS");
     Console.WriteLine($"Round: {gameRound}");
+    Console.WriteLine($"City Health: {cityCurrentHealth}/{cityMaxHealth}\t\t\tManticore Health: {manticoreCurrentHealth}/{manticoreMaxHealth}");
     Console.Write($"Cannon Type: ");
 
     switch (cannonType)
@@ -133,15 +123,14 @@ void RoundStart() // Primary game loop
     }
 
     Console.ForegroundColor = previousColor;
-    Console.WriteLine($"City Health: {cityCurrentHealth}/{cityMaxHealth}\t\t\tManticore Health: {manticoreCurrentHealth}/{manticoreMaxHealth}");
-
+    Console.WriteLine("-------------------------------------------------------------------");
     AttackManticore(cannonType);
 
     cityCurrentHealth -= 1;
     gameRound += 1;
 }
 
-string GetCannonType() // update to a switch
+string GetCannonType() // Will update to a switch later when I know how to handle bools
 {
     string cannonType = "";
 
@@ -169,65 +158,55 @@ string GetCannonType() // update to a switch
     return cannonType;
 }
 
-void AttackManticore(string cannonType) // update to a switch
+void AttackManticore(string cannonType) // Will update to a switch later when I know how to handle ints
 {
-    while (true)
+    Console.ResetColor();
+    int range = SetNumberInRange("Enter cannon range (0-100): ", 0, 100);
+
+    if (range > manticoreDistance)
     {
-        Console.Write("Enter cannon range (0-100): ");
-        int range = Convert.ToInt32(Console.ReadLine());
-
-        if (range < 0 || range > 100)
-        {
-            Console.WriteLine("Invalid entry. Distance must be 0-100: ");
-            continue;
-        }
-
-        else if (range > manticoreDistance)
-        {
-            Console.WriteLine("The cannon OVERSHOT the target!");
-        }
-
-        else if (range < manticoreDistance)
-        {
-            Console.WriteLine("The cannon is SHORT of the target!");
-        }
-
-        else
-        {
-            Console.WriteLine("Direct hit!");
-            DamageManticore(cannonType);
-        }
-        return;
-    }
-}
-
-void DamageManticore(string cannonType) // Only occurs if AttackManticore() results in a hit. I want to update this to also use a switch. But no time for now.
-{
-    int cannonDamage = 0;
-    int baseCannonDamage = 1;
-
-    if (cannonType == "Plasma Blast")
-    {
-        cannonDamage = baseCannonDamage + 9;
-        LogDamage(cannonType, cannonDamage);
+        Console.ForegroundColor = ConsoleColor.White;
+        Console.WriteLine("The cannon OVERSHOT the target!");
     }
 
-    else if (cannonType == "Fire")
+    else if (range < manticoreDistance)
     {
-        cannonDamage = baseCannonDamage + 2;
-        LogDamage(cannonType, cannonDamage);
-    }
-
-    else if (cannonType == "Electric")
-    {
-        cannonDamage = baseCannonDamage + 2;
-        LogDamage(cannonType, cannonDamage);
+        Console.ForegroundColor = ConsoleColor.White;
+        Console.WriteLine("The cannon is SHORT of the target!");
     }
 
     else
     {
-        cannonDamage = baseCannonDamage;
-        LogDamage(cannonType, cannonDamage);
+        Console.ForegroundColor = ConsoleColor.Yellow;
+        Console.WriteLine("Direct hit!");
+        DamageManticore(cannonType);
+    }
+    return;
+}
+
+void DamageManticore(string cannonType) // Only occurs if AttackManticore() results in a hit.
+{
+    int cannonDamage = 0;
+    int baseCannonDamage = 1;
+
+    switch (cannonType)
+    {
+        case "Plasma Blast":
+            cannonDamage = baseCannonDamage + 9;
+            LogDamage(cannonType, cannonDamage);
+            break;
+        case "Fire":
+            cannonDamage = baseCannonDamage + 2;
+            LogDamage(cannonType, cannonDamage);
+            break;
+        case "Electric":
+            cannonDamage = baseCannonDamage + 2;
+            LogDamage(cannonType, cannonDamage);
+            break;
+        case "Normal":
+            cannonDamage = baseCannonDamage;
+            LogDamage(cannonType, cannonDamage);
+            break;
     }
 
     manticoreCurrentHealth -= cannonDamage;
@@ -263,6 +242,7 @@ void LogDamage(string cannonType, int cannonDamage)
             Console.WriteLine(damageLog);
             break;
     }
+    Console.ResetColor();
 }
 
 static void CityLose()
@@ -303,7 +283,7 @@ static void GameStartMusic() // For the memes...
 
 static void SplashLogo()
 {
-    Console.ForegroundColor = ConsoleColor.DarkMagenta;
+    Console.ForegroundColor = ConsoleColor.Magenta;
     Console.WriteLine(@"
                  _   _ _   _ _   _ _____ _____ _   _ _____                
                 | | | | | | | \ | |_   _|_   _| \ | |  __ \               
@@ -326,4 +306,23 @@ static void SplashLogo()
 
 Please wait...
 ");
+}
+
+int SetNumberInRange(string message, int min, int max)
+{
+    while (true)
+    {
+        Console.Write(message);
+        int number = Convert.ToInt32(Console.ReadLine());
+
+        if (number < min || number > max)
+        {
+            Console.WriteLine($"Invalid entry. Must be {min}-{max}: ");
+            continue;
+        }
+        else
+        {
+            return number;
+        }
+    }
 }
