@@ -10,6 +10,7 @@ int manticoreDistance;
 
 bool playingGame = true;
 
+// Start game
 while (playingGame)
 {
     StartGame();
@@ -247,7 +248,7 @@ void LogDamage(string cannonType, int cannonDamage)
     }
 }
 
-void CityLose()
+static void CityLose()
 {
     Console.Beep(1200, 100);
     Console.Beep(1000, 100);
@@ -255,7 +256,7 @@ void CityLose()
     Console.Beep(600, 400);
 }
 
-void CityWin()
+static void CityWin()
 {
     Console.Beep(600, 100);
     Console.Beep(800, 100);
@@ -263,7 +264,7 @@ void CityWin()
     Console.Beep(1200, 400);
 }
 
-void GameStartMusic()
+static void GameStartMusic() // For the memes...
 {
     Console.Beep(196, 1200);
     Console.Beep(196, 300);
@@ -283,7 +284,7 @@ void GameStartMusic()
     Console.Beep(146, 1000);
 }
 
-void SplashLogo()
+static void SplashLogo()
 {
     Console.ForegroundColor = ConsoleColor.DarkMagenta;
     Console.WriteLine(@"
