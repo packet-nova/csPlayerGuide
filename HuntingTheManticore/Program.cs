@@ -39,7 +39,7 @@ while (playingGame) // Start game
     Console.Clear();
 }
 
-void StartGame() // Primary game loop
+void StartGame()
 {
     cityCurrentHealth = 15;
     manticoreCurrentHealth = 10;
