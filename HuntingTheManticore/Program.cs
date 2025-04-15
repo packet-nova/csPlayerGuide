@@ -189,7 +189,7 @@ void AttackManticore(string cannonType)
     }
 }
 
-void DamageManticore(string cannonType)
+void DamageManticore(string cannonType) // Only occurs if AttackManticore() results in a hit
 {
     int cannonDamage = 0;
     int baseCannonDamage = 1;
