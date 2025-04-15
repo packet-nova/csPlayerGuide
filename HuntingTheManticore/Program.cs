@@ -96,7 +96,7 @@ static int SetManticoreDistance()
     }
 }
 
-void RoundStart()
+void RoundStart() // Primary game loop
 {
     string cannonType = GetCannonType();
 
@@ -127,7 +127,9 @@ void RoundStart()
     }
     Console.ForegroundColor = previousColor;
     Console.WriteLine($"City Health: {cityCurrentHealth}/{cityMaxHealth}\t\t\tManticore Health: {manticoreCurrentHealth}/{manticoreMaxHealth}");
+    
     AttackManticore(cannonType);
+    
     cityCurrentHealth -= 1;
     gameRound += 1;
 }
