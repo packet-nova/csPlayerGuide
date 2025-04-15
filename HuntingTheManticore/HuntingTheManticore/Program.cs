@@ -10,9 +10,6 @@ int manticoreDistance = SetManticoreDistance();
 
 Console.Clear();
 
-//bool manticoreIsAlive;
-//bool cityIsAlive;
-
 // Game start
 while (checkIfAlive(manticoreCurrentHealth) && checkIfAlive(cityCurrentHealth))
 {
@@ -22,14 +19,14 @@ while (checkIfAlive(manticoreCurrentHealth) && checkIfAlive(cityCurrentHealth))
 // Game ending conditions
 if (!checkIfAlive(manticoreCurrentHealth))
 {
-    CityWins();
+    CityWin();
     Console.ForegroundColor = ConsoleColor.Green;
     Console.WriteLine("The Manticore has been destroyed. Consolas is saved!");
     Console.ResetColor();
 }
 else if (!checkIfAlive(cityCurrentHealth))
 {
-    CityLoses();
+    CityLose();
     Console.ForegroundColor = ConsoleColor.Red;
     Console.WriteLine("The city has been destroyed. Game over.");
     Console.ResetColor();
@@ -194,7 +191,7 @@ void LogDamage(string cannonType, int cannonDamage)
     }
 }
 
-void CityLoses()
+void CityLose()
 {
     Console.Beep(1200, 100);
     Console.Beep(1000, 100);
@@ -202,7 +199,7 @@ void CityLoses()
     Console.Beep(600, 400);
 }
 
-void CityWins()
+void CityWin()
 {
     Console.Beep(600, 100);
     Console.Beep(800, 100);
