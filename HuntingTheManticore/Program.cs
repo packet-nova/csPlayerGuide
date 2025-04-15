@@ -56,7 +56,6 @@ void StartGame()
     Console.ReadKey();
 
     Console.Clear();
-    Console.ForegroundColor = ConsoleColor.Yellow;
     Console.WriteLine("Player 2, it is your turn.");
     Console.Clear();
 
@@ -81,7 +80,7 @@ bool checkIfAlive(int health)
 
 int SetManticoreDistance()
 {
-    Console.ForegroundColor = ConsoleColor.Yellow;
+    Console.ForegroundColor = ConsoleColor.DarkYellow;
     Console.WriteLine($"Player 1, it is your turn.");
     int distance = SetNumberInRange("How far do you want to deploy the Manticore from the city? ", 0, 100);
     Console.ForegroundColor = ConsoleColor.DarkGreen;
