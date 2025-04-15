@@ -33,9 +33,9 @@ while (playingGame)
 
     Console.WriteLine($"Press any key to start a new game...");
     Console.ReadKey();
-    
+
     playingGame = true;
-    
+
     Console.Clear();
 }
 
@@ -68,7 +68,7 @@ bool checkIfAlive(int health)
     {
         return true;
     }
-    
+
     else
     {
         return false;
@@ -82,7 +82,7 @@ static int SetManticoreDistance()
         Console.ForegroundColor = ConsoleColor.Yellow;
         Console.WriteLine($"Player 1, it is your turn.");
         Console.Write("Choose the distance from the city to deploy the Manticore (0-100): ");
-                int distance = Convert.ToInt32(Console.ReadLine());
+        int distance = Convert.ToInt32(Console.ReadLine());
 
         if (distance >= 0 && distance <= 100)
         {
@@ -92,7 +92,7 @@ static int SetManticoreDistance()
             Console.ReadKey();
             return distance;
         }
-        
+
         else
         {
             Console.WriteLine("Invalid entry. Distance must be 0-100: ");
@@ -106,12 +106,12 @@ void RoundStart() // Primary game loop
 
     Console.ForegroundColor = ConsoleColor.Cyan;
     var previousColor = Console.ForegroundColor;
-    
+
     Console.WriteLine("-------------------------------------------------------------------");
     Console.WriteLine("STATUS");
     Console.WriteLine($"Round: {gameRound}");
     Console.Write($"Cannon Type: ");
-    
+
     switch (cannonType)
     {
         case "Plasma Blast":
@@ -134,9 +134,9 @@ void RoundStart() // Primary game loop
 
     Console.ForegroundColor = previousColor;
     Console.WriteLine($"City Health: {cityCurrentHealth}/{cityMaxHealth}\t\t\tManticore Health: {manticoreCurrentHealth}/{manticoreMaxHealth}");
-    
+
     AttackManticore(cannonType);
-    
+
     cityCurrentHealth -= 1;
     gameRound += 1;
 }
@@ -145,27 +145,27 @@ string GetCannonType() // update to a switch
 {
     string cannonType = "";
 
-    
+
     if ((gameRound % 3 == 0) && (gameRound % 5 == 0))
     {
         cannonType = "Plasma Blast";
     }
-    
+
     else if (gameRound % 3 == 0)
     {
         cannonType = "Fire";
     }
-    
+
     else if (gameRound % 5 == 0)
     {
         cannonType = "Electric";
     }
-    
+
     else
     {
         cannonType = "Normal";
     }
-    
+
     return cannonType;
 }
 
@@ -211,19 +211,19 @@ void DamageManticore(string cannonType) // Only occurs if AttackManticore() resu
         cannonDamage = baseCannonDamage + 9;
         LogDamage(cannonType, cannonDamage);
     }
-    
+
     else if (cannonType == "Fire")
     {
         cannonDamage = baseCannonDamage + 2;
         LogDamage(cannonType, cannonDamage);
     }
-   
+
     else if (cannonType == "Electric")
     {
         cannonDamage = baseCannonDamage + 2;
         LogDamage(cannonType, cannonDamage);
     }
-   
+
     else
     {
         cannonDamage = baseCannonDamage;
@@ -265,7 +265,7 @@ void LogDamage(string cannonType, int cannonDamage)
     }
 }
 
-    static void CityLose()
+static void CityLose()
 {
     Console.Beep(1200, 100);
     Console.Beep(1000, 100);
