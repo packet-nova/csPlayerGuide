@@ -4,15 +4,14 @@ Console.ForegroundColor = ConsoleColor.Cyan;
 const int manticoreMaxHealth = 10;
 const int cityMaxHealth = 15;
 
-int manticoreCurrentHealth = 10;
-int cityCurrentHealth = 15;
-int gameRound = 1;
+int manticoreCurrentHealth;
+int cityCurrentHealth;
+int gameRound;
 int manticoreDistance;
 
 bool playingGame = true;
 
-// Start game
-while (playingGame)
+while (playingGame) // Start game
 {
     StartGame();
 
@@ -40,7 +39,7 @@ while (playingGame)
     Console.Clear();
 }
 
-void StartGame()
+void StartGame() // Primary game loop
 {
     cityCurrentHealth = 15;
     manticoreCurrentHealth = 10;
