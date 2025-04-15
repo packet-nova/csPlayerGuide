@@ -1,6 +1,4 @@
-﻿using System;
-
-Console.Title = "Hunting the Manticore";
+﻿Console.Title = "Hunting the Manticore";
 Console.ForegroundColor = ConsoleColor.Cyan;
 
 int manticoreCurrentHealth = 10;
@@ -8,32 +6,57 @@ int manticoreMaxHealth = 10;
 int cityCurrentHealth = 15;
 int cityMaxHealth = 15;
 int gameRound = 1;
-int manticoreDistance = SetManticoreDistance();
+int manticoreDistance;
 
-Console.Clear();
-Console.ForegroundColor = ConsoleColor.Yellow;
-Console.WriteLine("Player 2, it is your turn.");
+bool playingGame = true;
 
-// Game start
-while (checkIfAlive(manticoreCurrentHealth) && checkIfAlive(cityCurrentHealth))
+while (playingGame)
 {
-    RoundStart();
+    StartGame();
+
+    if (!checkIfAlive(manticoreCurrentHealth))
+    {
+        CityWin();
+        Console.ForegroundColor = ConsoleColor.Green;
+        Console.WriteLine("The Manticore has been destroyed. Consolas is saved!");
+        Console.ResetColor();
+    }
+
+    else if (!checkIfAlive(cityCurrentHealth))
+    {
+        CityLose();
+        Console.ForegroundColor = ConsoleColor.Red;
+        Console.WriteLine("The city has been destroyed. Game over.");
+        Console.ResetColor();
+    }
+
+    Console.WriteLine($"Press any key to start a new game...");
+    Console.ReadKey();
+    playingGame = true;
+    Console.Clear();
 }
 
-// Game ending conditions
-if (!checkIfAlive(manticoreCurrentHealth))
+void StartGame()
 {
-    CityWin();
-    Console.ForegroundColor = ConsoleColor.Green;
-    Console.WriteLine("The Manticore has been destroyed. Consolas is saved!");
-    Console.ResetColor();
-}
-else if (!checkIfAlive(cityCurrentHealth))
-{
-    CityLose();
-    Console.ForegroundColor = ConsoleColor.Red;
-    Console.WriteLine("The city has been destroyed. Game over.");
-    Console.ResetColor();
+    cityCurrentHealth = 15;
+    manticoreCurrentHealth = 10;
+    gameRound = 1;
+
+    SplashLogo();
+    GameStartMusic();
+    Console.Clear();
+
+    manticoreDistance = SetManticoreDistance();
+
+    Console.Clear();
+    Console.ForegroundColor = ConsoleColor.Yellow;
+    Console.WriteLine("Player 2, it is your turn.");
+    Console.Clear();
+
+    while (checkIfAlive(manticoreCurrentHealth) && checkIfAlive(cityCurrentHealth))
+    {
+        RoundStart();
+    }
 }
 
 bool checkIfAlive(int health)
@@ -81,7 +104,6 @@ void RoundStart()
     Console.WriteLine("-------------------------------------------------------------------");
     Console.WriteLine("STATUS");
     Console.WriteLine($"Round: {gameRound}");
-    //Console.WriteLine($"Cannon Type: {cannonType}");
     Console.Write($"Cannon Type: ");
     switch (cannonType)
     {
@@ -241,10 +263,49 @@ void CityWin()
     Console.Beep(1200, 400);
 }
 
-//void ColoredText(string word, ConsoleColor color)
-//{
-//    var previousColor = Console.ForegroundColor;
-//    Console.ForegroundColor = color;
-//    Console.Write(word);
-//    Console.ForegroundColor = previousColor;
-//}
+void GameStartMusic()
+{
+    Console.Beep(196, 1200);
+    Console.Beep(196, 300);
+    Console.Beep(220, 400);
+    Console.Beep(196, 400);
+    Console.Beep(174, 300);
+    Console.Beep(155, 1000);
+    Console.Beep(146, 1000);
+    Console.Beep(196, 1000);
+    Console.Beep(196, 300);
+    Console.Beep(220, 400);
+    Console.Beep(196, 400);
+    Console.Beep(174, 300);
+    Console.Beep(155, 400);
+    Console.Beep(174, 300);
+    Console.Beep(155, 400);
+    Console.Beep(146, 1000);
+}
+
+void SplashLogo()
+{
+    Console.ForegroundColor = ConsoleColor.DarkMagenta;
+    Console.WriteLine(@"
+                 _   _ _   _ _   _ _____ _____ _   _ _____                
+                | | | | | | | \ | |_   _|_   _| \ | |  __ \               
+                | |_| | | | |  \| | | |   | | |  \| | |  \/               
+                |  _  | | | | . ` | | |   | | | . ` | | __                
+                | | | | |_| | |\  | | |  _| |_| |\  | |_\ \               
+                \_| |_/\___/\_| \_/ \_/  \___/\_| \_/\____/               
+                         _____ _   _  _____                                       
+                        |_   _| | | ||  ___|                                      
+                          | | | |_| || |__                                        
+                          | | |  _  ||  __|                                       
+                          | | | | | || |___                                       
+                          \_/ \_| |_/\____/                                       
+                                ___  ___  ___   _   _ _____ _____ _____ ___________ _____ 
+                                |  \/  | / _ \ | \ | |_   _|_   _/  __ \  _  | ___ \  ___|
+                                | .  . |/ /_\ \|  \| | | |   | | | /  \/ | | | |_/ / |__  
+                                | |\/| ||  _  || . ` | | |   | | | |   | | | |    /|  __| 
+                                | |  | || | | || |\  | | |  _| |_| \__/\ \_/ / |\ \| |___ 
+                                \_|  |_/\_| |_/\_| \_/ \_/  \___/ \____/\___/\_| \_\____/
+
+Please wait...
+");
+}
