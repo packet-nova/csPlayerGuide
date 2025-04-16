@@ -302,8 +302,7 @@ static void SplashLogo()
                                 | |  | || | | || |\  | | |  _| |_| \__/\ \_/ / |\ \| |___ 
                                 \_|  |_/\_| |_/\_| \_/ \_/  \___/ \____/\___/\_| \_\____/
 
-Please wait...
-");
+Please wait...");
 }
 
 int SetNumberInRange(string message, int min, int max)
