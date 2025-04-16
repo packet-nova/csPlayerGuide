@@ -1,14 +1,48 @@
-﻿//CookFood(FoodType.Soup, Ingredient.Mushroom, Seasoning.Salty);
-
-
-CookFood(FoodType.Gumbo, Ingredient.Potato, Seasoning.Spicy);
-
-void CookFood(FoodType food, Ingredient ingredient, Seasoning seasoning)
+﻿static (string food, string ingredient, string seasoning) GetFoodInfo(Seasoning seasoning, Ingredient ingredient, FoodType food)
 {
-    Console.WriteLine($"You cooked a {seasoning} {ingredient} {food}.");
+    string foodType = food switch
+    {
+        FoodType.Stew => "stew",
+        FoodType.Gumbo => "gumbo",
+        FoodType.Soup => "soup",
+        _ => "unknown"
+    };
+    string ingredientType = ingredient switch
+    {
+        Ingredient.Carrot => "carrot",
+        Ingredient.Chicken => "chicken",
+        Ingredient.Mushroom => "mushroom",
+        Ingredient.Potato => "potato",
+        _ => "unknown"
+    };
+    string seasoningType = seasoning switch
+    {
+        Seasoning.Spicy => "spicy",
+        Seasoning.Salty => "salty",
+        Seasoning.Sweet => "sweet",
+        _ => "unknown"
+    };
+    return (foodType, ingredientType, seasoningType);
 }
 
+enum FoodType
+{
+    Stew,
+    Gumbo,
+    Soup
+}
 
-enum FoodType { Soup, Stew, Gumbo };
-enum Ingredient { Mushroom, Chicken, Carrot, Potato };
-enum Seasoning { Spicy, Salty, Sweet};
+enum Ingredient
+{
+    Carrot,
+    Chicken,
+    Mushroom,
+    Potato
+}
+
+enum Seasoning
+{
+    Spicy,
+    Sweet,
+    Salty
+}
