@@ -40,6 +40,13 @@ int[] array1 = new int[] { 4, 51, -7, 13, -99, 15, -8, 45, 90 };
 int currentSmallest = int.MaxValue;
 int total = 0;
 
+
+// Sum of array integers
+foreach (int number in array1)
+{
+    total += number;
+}
+
 // Calculate the average in the array
 foreach (int number in array1)
 {
@@ -51,12 +58,6 @@ foreach (int number in array1)
 }
 
 float average = (float)total / array1.Length;
-
-// Sum of array integers
-foreach (int number in array1)
-{
-    total += number;
-}
 
 Console.WriteLine($"\nThe smallest number is {currentSmallest}.");
 Console.WriteLine($"The total is {total}.");

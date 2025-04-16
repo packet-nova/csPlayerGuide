@@ -1,6 +1,7 @@
-﻿Console.WriteLine(GetFoodInfo(Seasoning.Spicy, Ingredient.Mushroom, FoodType.Gumbo));
+﻿var info = GetFoodInfo(FoodType.Gumbo, Ingredient.Chicken, Seasoning.Spicy);
+Console.WriteLine(info.seasoning, info.ingredient, info.food);
 
-static (string food, string ingredient, string seasoning) GetFoodInfo(Seasoning seasoning, Ingredient ingredient, FoodType food)
+static (string food, string ingredient, string seasoning) GetFoodInfo(FoodType food, Ingredient ingredient, Seasoning seasoning)
 {
     string foodType = food switch
     {
