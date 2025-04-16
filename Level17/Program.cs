@@ -1,4 +1,6 @@
-﻿static (string food, string ingredient, string seasoning) GetFoodInfo(Seasoning seasoning, Ingredient ingredient, FoodType food)
+﻿Console.WriteLine(GetFoodInfo(Seasoning.Spicy, Ingredient.Mushroom, FoodType.Gumbo));
+
+static (string food, string ingredient, string seasoning) GetFoodInfo(Seasoning seasoning, Ingredient ingredient, FoodType food)
 {
     string foodType = food switch
     {
