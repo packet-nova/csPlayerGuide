@@ -3,7 +3,7 @@
 while (true)
 {
     Console.Write($"The chest in your hand is {state}. What do you want to do? ");
-    string action = Console.ReadLine();
+    string action = Console.ReadLine().ToLower();
     if (state == ChestState.Locked && action == "unlock") state = ChestState.Unlocked;
     else if (state == ChestState.Unlocked && action == "open") state = ChestState.Opened;
     else if (state == ChestState.Opened && action == "close") state = ChestState.Closed;
