@@ -26,7 +26,7 @@ float GetTotalArrowCost(string arrowhead, string fletch, float shaftLength)
         "plastic" => GetFletchInfo(Fletch.Plastic).cost,
         _ => 0
     };
-    return (shaftCost + arrowheadCost + fletchCost;
+    return shaftCost + arrowheadCost + fletchCost;
 }
 
 static string GetArrowheadChoice()
