@@ -1,20 +1,105 @@
-﻿Arrow arrow = new Arrow("steel", "plastic", 0.10f);
+﻿Console.Title = "Vin Fletcher's Arrows";
 
-var arrowheadChoice = GetUserStringInput("What type of arrowhead do you want? ");
-var shaftChoice = GetUserStringInput("What length of shaft do you want (.05 gold per cm)? ");
-var fletchChoice = GetUserStringInput("What type of fletching do you want? ");
+CraftArrow(GetArrowheadChoice(), GetFletchChoice(), GetShaftLength());
 
-
-void CraftArrow(string arrowheadChoice, string fletchChoice, float shaftChoice)
+void CraftArrow(string arrowhead, string fletch, float shaft)
 {
-    GetShaftCost(shaftChoice);
-    Console.WriteLine($"You successfully crafted a {arrowheadChoice} and{fletchChoice} {shaftChoice}cm long! This costs {total} gold.");
+    Arrow arrow = new Arrow(arrowhead, fletch, shaft);
+    Console.WriteLine($"You created a(n) {arrowhead}-tipped arrow with {fletch} fletching for {GetTotalArrowCost(arrowhead, fletch, shaft)} gold.");
 }
 
-float GetTotalArrowCost(int fletchCost, int arrowheadCost, float shaftCost)
+float GetTotalArrowCost(string arrowhead, string fletch, float shaftLength)
 {
-    float totalArrowCost = fletchCost + arrowheadCost + shaftCost;
-    return totalArrowCost;
+    float shaftCost = GetShaftCost(shaftLength);
+    int arrowheadCost = arrowhead switch
+    {
+        "wood" => GetArrowheadInfo(Arrowhead.Wood).cost,
+        "obsidian" => GetArrowheadInfo(Arrowhead.Obsidian).cost,
+        "steel" => GetArrowheadInfo(Arrowhead.Steel).cost,
+        _ => 0,
+    };
+
+    int fletchCost = fletch switch
+    {
+        "goose feather" => GetFletchInfo(Fletch.GooseFeather).cost,
+        "turkey feather" => GetFletchInfo(Fletch.TurkeyFeather).cost,
+        "plastic" => GetFletchInfo(Fletch.Plastic).cost,
+        _ => 0
+    };
+    return (shaftCost + arrowheadCost + fletchCost;
+}
+
+static string GetArrowheadChoice()
+{
+    Console.WriteLine("Which arrowhead material would you like? ");
+    DisplayArrowheadInfo();
+    Console.Write("Choice (1-3): ");
+    string arrowhead = Console.ReadLine().ToLower().Trim();
+
+    string arrowheadChoice = arrowhead switch
+    {
+        "1" => GetArrowheadInfo(Arrowhead.Wood).name.ToLower(),
+        "2" => GetArrowheadInfo(Arrowhead.Obsidian).name.ToLower(),
+        "3" => GetArrowheadInfo(Arrowhead.Steel).name.ToLower(),
+            _  => "invalid"
+    };
+    
+    if (arrowheadChoice == "invalid")
+    {
+        Console.WriteLine("Invalid choice. Please use '1', '2', or '3'.");
+        Console.WriteLine();
+        return GetArrowheadChoice();
+    }
+
+    Console.WriteLine(arrowheadChoice);
+    return arrowheadChoice; 
+}
+
+static string GetFletchChoice()
+{
+    Console.WriteLine("Which fletch material would you like? ");
+    DisplayFletchInfo();
+    Console.Write("Choice (1-3): ");
+    
+    string fletch = Console.ReadLine().ToLower().Trim();
+
+    string fletchChoice = fletch switch
+    {
+        "1" => GetFletchInfo(Fletch.GooseFeather).name.ToLower(),
+        "2" => GetFletchInfo(Fletch.TurkeyFeather).name.ToLower(),
+        "3" => GetFletchInfo(Fletch.Plastic).name.ToLower(),
+        _ => "invalid"
+    };
+    
+    if (fletchChoice == "invalid")
+    {
+        Console.WriteLine("Invalid choice. Please use '1', '2', or '3'.");
+        Console.WriteLine();
+        return GetFletchChoice();
+    }
+
+    Console.WriteLine(fletchChoice);
+    return fletchChoice;
+}
+
+static void DisplayArrowheadInfo()
+{
+    Console.WriteLine($"1. {GetArrowheadInfo(Arrowhead.Wood).name} - {GetArrowheadInfo(Arrowhead.Wood).cost}g");
+    Console.WriteLine($"2. {GetArrowheadInfo(Arrowhead.Obsidian).name} - {GetArrowheadInfo(Arrowhead.Obsidian).cost}g");
+    Console.WriteLine($"3. {GetArrowheadInfo(Arrowhead.Steel).name} - {GetArrowheadInfo(Arrowhead.Steel).cost}g");
+}
+
+static void DisplayFletchInfo()
+{
+    Console.WriteLine($"1. {GetFletchInfo(Fletch.GooseFeather).name} - {GetFletchInfo(Fletch.GooseFeather).cost}g");
+    Console.WriteLine($"2. {GetFletchInfo(Fletch.TurkeyFeather).name} - {GetFletchInfo(Fletch.TurkeyFeather).cost}g");
+    Console.WriteLine($"3. {GetFletchInfo(Fletch.Plastic).name} - {GetFletchInfo(Fletch.Plastic).cost}g");
+}
+
+static float GetShaftLength()
+{
+    float shaftLength = Convert.ToSingle(GetUserInput("How long should the arrow shaft be (in cm)? "));
+    return shaftLength;
 }
 
 float GetShaftCost(float shaftLength)
@@ -23,24 +108,17 @@ float GetShaftCost(float shaftLength)
     return shaftCost;
 }
 
-static string GetUserStringInput(string prompt)
+static (string name, int cost) GetFletchInfo(Fletch fletch)
 {
-    Console.Write(prompt);
-    var input = Console.ReadLine().ToLower().Trim();
-    return input;
-}
-
-static (string name, int cost) GetFletchInfo(Fletch name, Fletch cost)
-{
-    string fletchType = name switch
+    string fletchType = fletch switch
     {
-        Fletch.GooseFeather => "goose feather",
-        Fletch.TurkeyFeather => "turkey feather",
-        Fletch.Plastic => "plastic",
+        Fletch.GooseFeather => "Goose Feather",
+        Fletch.TurkeyFeather => "Turkey Feather",
+        Fletch.Plastic => "Plastic",
         _ => "no fletch"
     };
 
-    int fletchCost = cost switch
+    int fletchCost = fletch switch
     {
         Fletch.GooseFeather => 3,
         Fletch.TurkeyFeather => 5,
@@ -51,18 +129,17 @@ static (string name, int cost) GetFletchInfo(Fletch name, Fletch cost)
     return (fletchType, fletchCost);
 }
 
-// creates tuple to get string value for the name and int cost
-static (string name, int cost) GetArrowheadInfo(Arrowhead name, Arrowhead cost)
+static (string name, int cost) GetArrowheadInfo(Arrowhead arrowhead)
 {
-    string arrowheadType = name switch
+    string arrowheadType = arrowhead switch
     {
-        Arrowhead.Wood => "wood",        
-        Arrowhead.Obsidian => "obsidian",
-        Arrowhead.Steel => "steel",
+        Arrowhead.Wood => "Wood",
+        Arrowhead.Obsidian => "Obsidian",
+        Arrowhead.Steel => "Steel",
         _ => "no arrowhead"
     };
 
-    int arrowheadCost = cost switch
+    int arrowheadCost = arrowhead switch
     {
         Arrowhead.Wood => 3,
         Arrowhead.Obsidian => 5,
@@ -72,6 +149,16 @@ static (string name, int cost) GetArrowheadInfo(Arrowhead name, Arrowhead cost)
 
     return (arrowheadType, arrowheadCost);
 }
+
+
+static string GetUserInput(string prompt)
+{
+    Console.Write(prompt);
+    var input = Console.ReadLine().ToLower().Trim();
+    
+    return input;
+}
+
 
 class Arrow
 {
@@ -85,7 +172,6 @@ class Arrow
         _fletch = fletch;
         _shaftLength = shaftLength;
     }
-
 }
 
 enum Arrowhead { Wood, Steel, Obsidian }
