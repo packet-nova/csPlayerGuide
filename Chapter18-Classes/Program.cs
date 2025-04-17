@@ -1,5 +1,13 @@
 ﻿Console.Title = "Vin Fletcher's Arrows";
 
+/* If you want to create a set amount of arrows.
+int desiredArrows = Convert.ToInt32(GetUserInput("How many arrows do you want to make? "));
+for (int arrows = 0; arrows < desiredArrows; arrows++)
+{
+    CraftArrow(GetArrowheadChoice(), GetFletchChoice(), GetShaftLength());
+}
+*/
+
 CraftArrow(GetArrowheadChoice(), GetFletchChoice(), GetShaftLength());
 
 void CraftArrow(string arrowhead, string fletch, float shaft)
