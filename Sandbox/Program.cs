@@ -1,5 +1,33 @@
-﻿var weaponOne = CraftWeapon(Weapon.Sword, ItemRarity.Uncommon);
-Console.WriteLine($"{weaponOne.rarity} {weaponOne.weapon.ToLower()}");
+﻿var weaponOne = CraftWeapon(Weapon.Sword, ItemRarity.Epic);
+Console.WriteLine("What would you like to do? ");
+
+if (Console.ReadLine() == "craft sword".ToLower())
+{
+    LogCraftedWeapon(weaponOne.weapon, weaponOne.rarity);
+}
+
+static void LogCraftedWeapon(string weapon, string rarity)
+{
+    Console.Write("You crafted a(n) ");
+    GetWeaponLogText(weapon, rarity);
+    Console.WriteLine("!");
+}
+static void GetWeaponLogText(string weapon, string rarity)
+{
+    ConsoleColor origialColor = Console.ForegroundColor;
+
+    Console.ForegroundColor = rarity switch
+    {
+        "common" => ConsoleColor.White,
+        "uncommon" => ConsoleColor.Green,
+        "rare" => ConsoleColor.Blue,
+        "epic" => ConsoleColor.Magenta,
+        _ => ConsoleColor.Gray
+    };
+       
+    Console.Write($"{rarity} {weapon.ToLower()}");
+    Console.ForegroundColor = origialColor;
+}
 
 static (string weapon, string rarity) CraftWeapon(Weapon weapon, ItemRarity rarity)
 {
