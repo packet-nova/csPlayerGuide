@@ -1,5 +1,11 @@
-﻿var info = GetFoodInfo(FoodType.Gumbo, Ingredient.Chicken, Seasoning.Spicy);
-Console.WriteLine(info.seasoning, info.ingredient, info.food);
+﻿var foodInfo = GetFoodInfo(FoodType.Gumbo, Ingredient.Chicken, Seasoning.Spicy);
+Console.WriteLine($"{foodInfo.seasoning} {foodInfo.ingredient} {foodInfo.food}");
+Console.WriteLine(FoodType.Gumbo);
+
+
+//testing
+string soup = FoodType.Soup.ToString().ToLower();
+Console.WriteLine(soup);
 
 static (string food, string ingredient, string seasoning) GetFoodInfo(FoodType food, Ingredient ingredient, Seasoning seasoning)
 {
@@ -28,24 +34,6 @@ static (string food, string ingredient, string seasoning) GetFoodInfo(FoodType f
     return (foodType, ingredientType, seasoningType);
 }
 
-enum FoodType
-{
-    Stew,
-    Gumbo,
-    Soup
-}
-
-enum Ingredient
-{
-    Carrot,
-    Chicken,
-    Mushroom,
-    Potato
-}
-
-enum Seasoning
-{
-    Spicy,
-    Sweet,
-    Salty
-}
+enum FoodType { Stew, Gumbo, Soup }
+enum Ingredient { Carrot, Chicken, Mushroom, Potato }
+enum Seasoning { Spicy, Sweet, Salty }
