@@ -13,7 +13,11 @@ CraftArrow(GetArrowheadChoice(), GetFletchChoice(), GetShaftLength());
 void CraftArrow(string arrowhead, string fletch, float shaft)
 {
     Arrow arrow = new Arrow(arrowhead, fletch, shaft);
+    ConsoleColor previousForeground = Console.ForegroundColor;
+    Console.ForegroundColor = ConsoleColor.Green;
     Console.WriteLine($"You created a(n) {arrowhead}-tipped arrow with {fletch} fletching for {GetTotalArrowCost(arrowhead, fletch, shaft)} gold.");
+    
+    Console.ForegroundColor = previousForeground;
 }
 
 float GetTotalArrowCost(string arrowhead, string fletch, float shaftLength)
@@ -60,6 +64,7 @@ static string GetArrowheadChoice()
     }
 
     Console.WriteLine(arrowheadChoice);
+    Console.WriteLine();
     return arrowheadChoice; 
 }
 
@@ -87,6 +92,7 @@ static string GetFletchChoice()
     }
 
     Console.WriteLine(fletchChoice);
+    Console.WriteLine();
     return fletchChoice;
 }
 
