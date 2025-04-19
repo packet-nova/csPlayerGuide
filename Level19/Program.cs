@@ -7,7 +7,7 @@ for (int i = 0; i < desiredArrows; i++)
     CraftArrow(GetArrowheadChoice(), GetFletchChoice(), GetShaftLength());
 }*/
 
-StoreBanner();
+DisplayStoreBanner();
 
 CraftArrow(GetArrowheadChoice(), GetFletchChoice(), GetShaftLength());
 
@@ -180,7 +180,7 @@ static string GetUserInput(string prompt)
     return input;
 }
 
-static void StoreBanner()
+static void DisplayStoreBanner()
 {
     Console.ForegroundColor = ConsoleColor.Red;
     Console.WriteLine(@"
