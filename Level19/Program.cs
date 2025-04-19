@@ -7,6 +7,7 @@ for (int i = 0; i < desiredArrows; i++)
     CraftArrow(GetArrowheadChoice(), GetFletchChoice(), GetShaftLength());
 }*/
 
+StoreBanner();
 
 CraftArrow(GetArrowheadChoice(), GetFletchChoice(), GetShaftLength());
 
@@ -177,6 +178,17 @@ static string GetUserInput(string prompt)
     var input = Console.ReadLine().ToLower().Trim();
 
     return input;
+}
+
+static void StoreBanner()
+{
+    Console.ForegroundColor = ConsoleColor.Red;
+    Console.WriteLine(@"
+===========================================
+           Vin Fletcher's Arrows
+===========================================");
+    Console.WriteLine();
+    Console.ResetColor();
 }
 
 
