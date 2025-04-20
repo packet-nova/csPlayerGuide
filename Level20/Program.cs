@@ -16,7 +16,7 @@ CraftArrow(GetArrowheadChoice(), GetFletchChoice(), GetShaftLength());
 
 void CraftArrow(string arrowhead, string fletch, float shaft)
 {
-    Arrow arrow = new Arrow(arrowhead, fletch, shaft);
+    Arrow arrow = new(arrowhead, fletch, shaft);
     ConsoleColor previousForeground = Console.ForegroundColor;
     Console.ForegroundColor = ConsoleColor.Green;
     Console.WriteLine($"You created a(n) {arrowhead}-tipped arrow with {fletch} fletching for {GetTotalArrowCost(arrowhead, fletch, shaft)} gold.");
@@ -33,7 +33,6 @@ void CraftArrow(string arrowhead, string fletch, float shaft)
     Console.WriteLine($"The property (fletch) from the class returns: {arrow.Fletch}");
     Console.WriteLine($"The property (length) from the class returns: {arrow.ShaftLength}");
 
-    Console.ForegroundColor = previousForeground;
 }
 
 float GetTotalArrowCost(string arrowhead, string fletch, float shaftLength)
@@ -216,6 +215,8 @@ class Arrow
     public string Fletch => _fletch;
     public float ShaftLength => _shaftLength;
 
+
+    //redundant getters
     public string GetArrowhead() => _arrowhead;
     public string GetFletch() => _fletch;
     public float GetShaftLength() => _shaftLength;
