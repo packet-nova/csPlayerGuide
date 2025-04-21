@@ -25,7 +25,7 @@ void CraftArrow(Arrowhead arrowhead, Fletch fletch, float shaft)
     Arrow arrow = new(arrowhead, fletch, shaft);
     ConsoleColor previousForeground = Console.ForegroundColor;
     Console.ForegroundColor = ConsoleColor.Green;
-    Console.WriteLine($"You created a(n) {GetArrowheadInfo(arrowhead).name.ToLower()}-tipped arrow with {GetFletchInfo(fletch).name.ToLower()} fletching for {GetTotalArrowCost(arrowhead, fletch, shaft)} gold.");
+    Console.WriteLine($"You created a(n) {GetArrowheadDetails(arrowhead).name.ToLower()}-tipped arrow with {GetFletchDetails(fletch).name.ToLower()} fletching for {GetTotalArrowCost(arrowhead, fletch, shaft)} gold.");
     Console.ForegroundColor = previousForeground;
 
     Console.WriteLine();
@@ -46,17 +46,17 @@ float GetTotalArrowCost(Arrowhead arrowhead, Fletch fletch, float shaftLength)
     float shaftCost = GetShaftCost(shaftLength);
     int arrowheadCost = arrowhead switch
     {
-        Arrowhead.Wood => GetArrowheadInfo(Arrowhead.Wood).cost,
-        Arrowhead.Obsidian => GetArrowheadInfo(Arrowhead.Obsidian).cost,
-        Arrowhead.Steel => GetArrowheadInfo(Arrowhead.Steel).cost,
+        Arrowhead.Wood => GetArrowheadDetails(Arrowhead.Wood).cost,
+        Arrowhead.Obsidian => GetArrowheadDetails(Arrowhead.Obsidian).cost,
+        Arrowhead.Steel => GetArrowheadDetails(Arrowhead.Steel).cost,
         _ => 0,
     };
 
     int fletchCost = fletch switch
     {
-        Fletch.GooseFeather => GetFletchInfo(Fletch.GooseFeather).cost,
-        Fletch.TurkeyFeather => GetFletchInfo(Fletch.TurkeyFeather).cost,
-        Fletch.Plastic => GetFletchInfo(Fletch.Plastic).cost,
+        Fletch.GooseFeather => GetFletchDetails(Fletch.GooseFeather).cost,
+        Fletch.TurkeyFeather => GetFletchDetails(Fletch.TurkeyFeather).cost,
+        Fletch.Plastic => GetFletchDetails(Fletch.Plastic).cost,
         _ => 0
     };
     return shaftCost + arrowheadCost + fletchCost;
@@ -77,7 +77,7 @@ static Arrowhead GetArrowheadChoice()
         _ => Arrowhead.Wood
     };
 
-    Console.WriteLine($"You chose {GetArrowheadInfo(arrowheadChoice).name}.");
+    Console.WriteLine($"You chose {GetArrowheadDetails(arrowheadChoice).name}.");
     Console.WriteLine();
 
     return arrowheadChoice;
@@ -99,23 +99,23 @@ static Fletch GetFletchChoice()
         _ => Fletch.GooseFeather
     };
 
-    Console.WriteLine($"You chose {GetFletchInfo(fletchChoice).name}.");
+    Console.WriteLine($"You chose {GetFletchDetails(fletchChoice).name}.");
     Console.WriteLine();
     return fletchChoice;
 }
 
 static void DisplayArrowheadInfo()
 {
-    Console.WriteLine($"1. {GetArrowheadInfo(Arrowhead.Wood).name} - {GetArrowheadInfo(Arrowhead.Wood).cost}g");
-    Console.WriteLine($"2. {GetArrowheadInfo(Arrowhead.Obsidian).name} - {GetArrowheadInfo(Arrowhead.Obsidian).cost}g");
-    Console.WriteLine($"3. {GetArrowheadInfo(Arrowhead.Steel).name} - {GetArrowheadInfo(Arrowhead.Steel).cost}g");
+    Console.WriteLine($"1. {GetArrowheadDetails(Arrowhead.Wood).name} - {GetArrowheadDetails(Arrowhead.Wood).cost}g");
+    Console.WriteLine($"2. {GetArrowheadDetails(Arrowhead.Obsidian).name} - {GetArrowheadDetails(Arrowhead.Obsidian).cost}g");
+    Console.WriteLine($"3. {GetArrowheadDetails(Arrowhead.Steel).name} - {GetArrowheadDetails(Arrowhead.Steel).cost}g");
 }
 
 static void DisplayFletchInfo()
 {
-    Console.WriteLine($"1. {GetFletchInfo(Fletch.GooseFeather).name} - {GetFletchInfo(Fletch.GooseFeather).cost}g");
-    Console.WriteLine($"2. {GetFletchInfo(Fletch.TurkeyFeather).name} - {GetFletchInfo(Fletch.TurkeyFeather).cost}g");
-    Console.WriteLine($"3. {GetFletchInfo(Fletch.Plastic).name} - {GetFletchInfo(Fletch.Plastic).cost}g");
+    Console.WriteLine($"1. {GetFletchDetails(Fletch.GooseFeather).name} - {GetFletchDetails(Fletch.GooseFeather).cost}g");
+    Console.WriteLine($"2. {GetFletchDetails(Fletch.TurkeyFeather).name} - {GetFletchDetails(Fletch.TurkeyFeather).cost}g");
+    Console.WriteLine($"3. {GetFletchDetails(Fletch.Plastic).name} - {GetFletchDetails(Fletch.Plastic).cost}g");
 }
 
 static float GetShaftLength()
@@ -130,7 +130,7 @@ float GetShaftCost(float shaftLength)
     return shaftCost;
 }
 
-static (string name, int cost) GetFletchInfo(Fletch fletch)
+static (string name, int cost) GetFletchDetails(Fletch fletch)
 {
     string fletchType = fletch switch
     {
@@ -151,7 +151,7 @@ static (string name, int cost) GetFletchInfo(Fletch fletch)
     return (fletchType, fletchCost);
 }
 
-static (string name, int cost) GetArrowheadInfo(Arrowhead arrowhead)
+static (string name, int cost) GetArrowheadDetails(Arrowhead arrowhead)
 {
     string arrowheadType = arrowhead switch
     {
