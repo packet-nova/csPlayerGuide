@@ -14,11 +14,16 @@ DisplayStoreBanner();
 
 CraftArrow(GetArrowheadChoice(), GetFletchChoice(), GetShaftLength());
 
-Arrow eliteArrow01 = Arrow.CreateMarksmanArrow();
+Arrow eliteArrow01 = Arrow.CreateEliteArrow();
 
 Arrow marksmanArrow01 = Arrow.CreateMarksmanArrow();
 
 Arrow beginnerArrow01 = Arrow.CreateBeginnerArrow();
+
+Console.WriteLine(@$"
+Elite Arrow {eliteArrow01.Arrowhead}, {eliteArrow01.Fletch}, {eliteArrow01.ShaftLength}
+Marksman Arrow  {marksmanArrow01.Arrowhead} {marksmanArrow01.Fletch} {marksmanArrow01.ShaftLength}
+Beginner Arrow  {beginnerArrow01.Arrowhead} {beginnerArrow01.Fletch} {beginnerArrow01.ShaftLength}");
 
 void CraftArrow(Arrowhead arrowhead, Fletch fletch, float shaft)
 {
@@ -27,18 +32,7 @@ void CraftArrow(Arrowhead arrowhead, Fletch fletch, float shaft)
     Console.ForegroundColor = ConsoleColor.Green;
     Console.WriteLine($"You created a(n) {GetArrowheadDetails(arrowhead).name.ToLower()}-tipped arrow with {GetFletchDetails(fletch).name.ToLower()} fletching for {GetTotalArrowCost(arrowhead, fletch, shaft)} gold.");
     Console.ForegroundColor = previousForeground;
-
     Console.WriteLine();
-
-    Console.WriteLine($"The GetArrowhead() method returns: {arrow.GetArrowhead()}");
-    Console.WriteLine($"The GetFletch() method returns: {arrow.GetFletch()}");
-    Console.WriteLine($"The GetShaftLength() method returns: {arrow.GetShaftLength()}");
-    Console.WriteLine();
-
-    Console.WriteLine($"The property (arrowhead) from the class returns: {arrow.Arrowhead}");
-    Console.WriteLine($"The property (fletch) from the class returns: {arrow.Fletch}");
-    Console.WriteLine($"The property (length) from the class returns: {arrow.ShaftLength}");
-
 }
 
 float GetTotalArrowCost(Arrowhead arrowhead, Fletch fletch, float shaftLength)
@@ -208,9 +202,9 @@ class Arrow
     public Fletch Fletch => _fletch;
     public float ShaftLength => _shaftLength;
 
-    public static Arrow CreateBeginnerArrow() => new Arrow(Arrowhead.Steel, Fletch.Plastic, 95);
-    public static Arrow CreateMarksmanArrow() => new Arrow(Arrowhead.Wood, Fletch.GooseFeather, 75);
-    public static Arrow CreateEliteArrow() => new Arrow(Arrowhead.Steel, Fletch.GooseFeather, 65);
+    public static Arrow CreateBeginnerArrow() => new Arrow(Arrowhead.Wood, Fletch.GooseFeather, 75);
+    public static Arrow CreateMarksmanArrow() => new Arrow(Arrowhead.Steel, Fletch.GooseFeather, 65);
+    public static Arrow CreateEliteArrow() => new Arrow(Arrowhead.Steel, Fletch.Plastic, 95);
 
 }
 
