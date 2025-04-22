@@ -1,14 +1,14 @@
-﻿public class Card
+﻿class Card
 {
+    public CardRank Rank { get; }
+    public CardColor Color { get; } 
 
+    public Card(CardRank rank, CardColor color)
+    {
+        Rank = rank;
+        Color = color;
+    }
 
-
-
-
-
-
-
-    enum Color { Red, Green, Blue, Yellow }
-    enum Rank { 1$, 2, 3, 4, 5, 6, 7 }
-
+    public enum CardColor { Red, Green, Blue, Yellow }
+    public enum CardRank { One, Two, Three, Four, Five, Six, Seven, Eight, Nine, Ten, Dollar, Percent, Chevron, Ampersand }
 }
