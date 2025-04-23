@@ -34,7 +34,7 @@ while (true)
 public class Door
 {
     private int _passcode;
-    public DoorState DoorState { get; set; }
+    public DoorState DoorState { get; private set; }
 
     public Door(DoorState doorState)
     {
@@ -54,7 +54,7 @@ public class Door
         }
         else
         {
-            Console.WriteLine("Passcode is incorrect. The door is locked.");
+            Console.WriteLine("Passcode is incorrect. The door remains locked.");
         }
     }
 
@@ -73,7 +73,7 @@ public class Door
         }
         else
         {
-            Console.WriteLine("Passcode is incorrect. The door is unlocked.");
+            Console.WriteLine("Passcode is incorrect. The door remains unlocked.");
         }
     }
 
