@@ -48,9 +48,9 @@ float GetTotalArrowCost(Arrowhead arrowhead, Fletch fletch, float shaftLength)
 
     int fletchCost = fletch switch
     {
-        Fletch.GooseFeather => GetFletchDetails(Fletch.GooseFeather).cost,
+        Fletch.GooseFeather =>  GetFletchDetails(Fletch.GooseFeather).cost,
         Fletch.TurkeyFeather => GetFletchDetails(Fletch.TurkeyFeather).cost,
-        Fletch.Plastic => GetFletchDetails(Fletch.Plastic).cost,
+        Fletch.Plastic =>       GetFletchDetails(Fletch.Plastic).cost,
         _ => 0
     };
     return shaftCost + arrowheadCost + fletchCost;
@@ -204,7 +204,7 @@ class Arrow
 
     public static Arrow CreateBeginnerArrow() => new Arrow(Arrowhead.Wood, Fletch.GooseFeather, 75);
     public static Arrow CreateMarksmanArrow() => new Arrow(Arrowhead.Steel, Fletch.GooseFeather, 65);
-    public static Arrow CreateEliteArrow() => new Arrow(Arrowhead.Steel, Fletch.Plastic, 95);
+    public static Arrow CreateEliteArrow()    => new Arrow(Arrowhead.Steel, Fletch.Plastic, 95);
 
 }
 
