@@ -1,10 +1,10 @@
-﻿Color[] cardColors = new[] { Color.Red, Color.Green, Color.Blue, Color.Yellow };
-Rank[] cardRanks = new[] {Rank.One, Rank.Two, Rank.Three, Rank.Four, Rank.Five, Rank.Six, Rank.Seven, Rank.Eight,
-    Rank.Nine, Rank.Ten, Rank.Dollar, Rank.Percent, Rank.Caret, Rank.Ampersand };
+﻿CardColor[] cardColors = new[] { CardColor.Red, CardColor.Green, CardColor.Blue, CardColor.Yellow };
+CardRank[] cardRanks = new[] {CardRank.One, CardRank.Two, CardRank.Three, CardRank.Four, CardRank.Five, CardRank.Six, CardRank.Seven, CardRank.Eight,
+    CardRank.Nine, CardRank.Ten, CardRank.Dollar, CardRank.Percent, CardRank.Caret, CardRank.Ampersand };
 
-foreach (Rank rank in cardRanks)
+foreach (CardRank rank in cardRanks)
 {
-    foreach (Color color in cardColors)
+    foreach (CardColor color in cardColors)
     {
         Card card = new Card(rank, color);
         Console.WriteLine($"The {card.Color} {card.Rank}.");
@@ -13,17 +13,17 @@ foreach (Rank rank in cardRanks)
 
 public class Card
 {
-    public Rank Rank { get; }
-    public Color Color { get; }
+    public CardRank Rank { get; }
+    public CardColor Color { get; }
 
-    public Card(Rank rank, Color color)
+    public Card(CardRank rank, CardColor color)
     {
         Rank = rank;
         Color = color;
     }
 
-    public bool IsSymbol => Rank == Rank.Dollar || Rank == Rank.Percent || Rank == Rank.Caret || Rank == Rank.Ampersand;
+    public bool IsSymbol => Rank == CardRank.Dollar || Rank == CardRank.Percent || Rank == CardRank.Caret || Rank == CardRank.Ampersand;
     public bool IsNumber => !IsSymbol;
 }
-public enum Color { Red, Green, Blue, Yellow }
-public enum Rank { One, Two, Three, Four, Five, Six, Seven, Eight, Nine, Ten, Dollar, Percent, Caret, Ampersand }
+public enum CardColor { Red, Green, Blue, Yellow }
+public enum CardRank { One, Two, Three, Four, Five, Six, Seven, Eight, Nine, Ten, Dollar, Percent, Caret, Ampersand }
