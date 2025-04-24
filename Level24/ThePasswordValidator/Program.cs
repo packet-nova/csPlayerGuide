@@ -1,2 +1,4 @@
-﻿// See https://aka.ms/new-console-template for more information
-Console.WriteLine("Hello, World!");
+﻿string x = "test";
+
+Console.WriteLine(x.Length);
+Console.ReadLine();
