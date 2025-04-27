@@ -64,7 +64,7 @@ public class TicTacToeGame
     private bool HasWon(Board board, CellType cellType)
     {
         if (AreSame(cellType, board.GetCellAt(0, 0), board.GetCellAt(0, 1), board.GetCellAt(0, 2))) return true;
-        if (AreSame(cellType, board.GetCellAt(1, 0), board.GetCellAt(1, 1), board.GetCellAt(2, 1))) return true;
+        if (AreSame(cellType, board.GetCellAt(1, 0), board.GetCellAt(1, 1), board.GetCellAt(1, 2))) return true;
         if (AreSame(cellType, board.GetCellAt(2, 0), board.GetCellAt(2, 1), board.GetCellAt(2, 2))) return true;
 
         if (AreSame(cellType, board.GetCellAt(0, 0), board.GetCellAt(1, 0), board.GetCellAt(2, 0))) return true;
