@@ -1,18 +1,4 @@
-﻿// Have player pick a symbol (X or O)
-// Ask player where they want to place a mark
-// End game if all 9 squares are occupied with no winner (draw)
-// Render the game board after each player turn
-// Detect and display when a player has won
-// How to display player symbol? Ma
-// Player cannot place symbol in square if already occupied
-
-/*char[,] symbols = new char[3, 3] { { 'X', 'O', ' ' }, { 'X', 'O', ' ' }, { 'X', 'O', ' ' } };
-symbols[0, 0] = 'A';
-*/
-
-
-
-Board board = new Board();
+﻿Board board = new Board();
 Player p1 = new(CellType.X);
 Player p2 = new(CellType.O);
 Renderer renderer = new Renderer();
