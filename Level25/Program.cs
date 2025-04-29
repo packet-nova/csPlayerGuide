@@ -1,38 +1,6 @@
 ﻿Pack pack = new(10, 20, 30);
 pack.StartItemSelection();
 
-public class Arrow : InventoryItem
-{
-    public Arrow() : base(0.1, 0.05) { }
-}
-
-public class Bow : InventoryItem
-{
-    public Bow() : base(1, 4) { }
-}
-
-public class Rope : InventoryItem
-{
-    public Rope() : base(1, 1.5) { }
-}
-
-public class Water : InventoryItem
-{
-    public Water() : base(2, 3) { }
-}
-
-public class FoodRations : InventoryItem
-{
-    public FoodRations() : base(1, 0.5) { }
-}
-
-public class Sword : InventoryItem
-{
-    public Sword() : base(5, 3) { }
-
-}
-
-
 public class Pack
 {
     private int _maxItems;
@@ -150,6 +118,36 @@ public class Pack
     }
 }
 
+public class Arrow : InventoryItem
+{
+    public Arrow() : base(0.1, 0.05) { }
+}
+
+public class Bow : InventoryItem
+{
+    public Bow() : base(1, 4) { }
+}
+
+public class Rope : InventoryItem
+{
+    public Rope() : base(1, 1.5) { }
+}
+
+public class Water : InventoryItem
+{
+    public Water() : base(2, 3) { }
+}
+
+public class FoodRations : InventoryItem
+{
+    public FoodRations() : base(1, 0.5) { }
+}
+
+public class Sword : InventoryItem
+{
+    public Sword() : base(5, 3) { }
+
+}
 public class InventoryItem
 {
     public double Weight { get; }
