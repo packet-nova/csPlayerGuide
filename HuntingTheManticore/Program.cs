@@ -123,7 +123,7 @@ void RoundStart() // Primary game loop
     Console.ForegroundColor = previousColor;
     Console.WriteLine("-------------------------------------------------------------------");
     AttackManticore(cannonType);
-
+    
     cityCurrentHealth -= 1;
     gameRound += 1;
 }
