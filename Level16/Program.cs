@@ -11,7 +11,6 @@ while (true)
     else Console.WriteLine($"You can't do that with the chest {state}.");
 }
 
-
 enum ChestState
 {
     Locked,
