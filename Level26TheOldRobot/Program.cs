@@ -1,13 +1,17 @@
-﻿Robot robot = new(0, 0, false);
+﻿Robot robot = new(0, 0, true);
 
-for (int i = 0; i < robot.Commands.Length; i++)
+
+if (robot.IsPowered)
 {
-    Console.Write("Enter a command: ");
-    RobotCommand? command = UserCommands(robot); 
-    robot.Commands[i] = command;
+    for (int i = 0; i < robot.Commands.Length; i++)
+    {
+        Console.Write("Enter a command: ");
+        RobotCommand? command = UserCommands(robot);
+        robot.Commands[i] = command;
+    }
+    robot.Run();
 }
 
-robot.Run();
 
 static RobotCommand? UserCommands(Robot robot)
 {
