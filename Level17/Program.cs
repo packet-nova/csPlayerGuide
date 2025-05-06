@@ -5,14 +5,17 @@ Console.WriteLine($"You cooked a delicious {cookedDish.seasoning} {cookedDish.in
 static FoodType ChooseFoodType()
 {
     int i = 1;
+    
     foreach (string j in Enum.GetNames(typeof(FoodType)))
     {
         Console.WriteLine($"{i}. {j}");
         i++;
     }
+    
     Console.Write("Pick a food: ");
     int choice = Convert.ToInt32(Console.ReadLine());
     Console.WriteLine();
+    
     FoodType food = choice switch
     {
         1 => (FoodType)(0),
@@ -20,20 +23,24 @@ static FoodType ChooseFoodType()
         3 => (FoodType)(2),
         _ => FoodType.Soup
     };
+   
     return food;
 }
 
 static Seasoning ChooseSeasoning()
 {
     int i = 1;
+    
     foreach (string j in Enum.GetNames(typeof(Seasoning)))
     {
         Console.WriteLine($"{i}. {j}");
         i++;
     }
+    
     Console.Write("Pick a seasoning: ");
     int choice = Convert.ToInt32(Console.ReadLine());
     Console.WriteLine();
+    
     Seasoning seasoning = choice switch
     {
         1 => (Seasoning)(0),
@@ -41,20 +48,24 @@ static Seasoning ChooseSeasoning()
         3 => (Seasoning)(2),
         _ => Seasoning.Spicy
     };
+    
     return seasoning;
 }
 
 static Ingredient ChooseIngredient()
 {
     int i = 1;
+    
     foreach (string j in Enum.GetNames(typeof(Ingredient)))
     {
         Console.WriteLine($"{i}. {j}");
         i++;
     }
+   
     Console.Write("Pick an ingredient: ");
     int choice = Convert.ToInt32(Console.ReadLine());
     Console.WriteLine();
+    
     Ingredient ingredient = choice switch
     {
         1 => (Ingredient)(0),
@@ -63,6 +74,7 @@ static Ingredient ChooseIngredient()
         4 => (Ingredient)(3),
         _ => Ingredient.Potato
     };
+    
     return ingredient;
 }
 
@@ -75,6 +87,7 @@ static (string food, string ingredient, string seasoning) GetFoodInfo(FoodType f
         FoodType.Soup => "soup",
         _ => "unknown"
     };
+    
     string ingredientType = ingredient switch
     {
         Ingredient.Carrot => "carrot",
@@ -83,6 +96,7 @@ static (string food, string ingredient, string seasoning) GetFoodInfo(FoodType f
         Ingredient.Potato => "potato",
         _ => "unknown"
     };
+    
     string seasoningType = seasoning switch
     {
         Seasoning.Spicy => "spicy",
@@ -90,6 +104,7 @@ static (string food, string ingredient, string seasoning) GetFoodInfo(FoodType f
         Seasoning.Sweet => "sweet",
         _ => "unknown"
     };
+    
     return (foodType, ingredientType, seasoningType);
 }
 
