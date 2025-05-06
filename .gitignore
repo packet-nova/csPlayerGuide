@@ -362,3 +362,6 @@ MigrationBackup/
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
 /Level29/Level29.csproj
+/Level29/Level29.sln
+/Level29/Level29.sln
+/.gitignore
