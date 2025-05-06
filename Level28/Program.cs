@@ -1,7 +1,7 @@
 ﻿Coordinate a = new(2, 2);
 Coordinate b = new(4, 4);
 Coordinate c = new(5, 5);
-Coordinate d = new(6, 3);
+Coordinate d = new(3, 4);
 
 Console.WriteLine($"Coordinates are adjacent: {IsAdjacent(a, b)}"); // Returns False
 Console.WriteLine($"Coordinates are adjacent: {IsAdjacent(c, d)}"); // Returns True
