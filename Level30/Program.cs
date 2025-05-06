@@ -1,7 +1,4 @@
-﻿
-using System.Net.NetworkInformation;
-
-Sword sword = new();
+﻿Sword sword = new();
 Bow bow = new();
 Axe axe = new();
 
