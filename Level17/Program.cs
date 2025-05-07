@@ -13,7 +13,6 @@ static FoodType ChooseFoodType()
     
     Console.Write("Pick a food: ");
     int choice = Convert.ToInt32(Console.ReadLine());
-    Console.WriteLine();
     
     FoodType food = choice switch
     {
@@ -22,7 +21,9 @@ static FoodType ChooseFoodType()
         3 => (FoodType)(2),
         _ => FoodType.Soup
     };
-   
+    
+    Console.WriteLine($"You selected {food}.");
+    Console.WriteLine();
     return food;
 }
 
@@ -38,7 +39,6 @@ static Seasoning ChooseSeasoning()
     
     Console.Write("Pick a seasoning: ");
     int choice = Convert.ToInt32(Console.ReadLine());
-    Console.WriteLine();
     
     Seasoning seasoning = choice switch
     {
@@ -48,6 +48,8 @@ static Seasoning ChooseSeasoning()
         _ => Seasoning.Spicy
     };
     
+    Console.WriteLine($"You selected {seasoning}.");
+    Console.WriteLine();
     return seasoning;
 }
 
@@ -63,7 +65,6 @@ static Ingredient ChooseIngredient()
    
     Console.Write("Pick an ingredient: ");
     int choice = Convert.ToInt32(Console.ReadLine());
-    Console.WriteLine();
     
     Ingredient ingredient = choice switch
     {
@@ -73,7 +74,9 @@ static Ingredient ChooseIngredient()
         4 => (Ingredient)(3),
         _ => Ingredient.Potato
     };
-    
+
+    Console.WriteLine($"You selected {ingredient}.");
+    Console.WriteLine();
     return ingredient;
 }
 

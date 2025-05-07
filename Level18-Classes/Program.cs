@@ -176,15 +176,15 @@ static string GetUserInput(string prompt)
 
 class Arrow
 {
-    public string _arrowhead;
-    public string _fletch;
-    public float _shaftLength;
+    public string Arrowhead;
+    public string Fletch;
+    public float ShaftLength;
 
     public Arrow(string arrowhead, string fletch, float shaftLength)
     {
-        _arrowhead = arrowhead;
-        _fletch = fletch;
-        _shaftLength = shaftLength;
+        Arrowhead = arrowhead;
+        Fletch = fletch;
+        ShaftLength = shaftLength;
     }
 }
 
