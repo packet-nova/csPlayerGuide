@@ -1,5 +1,4 @@
 ﻿var cookedDish = GetFoodInfo(ChooseFoodType(), ChooseIngredient(), ChooseSeasoning());
-
 Console.WriteLine($"You cooked a delicious {cookedDish.seasoning} {cookedDish.ingredient} {cookedDish.food}.");
 
 static FoodType ChooseFoodType()
