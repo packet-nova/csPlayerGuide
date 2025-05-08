@@ -1,19 +1,19 @@
-﻿//Location location = new(1, 2);
-Player player = new();
+﻿Game game = new();
+game.TitleScreen();
 
-Map map = new(4, 4);
+while (!game.IsGameOver())
+{
+    game.Run();
+}
 
-Console.WriteLine(map.GetRoomAt(0, 0));
-map.SetRoomAt(0, 0, RoomType.Entrance);
-Console.WriteLine(map.GetRoomAt(0, 0));
-Console.WriteLine(map.GetRoomAt(3, 3));
+public interface IMovable
+{
+    void Move(Direction direction, Map map);
+}
 
-//Console.WriteLine(location);
-//Console.WriteLine(player.Location);
-
-
-
-public record Location (int row, int column);
-
-public enum Directions { North, South, East, West }
-public enum RoomType { Empty, Entrance, Fountain, MapBoundary }
+public interface IInteractable
+{
+    void Interact();
+}
+public enum Direction { North, South, East, West }
+public enum RoomType { Empty, Entrance, Fountain, Encounter, MapBoundary }
