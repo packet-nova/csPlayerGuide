@@ -28,6 +28,11 @@
             _suppressStatus = false;
 
         string input = PromptUserForAction();
+        ProcessAction(input);
+    }
+
+    public void ProcessAction(string input)
+    {
         if (input == "move north" || input == "n" || input == "north") _player.Move(Direction.North, _map);
         else if (input == "move south" || input == "s" || input == "south") _player.Move(Direction.South, _map);
         else if (input == "move east" || input == "e" || input == "east") _player.Move(Direction.East, _map);
@@ -39,7 +44,7 @@
         }
 
         else Console.WriteLine("Invalid command.");
-        
+
         if (FountainOfObjects.Activated == true && _player.Location == (0, 0))
         {
             ConsoleColor previousColor = Console.ForegroundColor;
@@ -47,8 +52,8 @@
             Console.WriteLine("You activated the fountain and made a safe exit. You win!");
             Console.ForegroundColor = previousColor;
             _gameOver = true;
+            return;
         }
-
     }
 
     public void TitleScreen()
