@@ -19,7 +19,7 @@
     public void GetRoomDescription(int x, int y)
     {
         RoomType room = _rooms[x, y];
-        
+
         switch (room)
         {
             case RoomType.Empty:
@@ -35,7 +35,7 @@
                 break;
 
             case RoomType.Encounter:
-                Console.ForegroundColor = ConsoleColor.Red;
+                Console.ForegroundColor = ConsoleColor.DarkRed;
                 Console.WriteLine("Something lurks about here...");
                 Console.ResetColor();
                 break;
@@ -52,6 +52,19 @@
                 Console.ResetColor();
                 break;
         }
+    }
+
+    public bool TryMoveTo(int newX, int newY, Direction direction)
+    {
+        if (IsOutOfBounds(newX, newY))
+        {
+            Console.ForegroundColor = ConsoleColor.DarkYellow;
+            Console.WriteLine($"You attempt to move {direction}, but there is no where to go. Damp, jagged rock blocks your path.");
+            Console.ResetColor();
+            return false;
+        }
+        
+        return true;
     }
 
     public int GetXSize()

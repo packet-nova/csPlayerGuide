@@ -4,6 +4,7 @@
     private Player _player;
 
     private bool _gameOver = false;
+    private bool _suppressStatus = false;
 
     public Game()
     {
@@ -21,14 +22,24 @@
 
     public void Run()
     {
-        PlayerStatus();
+        if (!_suppressStatus)
+            PlayerStatus();
+        else
+            _suppressStatus = false;
+
         string input = PromptUserForAction();
         if (input == "move north" || input == "n" || input == "north") _player.Move(Direction.North, _map);
         else if (input == "move south" || input == "s" || input == "south") _player.Move(Direction.South, _map);
         else if (input == "move east" || input == "e" || input == "east") _player.Move(Direction.East, _map);
         else if (input == "move west" || input == "w" || input == "west") _player.Move(Direction.West, _map);
-        else if (input == "activate" && _map.GetRoomAt(_player.X, _player.Y) == RoomType.Fountain) FountainOfObjects.Interact();
+        else if (input == "activate" && _map.GetRoomAt(_player.X, _player.Y) == RoomType.Fountain)
+        {
+            FountainOfObjects.Interact();
+            _suppressStatus = true;
+        }
 
+        else Console.WriteLine("Invalid command.");
+        
         if (FountainOfObjects.Activated == true && _player.Location == (0, 0))
         {
             ConsoleColor previousColor = Console.ForegroundColor;
@@ -37,6 +48,7 @@
             Console.ForegroundColor = previousColor;
             _gameOver = true;
         }
+
     }
 
     public void TitleScreen()
@@ -74,7 +86,7 @@
     public void PlayerStatus()
     {
         ConsoleColor previousColor = Console.ForegroundColor;
-        Console.ForegroundColor = ConsoleColor.Yellow;
+        Console.ForegroundColor = ConsoleColor.White;
         Console.WriteLine($"-------------------------------------------------------------------------");
         Console.WriteLine($"You are in the room at {_player.Location}.");
         _map.GetRoomDescription(_player.X, _player.Y);

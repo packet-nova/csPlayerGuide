@@ -25,14 +25,7 @@
                 break;
         }
 
-        if (map.IsOutOfBounds(newX, newY))
-        {
-            Console.ForegroundColor = ConsoleColor.Red;
-            Console.WriteLine($"You attempt to move {direction}, but there is no where to go. Damp, jagged rock blocks your path.");
-            Console.ResetColor();
-        }
-
-        else
+        if (map.TryMoveTo(newX, newY, direction))
         {
             X = newX;
             Y = newY;
