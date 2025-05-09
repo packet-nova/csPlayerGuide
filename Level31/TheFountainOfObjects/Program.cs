@@ -1,11 +1,11 @@
 ﻿Console.Title = "The Fountain of Objects";
-
+GameUI.TitleScreen();
 
 MapSize mapSize = GameOptions.PromptMapSize();
 GameOptions options = new(mapSize);
 
 Game game = new(options);
-game.TitleScreen();
+
 
 while (!game.IsGameOver())
 {
