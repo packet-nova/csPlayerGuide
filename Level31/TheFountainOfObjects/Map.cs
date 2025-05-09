@@ -8,14 +8,13 @@
     public int X => _x;
     public int Y => _y;
 
-    public Map(int row, int column)
+    public Map(int x, int y)
     {
-        _x = row;
-        _y = column;
-        _rooms = new RoomType[row, column];
+        _x = x;
+        _y = y;
+        _rooms = new RoomType[x, y];
     }
 
-    public RoomType GetRoomAt(int x, int y) => _rooms[x, y];
     public void GetRoomDescription(int x, int y)
     {
         RoomType room = _rooms[x, y];
@@ -59,27 +58,29 @@
         if (IsOutOfBounds(newX, newY))
         {
             Console.ForegroundColor = ConsoleColor.DarkYellow;
-            Console.WriteLine($"You attempt to move {direction}, but there is no where to go. Damp, jagged rock blocks your path.");
+            Console.WriteLine($"You attempt to move {direction}, but there is nowhere to go. Damp, jagged rock blocks your path.");
             Console.ResetColor();
             return false;
         }
-        
+
         return true;
     }
 
-    public int GetXSize()
+    public int GetXSize() // get boundaries of East/West
     {
         return _rooms.GetLength(0);
     }
 
-    public int GetYSize()
+    public int GetYSize() // Get boundaries of North/South
     {
         return _rooms.GetLength(1);
     }
 
-    public void SetRoomAt(int row, int column, RoomType roomType)
+    public RoomType GetRoomAt(int x, int y) => _rooms[x, y];
+
+    public void SetRoomAt(int x, int y, RoomType roomType)
     {
-        _rooms[row, column] = roomType;
+        _rooms[x, y] = roomType;
     }
 
     public bool IsOutOfBounds(int x, int y)

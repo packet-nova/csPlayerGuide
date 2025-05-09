@@ -6,13 +6,13 @@
     private bool _gameOver = false;
     private bool _suppressStatus = false;
 
-    public Game()
+    public Game(GameOptions options)
     {
         _player = new Player();
-        _map = new(4, 4);
-        _map.SetRoomAt(0, 0, RoomType.Entrance);
-        _map.SetRoomAt(0, 2, RoomType.Fountain);
-        _map.SetRoomAt(2, 2, RoomType.Encounter);
+
+        var (map, playerStart) = MapGenerator.GenerateMap(options.MapSize);
+        _map = map;
+        _player.SetPosition(playerStart.x, playerStart.y);
     }
 
     public bool IsGameOver()
