@@ -3,6 +3,15 @@
     public int X { get; private set; }
     public int Y { get; private set; }
     public (int x, int y) Location => (X, Y);
+    public int MaxHealth { get; private set; }
+    public int CurrentHealth {  get; private set; }
+    public bool IsDead => CurrentHealth <= 0;
+
+    public Player(int maxHealth)
+    {
+        MaxHealth = maxHealth;
+        CurrentHealth = maxHealth;
+    }
 
     public void Move(Direction direction, Map map)
     {
@@ -32,6 +41,18 @@
             Console.WriteLine($"You have moved {direction}.");
         }
     }
+
+    public string LivingStatus()
+    {
+        if (IsDead)
+            Console.ForegroundColor = ConsoleColor.Red;
+        else 
+            Console.ForegroundColor = ConsoleColor.Green;
+        string status = IsDead ? "Dead" : "Alive";
+        Console.ResetColor();
+        return status;
+    }
+
     public void SetPosition(int x, int y)
     {
         X = x;

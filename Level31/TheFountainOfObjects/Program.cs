@@ -22,6 +22,6 @@ public interface IInteractable
     void Interact();
 }
 public enum Direction { North, South, East, West }
-public enum RoomType { Empty, Entrance, Fountain, Encounter, MapBoundary }
+public enum RoomType { Empty, Entrance, Fountain, Encounter, Pit, MapBoundary }
 public enum GameDifficulty { Easy, Medium, Hard }
 public enum MapSize { Small, Medium, Large }

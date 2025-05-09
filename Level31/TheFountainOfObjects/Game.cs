@@ -9,7 +9,7 @@
     public Game(GameOptions options)
     {
         var (map, playerStart) = MapGenerator.GenerateMap(options.MapSize);
-        _player = new Player();
+        _player = new Player(15);
         _map = map;
         _player.SetPosition(playerStart.x, playerStart.y);
     }
@@ -22,12 +22,13 @@
     public void Run()
     {
         if (!_suppressStatus)
-            GameUI.PlayerStatus(_map, _player);
+            GameUI.PlayerStatus(_player, _map);
         else
             _suppressStatus = false;
 
         string input = PromptUserForAction();
         ProcessAction(input);
+        Console.WriteLine(_map.GetXSize());
     }
 
     public string PromptUserForAction()
@@ -48,7 +49,7 @@
         else if (input == "move east" || input == "e" || input == "east") _player.Move(Direction.East, _map);
         else if (input == "move west" || input == "w" || input == "west") _player.Move(Direction.West, _map);
         else if (input == "help" || input == "h") GameUI.HelpMessage();
-        else if (input == "activate" && _map.GetRoomAt(_player.X, _player.Y) == RoomType.Fountain)
+        else if (input == "activate" && _map.GetRoomAt(_player.Location) == RoomType.Fountain)
         {
             FountainOfObjects.Interact();
             _suppressStatus = true;
@@ -56,7 +57,8 @@
 
         else Console.WriteLine("Invalid command.");
 
-        if (FountainOfObjects.Activated == true && _player.Location == (0, 0))
+        //if (FountainOfObjects.Activated == true && _map.GetRoomAt(_player.X, _player.Y) == RoomType.Entrance)
+        if (FountainOfObjects.Activated == true && _map.GetRoomAt(_player.X, _player.Y) == RoomType.Entrance)
         {
             GameUI.WinScreen();
             _gameOver = true;

@@ -1,4 +1,4 @@
-﻿public class MapGenerator
+﻿public static class MapGenerator
 {
     public static (int x, int y) GetMapSize(MapSize size)
     {
@@ -17,11 +17,39 @@
         Map map = new Map(x, y);
 
         Random random = new();
-        int entranceX = random.Next(x);
-        int entranceY = random.Next(y);
 
-        map.SetRoomAt(entranceX, entranceY, RoomType.Entrance);
-        map.SetRoomAt(0, 2, RoomType.Fountain);
+        int pitX = random.Next(x);
+        int pitY = random.Next(y);
+
+        SpawnEntrance();
+        SpawnFountain();
+
+        (int x, int y) SpawnEntrance()
+        {
+            int entranceX = random.Next(x);
+            int entranceY = random.Next(y);
+            map.SetRoomAt(entranceX, entranceY, RoomType.Entrance);
+            return (entranceX, entranceY);
+        }
+
+        //check for empty tile and spawn entrance
+        void SpawnFountain()
+        {
+            int fountainX = random.Next(x);
+            int fountainY = random.Next(y);
+
+            if (map.GetRoomAt(fountainX, fountainY) == RoomType.Empty)
+            {
+                map.SetRoomAt(fountainX, fountainY, RoomType.Fountain);
+            }
+            else
+            {
+                Console.WriteLine("Error.");
+            }
+        }
+
+        // check for empty tile and spawn pit
+        map.SetRoomAt(pitX, pitY, RoomType.Pit);
 
         return (map, (entranceX, entranceY));
     }
