@@ -11,7 +11,7 @@
         };
     }
 
-    public static (Map map, (int x, int y) playerStart) GenerateMap(MapSize size) // Generates a new map. Player spawn is always entrance.
+    public static (Map map, (int x, int y) playerStart) GenerateMap(MapSize size) // Generates a new map. Discrete static methods for different spawners.
     {
         var (x, y) = GetMapSize(size);
         Map map = new Map(x, y);
@@ -50,7 +50,7 @@
 
         // check for empty tile and spawn pit
         map.SetRoomAt(pitX, pitY, RoomType.Pit);
-
+        
         return (map, (entranceX, entranceY));
     }
 }
