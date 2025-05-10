@@ -1,6 +1,4 @@
-﻿using System.Data;
-
-public static class GameUI
+﻿public class GameUI
 {
     public static void TitleScreen()
     {
@@ -28,9 +26,9 @@ public static class GameUI
         Console.WriteLine($"This room is an: {map.GetRoomAt(player.Location)}");
         Console.WriteLine($"Status: {(player.IsDead ? "Dead" : "Alive")} | HP: {player.CurrentHealth}/{player.MaxHealth}");
         map.GetRoomDescription(player.X, player.Y);
-        // debut ouput line
-        DebugOutput(map, player);
         Console.WriteLine($"-------------------------------------------------------------------------");
+        // debut ouput line - only disables if Debug is enabled
+        Debug.DebugOutput(map, player);
         Console.ForegroundColor = previousColor;
     }
 
@@ -66,17 +64,5 @@ public static class GameUI
             Thread.Sleep(delay);
         }
         Console.Clear();
-    }
-
-    public static void DebugOutput(Map map, Player player)
-    {
-        Console.WriteLine($"Map X Size: {map.GetXSize()}");
-        Console.WriteLine($"Map Y Size: {map.GetYSize()}");
-        Console.WriteLine($"Entrance location: {map.GetYSize()}");
-
-        //foreach (int row in map.GetXSize())
-        //{
-        //    Console.WriteLine(row);
-        //}
     }
 }

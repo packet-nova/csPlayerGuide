@@ -5,6 +5,7 @@
     public (int x, int y) Location => (X, Y);
     public int MaxHealth { get; private set; }
     public int CurrentHealth {  get; private set; }
+    public int PlayerLevel { get; private set; }
     public bool IsDead => CurrentHealth <= 0;
 
     public Player(int maxHealth)

@@ -7,6 +7,7 @@ GameOptions options = new(mapSize);
 Game game = new(options);
 
 
+
 while (!game.IsGameOver())
 {
     game.Run();
@@ -21,6 +22,14 @@ public interface IInteractable
 {
     void Interact();
 }
+
+
+
+
+
+
+
+
 public enum Direction { North, South, East, West }
 public enum RoomType { Empty, Entrance, Fountain, Encounter, Pit, MapBoundary }
 public enum GameDifficulty { Easy, Medium, Hard }
