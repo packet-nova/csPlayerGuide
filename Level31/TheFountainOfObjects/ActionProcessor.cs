@@ -26,21 +26,25 @@
         else if (input == "move west" || input == "w" || input == "west")
             _player.Move(Direction.West, _map);
 
-        // Process other commands
+        // Process additional commands
         else if (input == "help" || input == "h") GameUI.HelpMessage();
+        else if (input == "debug")
+        {
+            Debug.Enabled = !Debug.Enabled;
+            Console.WriteLine($"Debug mode: {Debug.Enabled}");
+        }
         else if (input == "activate" && _map.GetRoomAt(_player.Location) == RoomType.Fountain)
         {
             FountainOfObjects.Interact();
-            _suppressStatus = true;
+            _game.SuppressNextStatus();
         }
 
         else Console.WriteLine("Invalid command.");
 
-        //if (FountainOfObjects.Activated == true && _map.GetRoomAt(_player.X, _player.Y) == RoomType.Entrance)
         if (FountainOfObjects.Activated == true && _map.GetRoomAt(_player.Location) == RoomType.Entrance)
         {
             GameUI.WinScreen();
-            _gameOver = true;
+            _game.GameOver();
             return;
         }
     }

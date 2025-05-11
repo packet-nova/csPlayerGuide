@@ -4,21 +4,21 @@
     private Player _player;
     private ActionProcessor _actionProcessor;
 
-    private bool _gameOver = false;
-    private bool _suppressStatus = false;
+    private bool _gameOver;
+    private bool _suppressStatus;
 
-    public Game(GameOptions options)
+    public Game()
     {
-        var (map, playerStart) = MapGenerator.GenerateMap(options.MapSize);
+        //Prompt user for game options before generating map and constructing game
+        GameOptions options = GameOptions.PromptGameOptions();
+
+        _map = MapGenerator.GenerateMap(options.MapSize);
         _player = new Player(15);
-        _map = map;
-        _player.SetPosition(playerStart.x, playerStart.y);
-        _actionProcessor = new(_player, _map, this);
-    }
 
-    public bool IsGameOver()
-    {
-        return _gameOver;
+        //Set player spawn location
+        var (playerSpawnX, playerSpawnY) = MapGenerator.PlayerSpawnLocation;
+        _player.SetPosition(playerSpawnX, playerSpawnY);
+        _actionProcessor = new(_player, _map, this);
     }
 
     public void Run()
@@ -29,7 +29,7 @@
             _suppressStatus = false;
 
         string input = PromptUserForAction();
-        ProcessAction(input);
+        _actionProcessor.ProcessAction(input);
     }
 
     public string PromptUserForAction()
@@ -43,32 +43,22 @@
         return input.ToLower().Trim();
     }
 
-    public void ProcessAction(string input)
-    {
-        if (input == "move north" || input == "n" || input == "north") _player.Move(Direction.North, _map);
-        else if (input == "move south" || input == "s" || input == "south") _player.Move(Direction.South, _map);
-        else if (input == "move east" || input == "e" || input == "east") _player.Move(Direction.East, _map);
-        else if (input == "move west" || input == "w" || input == "west") _player.Move(Direction.West, _map);
-        else if (input == "help" || input == "h") GameUI.HelpMessage();
-        else if (input == "activate" && _map.GetRoomAt(_player.Location) == RoomType.Fountain)
-        {
-            FountainOfObjects.Interact();
-            _suppressStatus = true;
-        }
-
-        else Console.WriteLine("Invalid command.");
-
-        //if (FountainOfObjects.Activated == true && _map.GetRoomAt(_player.X, _player.Y) == RoomType.Entrance)
-        if (FountainOfObjects.Activated == true && _map.GetRoomAt(_player.Location) == RoomType.Entrance)
-        {
-            GameUI.WinScreen();
-            _gameOver = true;
-            return;
-        }
-    }
-
    public void SuppressNextStatus()
     {
         _suppressStatus = true;
+    }
+    public bool IsGameOver()
+    {
+        return _gameOver;
+    }
+
+    public void GameOver()
+    {
+        _gameOver = true;
+    }
+
+    public void MoveEntitiy(IMovable entity, Direction direction, Map map)
+    {
+        entity.Move(direction, map);
     }
 }

@@ -1,12 +1,15 @@
 ﻿Console.Title = "The Fountain of Objects";
 GameUI.TitleScreen();
 
-MapSize mapSize = GameOptions.PromptMapSize();
-GameOptions options = new(mapSize);
+MockMovable newEntity = new();
+Map testMap = new(4, 4);
 
-Game game = new(options);
+newEntity.Move(Direction.North, testMap);
+newEntity.Move(Direction.South, testMap);
+newEntity.Move(Direction.East, testMap);
+newEntity.Move(Direction.West, testMap);
 
-
+Game game = new();
 
 while (!game.IsGameOver())
 {
@@ -22,13 +25,6 @@ public interface IInteractable
 {
     void Interact();
 }
-
-
-
-
-
-
-
 
 public enum Direction { North, South, East, West }
 public enum RoomType { Empty, Entrance, Fountain, Encounter, Pit, MapBoundary }

@@ -23,11 +23,10 @@
         Console.ForegroundColor = ConsoleColor.White;
         Console.WriteLine($"-------------------------------------------------------------------------");
         Console.WriteLine($"You are in the room at {player.Location}");
-        Console.WriteLine($"This room is an: {map.GetRoomAt(player.Location)}");
-        Console.WriteLine($"Status: {(player.IsDead ? "Dead" : "Alive")} | HP: {player.CurrentHealth}/{player.MaxHealth}");
+        Console.WriteLine($"Level: {player.PlayerLevel} Status: {(player.IsDead ? "Dead" : "Alive")} | HP: {player.CurrentHealth}/{player.MaxHealth}");
         map.GetRoomDescription(player.X, player.Y);
         Console.WriteLine($"-------------------------------------------------------------------------");
-        // debut ouput line - only disables if Debug is enabled
+        // debug ouput line - only disables if Debug is enabled
         Debug.DebugOutput(map, player);
         Console.ForegroundColor = previousColor;
     }
@@ -51,6 +50,7 @@
         Console.ForegroundColor = ConsoleColor.Green;
         Console.WriteLine("""
             You can navigate the caverns by using 4 cardinal directions: (N)orth, (S)outh, (E)ast, and (W)est.
+            Activate the fountain when you locate it.
             Watch out for traps and pitfalls, and there may be monsters lurking to ambush you.
             """);
         Console.ResetColor();

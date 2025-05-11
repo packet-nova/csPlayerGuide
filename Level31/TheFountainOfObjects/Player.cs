@@ -8,10 +8,11 @@
     public int PlayerLevel { get; private set; }
     public bool IsDead => CurrentHealth <= 0;
 
-    public Player(int maxHealth)
+    public Player(int maxHealth = 15, int level = 1)
     {
         MaxHealth = maxHealth;
         CurrentHealth = maxHealth;
+        PlayerLevel = level;
     }
 
     public void Move(Direction direction, Map map)

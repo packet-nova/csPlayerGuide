@@ -1,6 +1,6 @@
 ﻿public class Debug
 {
-    public static bool Enabled { get; set; } = true;
+    public static bool Enabled { get; set; } = false;
 
 
     /// <summary>
@@ -17,7 +17,9 @@
         Console.WriteLine($"Map X Size: {map.GetXSize()}");
         Console.WriteLine($"Map Y Size: {map.GetYSize()}");
         Console.WriteLine($"Entrance location: {MapGenerator.EntranceLocation}");
-        Console.WriteLine($"Player spawn location: {MapGenerator.PlayerSpawn}");
+        Console.WriteLine($"Player spawn location: {MapGenerator.PlayerSpawnLocation}");
+        Console.WriteLine($"Fountain location: {MapGenerator.FountainLocation}");
+        Console.WriteLine($"This room is an: {map.GetRoomAt(player.Location)}");
         Console.WriteLine($"-------------------------------------------------------------------------");
     }
 }
