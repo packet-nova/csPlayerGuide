@@ -27,12 +27,6 @@
             movable.Location = new(newX, newY);
             Console.WriteLine($"{movable} moved {direction} to {movable.Location}.");
         }
-       // if (map.TryMoveTo(newX, newY, direction))
-        //{
-        //    movable.X = newX;
-        //    movable.Y = newY;
-        //    Console.WriteLine($"{movable} moved {direction} to ({movable.X}, {movable.Y}).");
-        //}
         else
         {
             Console.ForegroundColor = ConsoleColor.DarkYellow;
