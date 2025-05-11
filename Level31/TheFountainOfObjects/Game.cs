@@ -2,6 +2,7 @@
 {
     private Map _map;
     private Player _player;
+    private ActionProcessor _actionProcessor;
 
     private bool _gameOver = false;
     private bool _suppressStatus = false;
@@ -12,6 +13,7 @@
         _player = new Player(15);
         _map = map;
         _player.SetPosition(playerStart.x, playerStart.y);
+        _actionProcessor = new(_player, _map, this);
     }
 
     public bool IsGameOver()
@@ -28,7 +30,6 @@
 
         string input = PromptUserForAction();
         ProcessAction(input);
-        Console.WriteLine(_map.GetXSize());
     }
 
     public string PromptUserForAction()
@@ -58,11 +59,16 @@
         else Console.WriteLine("Invalid command.");
 
         //if (FountainOfObjects.Activated == true && _map.GetRoomAt(_player.X, _player.Y) == RoomType.Entrance)
-        if (FountainOfObjects.Activated == true && _map.GetRoomAt(_player.X, _player.Y) == RoomType.Entrance)
+        if (FountainOfObjects.Activated == true && _map.GetRoomAt(_player.Location) == RoomType.Entrance)
         {
             GameUI.WinScreen();
             _gameOver = true;
             return;
         }
+    }
+
+   public void SuppressNextStatus()
+    {
+        _suppressStatus = true;
     }
 }

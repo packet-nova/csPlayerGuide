@@ -2,6 +2,10 @@
 {
     public static bool Enabled { get; set; } = true;
 
+
+    /// <summary>
+    /// Prints out debug information to the console.
+    /// </summary>
     public static void DebugOutput(Map map, Player player)
     {
         if (!Enabled) return;
