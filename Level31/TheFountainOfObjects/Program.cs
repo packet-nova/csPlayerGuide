@@ -21,8 +21,6 @@ while (!game.IsGameOver())
 
 public interface IMovable
 {
-    //int X { get; set; }
-    //int Y { get; set; }
     Location Location { get; set; }
     void Move(Direction direction, Map map);
 }
