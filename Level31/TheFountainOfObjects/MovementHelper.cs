@@ -2,8 +2,9 @@
 {
     public static void Move(IMovable movable, Direction direction, Map map)
     {
-        int newX = movable.X;
-        int newY = movable.Y;
+        int newX = movable.Location.x;
+        int newY = movable.Location.y;
+        
         // Determine the new position based on the direction
         switch (direction)
         {
@@ -23,10 +24,15 @@
         // Validate the movement using the map
         if (map.TryMoveTo(newX, newY, direction))
         {
-            movable.X = newX;
-            movable.Y = newY;
-            Console.WriteLine($"{movable} moved {direction} to ({movable.X}, {movable.Y}).");
+            movable.Location = new(newX, newY);
+            Console.WriteLine($"{movable} moved {direction} to {movable.Location}.");
         }
+       // if (map.TryMoveTo(newX, newY, direction))
+        //{
+        //    movable.X = newX;
+        //    movable.Y = newY;
+        //    Console.WriteLine($"{movable} moved {direction} to ({movable.X}, {movable.Y}).");
+        //}
         else
         {
             Console.ForegroundColor = ConsoleColor.DarkYellow;

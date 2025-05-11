@@ -17,9 +17,9 @@
         _rooms = new RoomType[x, y];
     }
 
-    public void GetRoomDescription(int x, int y)
+    public void GetRoomDescription(Location location)
     {
-        RoomType room = _rooms[x, y];
+        RoomType room = _rooms[location.x, location.y];
 
         switch (room)
         {
@@ -72,8 +72,9 @@
         return _rooms.GetLength(1);
     }
 
-    public RoomType GetRoomAt(int x, int y) => _rooms[x, y];
-    public RoomType GetRoomAt((int x, int y) location) => _rooms[location.x, location.y];
+    public RoomType GetRoomAt(Location location) => _rooms[location.x, location.y];
+    //public RoomType GetRoomAt(int x, int y) => _rooms[x, y];
+    //public RoomType GetRoomAt((int x, int y) location) => _rooms[location.x, location.y];
 
     public void SetRoomAt(int x, int y, RoomType roomType)
     {

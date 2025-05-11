@@ -1,7 +1,6 @@
 ﻿public class FountainOfObjects
 {
-    public int X { get; private set; }
-    public int Y { get; private set; }
+    public Location Location { get; set; }
     public static bool Activated { get; private set; } = false;
 
     public static void Interact()

@@ -24,9 +24,9 @@
         Console.WriteLine($"-------------------------------------------------------------------------");
         Console.WriteLine($"You are in the room at {player.Location}");
         Console.WriteLine($"Level: {player.PlayerLevel} Status: {(player.IsDead ? "Dead" : "Alive")} | HP: {player.CurrentHealth}/{player.MaxHealth}");
-        map.GetRoomDescription(player.X, player.Y);
+        map.GetRoomDescription(player.Location);
         Console.WriteLine($"-------------------------------------------------------------------------");
-        // debug ouput line - only disables if Debug is enabled
+        // debug ouput line - only displays if Debug is enabled in Debug class
         Debug.DebugOutput(map, player);
         Console.ForegroundColor = previousColor;
     }
