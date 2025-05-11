@@ -1,8 +1,5 @@
-﻿using System.ComponentModel;
-
-public class MapGenerator
+﻿public class MapGenerator
 {
-
     public static (int x, int y) EntranceLocation { get; private set; }
     public static (int x, int y) FountainLocation { get; private set; }
     public static (int x, int y) PlayerSpawnLocation { get; private set; }
@@ -40,8 +37,6 @@ public class MapGenerator
         (int entranceX, int entranceY) = SpawnEntrance();
         (int fountainX, int fountainY) = SpawnFountain();
         (int playerSpawnX, int playerSpawnY) = SpawnPlayer();
-        //SpawnEntrance();
-        //SpawnFountain();
 
         (int x, int y) SpawnEntrance()
         {

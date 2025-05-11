@@ -20,9 +20,15 @@
     {
         while (true)
         {
-            Console.Write("Choose a map size: (S)mall, (M)edium, (L)arge: ");
+            Console.Write("Choose a map size: (S)mall, (M)edium, (L)arge [default: Small]: ");
             string input = Console.ReadLine().ToLower().Trim();
             
+            if (string.IsNullOrEmpty(input))
+            {
+                input = "s"; // Default to small if no input
+                Console.WriteLine("Defaulting to Small map size.");
+            }
+
             switch (input)
             {
                 case "s":
@@ -47,8 +53,14 @@
     {
         while (true)
         {
-            Console.Write("Choose a difficulty: (E)asy, (M)edium, (H)ard: ");
+            Console.Write("Choose a difficulty: (E)asy, (M)edium, (H)ard [default: Easy]: ");
             string input = Console.ReadLine().ToLower().Trim();
+
+            if (string.IsNullOrEmpty(input))
+            {
+                input = "e"; // Default to easy if no input
+                Console.WriteLine("Defaulting to Easy difficulty.");
+            }
 
             switch (input)
             {

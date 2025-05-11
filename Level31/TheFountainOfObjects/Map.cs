@@ -49,7 +49,7 @@
 
             default:
                 Console.ForegroundColor = ConsoleColor.DarkGray;
-                Console.WriteLine("This room is unremarkable.");
+                Console.WriteLine("NO ROOM SET. MOST LIKELY BUG");
                 Console.ResetColor();
                 break;
         }
@@ -58,14 +58,8 @@
     public bool TryMoveTo(int newX, int newY, Direction direction)
     {
         if (IsOutOfBounds(newX, newY))
-        {
-            Console.ForegroundColor = ConsoleColor.DarkYellow;
-            Console.WriteLine($"You attempt to move {direction}, but there is nowhere to go. Damp, jagged rock blocks your path.");
-            Console.ResetColor();
             return false;
-        }
-
-        return true;
+        else return true;
     }
 
     public int GetXSize() // get boundaries of East/West

@@ -1,14 +1,17 @@
 ﻿Console.Title = "The Fountain of Objects";
 GameUI.TitleScreen();
 
-MockMovable newEntity = new();
-Map testMap = new(4, 4);
+// testing block
+//MockMovable newEntity = new();
+//Map testMap = new(4, 4);
 
-newEntity.Move(Direction.North, testMap);
-newEntity.Move(Direction.South, testMap);
-newEntity.Move(Direction.East, testMap);
-newEntity.Move(Direction.West, testMap);
+//newEntity.Move(Direction.North, testMap);
+//newEntity.Move(Direction.South, testMap);
+//newEntity.Move(Direction.East, testMap);
+//newEntity.Move(Direction.West, testMap);
 
+
+//Actual Game
 Game game = new();
 
 while (!game.IsGameOver())
@@ -18,6 +21,8 @@ while (!game.IsGameOver())
 
 public interface IMovable
 {
+    int X { get; set; }
+    int Y { get; set; }
     void Move(Direction direction, Map map);
 }
 

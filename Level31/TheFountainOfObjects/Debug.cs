@@ -20,6 +20,7 @@
         Console.WriteLine($"Player spawn location: {MapGenerator.PlayerSpawnLocation}");
         Console.WriteLine($"Fountain location: {MapGenerator.FountainLocation}");
         Console.WriteLine($"This room is an: {map.GetRoomAt(player.Location)}");
+        //Console.WriteLine($"Player alive: {!player.IsDead} | Difficulty: {options.Difficulty} | Map size {options.MapSize}");
         Console.WriteLine($"-------------------------------------------------------------------------");
     }
 }
