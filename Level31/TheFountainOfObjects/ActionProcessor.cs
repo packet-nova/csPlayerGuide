@@ -37,7 +37,7 @@
             Debug.Enabled = !Debug.Enabled;
             Console.WriteLine($"Debug mode: {Debug.Enabled}");
         }
-        else if (input == "activate")
+        else if (input == "activate" || input == "a")
         {
             // Check if player is at the fountain
             if (_map.GetRoomAt(_player.Location) == RoomType.Fountain)

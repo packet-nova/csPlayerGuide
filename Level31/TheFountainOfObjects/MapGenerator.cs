@@ -46,7 +46,7 @@
         {
             int entranceX = random.Next(x);
             int entranceY = random.Next(y);
-            
+
             map.SetRoomAt(entranceX, entranceY, RoomType.Entrance);
             EntranceLocation = new(entranceX, entranceY);
             return EntranceLocation;
@@ -55,19 +55,18 @@
         // Spawns a fountain at the first random location only if it is RoomType.Empty
         Location SpawnFountain()
         {
-            int fountainX = random.Next(x);
-            int fountainY = random.Next(y);
+            int fountainX;
+            int fountainY;
 
-            if (map.GetRoomAt(new(fountainX, fountainY)) == RoomType.Empty)
+            do
             {
-                map.SetRoomAt(fountainX, fountainY, RoomType.Fountain);
+                fountainX = random.Next(x);
+                fountainY = random.Next(y);
             }
-            
-            else
-            {
-                Console.WriteLine("Error.");
-            }
-            
+            while (Math.Abs(fountainX - EntranceLocation.x) <= 1 ||
+                   Math.Abs(fountainY - EntranceLocation.y) <= 1);
+
+            map.SetRoomAt(fountainX, fountainY, RoomType.Fountain);
             FountainLocation = new(fountainX, fountainY);
             return FountainLocation;
         }
@@ -84,7 +83,7 @@
         {
             int maelstromX;
             int maelstromY;
-            
+
             do
             {
                 maelstromX = random.Next(x);
@@ -93,7 +92,7 @@
             while ((maelstromX == EntranceLocation.x && maelstromY == EntranceLocation.y)
             || (maelstromX == FountainLocation.x && maelstromY == FountainLocation.y)
             || (maelstromX == PlayerSpawnLocation.x && maelstromY == PlayerSpawnLocation.y));
-            
+
             MaelstromLocation = new(maelstromX, maelstromY);
             MaelstromInstance = new Maelstrom(MaelstromLocation);
             map.SetRoomAt(maelstromX, maelstromY, RoomType.Encounter);
@@ -104,7 +103,7 @@
         {
             int catX = random.Next(x);
             int catY = random.Next(y);
-            
+
             CatLocation = new(catX, catY);
             map.SetRoomAt(catX, catY, RoomType.Encounter);
             return CatLocation;

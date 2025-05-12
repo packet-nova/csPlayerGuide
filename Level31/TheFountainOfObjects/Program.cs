@@ -9,9 +9,10 @@ while (!game.IsGameOver())
     game.Run();
     if (game.IsGameOver())
     {
-        Console.Write("Do you want to play again? (Y/N) ");
+        Console.Write("Do you want to play again? [Y]/N: ");
         string response = Console.ReadLine();
-        if (response.ToLower() == "y")
+        
+        if (response.ToLower() == "y" || response.ToLower() == "")
         {
             game = new();
         }

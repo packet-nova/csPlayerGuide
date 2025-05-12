@@ -55,7 +55,7 @@
             Help:
             You can navigate the caverns by using 4 cardinal directions: (N)orth, (S)outh, (E)ast, and (W)est.
             You can (L)ook to see your surroundings.
-            Activate the fountain when you locate it.
+            (A)ctivate the fountain when you locate it.
             Watch out for deadly maelstroms. You are not equipped enough to fight these.
             """);
         Console.ResetColor();

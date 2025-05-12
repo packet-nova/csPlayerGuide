@@ -20,7 +20,7 @@
     {
         while (true)
         {
-            Console.Write("Choose a map size: (S)mall, (M)edium, (L)arge [default: Small]: ");
+            Console.Write("Choose a map size: [S]mall, (M)edium, (L)arge: ");
             string input = Console.ReadLine().ToLower().Trim();
             
             if (string.IsNullOrEmpty(input))
@@ -42,7 +42,7 @@
                     return MapSize.Large;
                 default:
                     Console.ForegroundColor = ConsoleColor.Red;
-                    Console.WriteLine("Invalid input. Choose (S)mall, (M)edium, or (L)arge.");
+                    Console.WriteLine("Invalid input. Choose [S]mall, (M)edium, or (L)arge.");
                     Console.ResetColor();
                     break;
             }
@@ -53,7 +53,7 @@
     {
         while (true)
         {
-            Console.Write("Choose a difficulty: (E)asy, (M)edium, (H)ard [default: Easy]: ");
+            Console.Write("Choose a difficulty: [E]asy, (M)edium, (H)ard: ");
             string input = Console.ReadLine().ToLower().Trim();
 
             if (string.IsNullOrEmpty(input))
@@ -75,7 +75,7 @@
                     return GameDifficulty.Hard;
                 default:
                     Console.ForegroundColor = ConsoleColor.Red;
-                    Console.WriteLine("Invalid input. Choose (E)asy, (M)edium, (H)ard.");
+                    Console.WriteLine("Invalid input. Choose [E]asy, (M)edium, (H)ard.");
                     Console.ResetColor();
                     break;
             }
