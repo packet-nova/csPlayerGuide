@@ -1,16 +1,22 @@
-﻿public class Cat() : IMovable
+﻿public class Cat : IMovable
 {
     public Location Location { get; set; }
     public bool IsLooted { get; set; } = false;
     public string Name { get; } = "Cat";
     public string Description { get; } = "A small, fluffy cat. It looks like it could use a good home.";
-    public static bool Activated { get; private set; } = false;
+    public string SenseDescription { get; } = "You hear distant meows.";
+    public bool Activated { get; private set; } = false;
+
+    public Cat(Location location)
+    {
+        Location = location;
+    }
     public void Move(Direction direction, Map map)
     {
         MovementHelper.Move(this, direction, map);
     }
 
-    public static void Interact()
+    public void Interact()
     {
         Activated = true;
         ConsoleColor previousColor = Console.ForegroundColor;

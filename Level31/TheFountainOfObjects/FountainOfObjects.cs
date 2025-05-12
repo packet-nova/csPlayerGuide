@@ -1,9 +1,14 @@
 ﻿public class FountainOfObjects
 {
     public Location Location { get; set; }
-    public static bool Activated { get; private set; } = false;
+    public bool Activated { get; private set; } = false;
 
-    public static void Interact()
+    public FountainOfObjects(Location location)
+    {
+        Location = location;
+    }
+
+    public void Interact()
     {
         Activated = true;
         ConsoleColor previousColor = Console.ForegroundColor;

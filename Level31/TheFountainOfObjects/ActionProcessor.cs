@@ -42,13 +42,13 @@
             // Check if player is at the fountain
             if (_map.GetRoomAt(_player.Location) == RoomType.Fountain)
             {
-                FountainOfObjects.Interact();
+                MapGenerator.FountainInstance.Interact();
                 _game.SuppressNextStatus();
             }
             // Check if player is at the cat location
             else if (_player.Location.Equals(MapGenerator.CatLocation))
             {
-                Cat.Interact();
+                MapGenerator.CatInstance.Interact();
                 _game.SuppressNextStatus();
             }
         }
@@ -57,7 +57,7 @@
 
         _game.CheckForEncounter();
 
-        if ((FountainOfObjects.Activated || Cat.Activated) && _map.GetRoomAt(_player.Location) == RoomType.Entrance)
+        if (((MapGenerator.FountainInstance.Activated) || MapGenerator.CatInstance.Activated) && _map.GetRoomAt(_player.Location) == RoomType.Entrance)
         {
             GameUI.WinScreen();
             _game.GameOver();

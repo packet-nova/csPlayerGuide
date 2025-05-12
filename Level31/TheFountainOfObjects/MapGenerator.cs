@@ -5,7 +5,11 @@
     public static Location PlayerSpawnLocation { get; private set; }
     public static Location CatLocation { get; private set; }
     public static Location MaelstromLocation { get; private set; }
+
     public static Maelstrom MaelstromInstance { get; private set; }
+    public static Cat CatInstance { get; private set; }
+    public static FountainOfObjects FountainInstance { get; private set; }
+
 
     public static (int x, int y) GetMapSize(MapSize size)
     {
@@ -40,7 +44,6 @@
         Location maelstromLocation = SpawnMaelstrom();
 
         //Spawner Methods
-
         //Check for empty tile and spawn entrance
         Location SpawnEntrance()
         {
@@ -68,6 +71,7 @@
 
             map.SetRoomAt(fountainX, fountainY, RoomType.Fountain);
             FountainLocation = new(fountainX, fountainY);
+            FountainInstance = new FountainOfObjects(FountainLocation);
             return FountainLocation;
         }
 
@@ -105,6 +109,7 @@
             int catY = random.Next(y);
 
             CatLocation = new(catX, catY);
+            CatInstance = new Cat(CatLocation);
             map.SetRoomAt(catX, catY, RoomType.Encounter);
             return CatLocation;
         }
