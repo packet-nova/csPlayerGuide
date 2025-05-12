@@ -9,6 +9,8 @@
             You've wandered into a dark cave to find and reactivate the Fountain of Objects.
             Navigate to locate and activate the fountain.
             Then make your way to the exit.
+
+            Press (h) for help.
             
             Press any key to continue, and good luck!
             """);
@@ -52,8 +54,9 @@
         Console.WriteLine("""
             Help:
             You can navigate the caverns by using 4 cardinal directions: (N)orth, (S)outh, (E)ast, and (W)est.
+            You can (L)ook to see your surroundings.
             Activate the fountain when you locate it.
-            Watch out for traps and pitfalls, and there may be monsters lurking to ambush you.
+            Watch out for deadly maelstroms. You are not equipped enough to fight these.
             """);
         Console.ResetColor();
     }

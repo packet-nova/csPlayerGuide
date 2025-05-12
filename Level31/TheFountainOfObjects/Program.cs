@@ -7,6 +7,20 @@ Game game = new();
 while (!game.IsGameOver())
 {
     game.Run();
+    if (game.IsGameOver())
+    {
+        Console.Write("Do you want to play again? (Y/N) ");
+        string response = Console.ReadLine();
+        if (response.ToLower() == "y")
+        {
+            game = new();
+        }
+        else
+        {
+            Console.WriteLine("Thanks for playing!");
+            break;
+        }
+    }
 }
 
 public interface IMovable
@@ -19,6 +33,8 @@ public interface IInteractable
 {
     void Interact();
 }
+
+public record struct Location(int x, int y);
 
 public enum Direction { North, South, East, West }
 public enum RoomType { Empty, Entrance, Fountain, Encounter, Pit, MapBoundary }

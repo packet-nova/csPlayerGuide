@@ -26,6 +26,10 @@
         else if (input == "move west" || input == "w" || input == "west")
             _player.Move(Direction.West, _map);
 
+        // Player look command
+        else if (input == "look" || input == "l")
+            _player.Look(_map);
+
         // Process additional commands
         else if (input == "help" || input == "h") GameUI.HelpMessage();
         else if (input == "debug")

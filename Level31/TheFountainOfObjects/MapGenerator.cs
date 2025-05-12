@@ -5,6 +5,7 @@
     public static Location PlayerSpawnLocation { get; private set; }
     public static Location CatLocation { get; private set; }
     public static Location MaelstromLocation { get; private set; }
+    public static Maelstrom MaelstromInstance { get; private set; }
 
     public static (int x, int y) GetMapSize(MapSize size)
     {
@@ -21,6 +22,7 @@
     {
         bool IsEmpty = false;
     }
+
     /// <summary>
     ///Generates a new map. Discrete static methods for different spawners.
     /// </summary>
@@ -44,6 +46,7 @@
         {
             int entranceX = random.Next(x);
             int entranceY = random.Next(y);
+            
             map.SetRoomAt(entranceX, entranceY, RoomType.Entrance);
             EntranceLocation = new(entranceX, entranceY);
             return EntranceLocation;
@@ -59,10 +62,12 @@
             {
                 map.SetRoomAt(fountainX, fountainY, RoomType.Fountain);
             }
+            
             else
             {
                 Console.WriteLine("Error.");
             }
+            
             FountainLocation = new(fountainX, fountainY);
             return FountainLocation;
         }
@@ -77,17 +82,31 @@
 
         Location SpawnMaelstrom()
         {
-            int maelstromX = random.Next(x);
-            int maelstromY = random.Next(y);
+            int maelstromX;
+            int maelstromY;
+            
+            do
+            {
+                maelstromX = random.Next(x);
+                maelstromY = random.Next(y);
+            }
+            while ((maelstromX == EntranceLocation.x && maelstromY == EntranceLocation.y)
+            || (maelstromX == FountainLocation.x && maelstromY == FountainLocation.y)
+            || (maelstromX == PlayerSpawnLocation.x && maelstromY == PlayerSpawnLocation.y));
+            
             MaelstromLocation = new(maelstromX, maelstromY);
-            return CatLocation;
+            MaelstromInstance = new Maelstrom(MaelstromLocation);
+            map.SetRoomAt(maelstromX, maelstromY, RoomType.Encounter);
+            return MaelstromLocation;
         }
 
         Location SpawnCat()
         {
             int catX = random.Next(x);
             int catY = random.Next(y);
+            
             CatLocation = new(catX, catY);
+            map.SetRoomAt(catX, catY, RoomType.Encounter);
             return CatLocation;
         }
 
@@ -96,7 +115,7 @@
         //{
         //    int pitX = random.Next(x);
         //    int pitY = random.Next(y);
-        //    map.SetRoomAt(pitX, pitY, RoomType.Pit);
+        //    map.SetRoomAt(pitX, pitY, RoomType.Encounter);
         //}
 
         return map;
