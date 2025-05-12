@@ -1,14 +1,6 @@
 ﻿public class Map
 {
-    private readonly int _x;
-    private readonly int _y;
-
-    public (int x, int y) Size { get; }
-
     private readonly RoomType[,] _rooms;
-
-    public int X => _x;
-    public int Y => _y;
 
     public Map(int x, int y)
     {
@@ -73,8 +65,6 @@
     }
 
     public RoomType GetRoomAt(Location location) => _rooms[location.x, location.y];
-    //public RoomType GetRoomAt(int x, int y) => _rooms[x, y];
-    //public RoomType GetRoomAt((int x, int y) location) => _rooms[location.x, location.y];
 
     public void SetRoomAt(int x, int y, RoomType roomType)
     {
