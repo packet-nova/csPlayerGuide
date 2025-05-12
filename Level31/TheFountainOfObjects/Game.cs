@@ -42,7 +42,34 @@
         return input.ToLower().Trim();
     }
 
-   public void SuppressNextStatus()
+    public void CheckForEncounter()
+    {
+        // Kill the player if there's a deadly encounter (one shot).
+        if (HasDeadlyEncounter())
+        {
+            _map.GetRoomDescription(_player.Location);
+            KillPlayerByEntity();
+        }
+    }
+
+    public void KillPlayerByEntity()
+    {
+        _player.KillPlayer();
+        SuppressNextStatus();
+        GameUI.LoseScreen();
+        GameOver();
+    }
+
+    public bool HasDeadlyEncounter()
+    {
+        if (_player.Location.Equals(MapGenerator.MaelstromLocation))
+        {
+            return true;
+        }
+        return false;
+    }
+
+    public void SuppressNextStatus()
     {
         _suppressStatus = true;
     }

@@ -4,8 +4,6 @@
 
     public Map(int x, int y)
     {
-        _x = x;
-        _y = y;
         _rooms = new RoomType[x, y];
     }
 
@@ -44,6 +42,19 @@
                 Console.WriteLine("NO ROOM SET. MOST LIKELY BUG");
                 Console.ResetColor();
                 break;
+        }
+
+        if (location.Equals(MapGenerator.CatLocation))
+        {
+            Console.ForegroundColor = ConsoleColor.Magenta;
+            Console.WriteLine("There's a small, fluffy cat in this room. It looks at you curiously.");
+            Console.ResetColor();
+        }
+        if (location.Equals(MapGenerator.MaelstromLocation))
+        {
+            Console.ForegroundColor = ConsoleColor.DarkRed;
+            Console.WriteLine("There's a maelstrom here!");
+            Console.ResetColor();
         }
     }
 

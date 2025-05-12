@@ -4,7 +4,9 @@
     public int MaxHealth { get; private set; }
     public int CurrentHealth {  get; private set; }
     public int PlayerLevel { get; private set; }
-    public bool IsDead => CurrentHealth <= 0;
+
+    private bool _isDead;
+    public bool IsDead => _isDead || CurrentHealth <= 0;
 
     public Player(Location location, int maxHealth = 15, int level = 1)
     {
@@ -17,6 +19,11 @@
     public void Move(Direction direction, Map map)
     {
         MovementHelper.Move(this, direction, map);
+    }
+
+    public void KillPlayer()
+    {
+        _isDead = true;
     }
 
     public string LivingStatus()

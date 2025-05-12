@@ -3,7 +3,7 @@
     private readonly Player _player;
     private readonly Map _map;
     private readonly Game _game;
-    
+
     public ActionProcessor(Player player, Map map, Game game)
     {
         _player = player;
@@ -33,15 +33,27 @@
             Debug.Enabled = !Debug.Enabled;
             Console.WriteLine($"Debug mode: {Debug.Enabled}");
         }
-        else if (input == "activate" && _map.GetRoomAt(_player.Location) == RoomType.Fountain)
+        else if (input == "activate")
         {
-            FountainOfObjects.Interact();
-            _game.SuppressNextStatus();
+            // Check if player is at the fountain
+            if (_map.GetRoomAt(_player.Location) == RoomType.Fountain)
+            {
+                FountainOfObjects.Interact();
+                _game.SuppressNextStatus();
+            }
+            // Check if player is at the cat location
+            else if (_player.Location.Equals(MapGenerator.CatLocation))
+            {
+                Cat.Interact();
+                _game.SuppressNextStatus();
+            }
         }
 
         else Console.WriteLine("Invalid command.");
 
-        if (FountainOfObjects.Activated == true && _map.GetRoomAt(_player.Location) == RoomType.Entrance)
+        _game.CheckForEncounter();
+
+        if ((FountainOfObjects.Activated || Cat.Activated) && _map.GetRoomAt(_player.Location) == RoomType.Entrance)
         {
             GameUI.WinScreen();
             _game.GameOver();

@@ -3,6 +3,8 @@
     public static Location EntranceLocation { get; private set; }
     public static Location FountainLocation { get; private set; }
     public static Location PlayerSpawnLocation { get; private set; }
+    public static Location CatLocation { get; private set; }
+    public static Location MaelstromLocation { get; private set; }
 
     public static (int x, int y) GetMapSize(MapSize size)
     {
@@ -32,6 +34,8 @@
         Location entranceLocation = SpawnEntrance();
         Location fountainLocation = SpawnFountain();
         Location playerSpawnLocation = SpawnPlayer();
+        Location catLocation = SpawnCat();
+        Location maelstromLocation = SpawnMaelstrom();
 
         //Spawner Methods
 
@@ -71,10 +75,29 @@
             return PlayerSpawnLocation;
         }
 
-        // Check for empty tile and spawn pit
-        int pitX = random.Next(x);
-        int pitY = random.Next(y);
-        map.SetRoomAt(pitX, pitY, RoomType.Pit);
+        Location SpawnMaelstrom()
+        {
+            int maelstromX = random.Next(x);
+            int maelstromY = random.Next(y);
+            MaelstromLocation = new(maelstromX, maelstromY);
+            return CatLocation;
+        }
+
+        Location SpawnCat()
+        {
+            int catX = random.Next(x);
+            int catY = random.Next(y);
+            CatLocation = new(catX, catY);
+            return CatLocation;
+        }
+
+        //Ignore
+        //Location SpawnPit()
+        //{
+        //    int pitX = random.Next(x);
+        //    int pitY = random.Next(y);
+        //    map.SetRoomAt(pitX, pitY, RoomType.Pit);
+        //}
 
         return map;
     }

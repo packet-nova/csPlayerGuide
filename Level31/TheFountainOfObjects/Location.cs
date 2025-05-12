@@ -1,1 +1,1 @@
-﻿public record Location(int x, int y);
+﻿public record struct Location(int x, int y);
