@@ -1,17 +1,14 @@
 ﻿public class Game
 {
-    private MapData _mapData;
-    private Map _map;
-    private Player _player;
-    private FountainOfObjects _fountain;
-    private Maelstrom _maelstrom;
+    public MapData MapData { get; private set; }
+    public Map Map { get; private set; }
+    public Player Player { get; private set; }
+    public FountainOfObjects Fountain { get; private set; }
+    public Maelstrom Maelstrom { get; private set; }
+    
     private ActionProcessor _actionProcessor;
-
     private bool _gameOver;
     private bool _suppressStatus;
-
-    public MapData MapData => _mapData;
-    public Player Player => _player;
 
     public Game()
     {
@@ -19,19 +16,19 @@
         GameOptions options = GameOptions.PromptGameOptions();
 
         MapGenerator mapGenerator = new();
-        _mapData = mapGenerator.GenerateMap(options.MapSize);
-        _map = _mapData.Map;
-        _player = new(_mapData.PlayerSpawn);
-        _fountain = new(_mapData.FountainSpawn);
-        _maelstrom = new(_mapData.MaelstromSpawn);
+        MapData = mapGenerator.GenerateMap(options.MapSize);
+        Map = MapData.Map;
+        Player = new(MapData.PlayerSpawn);
+        Fountain = new(MapData.FountainSpawn);
+        Maelstrom = new(MapData.MaelstromSpawn);
 
-        _actionProcessor = new(this, _map, _player, _fountain, _maelstrom);
+        _actionProcessor = new(this);
     }
 
     public void Run()
     {
         if (!_suppressStatus)
-            GameUI.PlayerStatus(_player, _map, this, _maelstrom);
+            GameUI.PlayerStatus(this);
         else
             _suppressStatus = false;
 
@@ -55,14 +52,14 @@
         // Kill the player if there's a deadly encounter (one shot).
         if (HasDeadlyEncounter())
         {
-            _map.GetRoomDescription(_player.Location, _maelstrom);
+            Map.GetRoomDescription(Player.Location, Maelstrom);
             KillPlayerByEntity();
         }
     }
 
     public void KillPlayerByEntity()
     {
-        _player.KillPlayer();
+        Player.KillPlayer();
         SuppressNextStatus();
         GameUI.LoseScreen();
         GameOver();
@@ -70,7 +67,7 @@
 
     public bool HasDeadlyEncounter()
     {
-        return (_player.Location.Equals(_maelstrom.Location));
+        return (Player.Location.Equals(Maelstrom.Location));
     }
 
     public void SuppressNextStatus()
@@ -85,10 +82,5 @@
     public void GameOver()
     {
         _gameOver = true;
-    }
-
-    public void MoveEntitiy(IMovable entity, Direction direction, Map map)
-    {
-        entity.Move(direction, map);
     }
 }

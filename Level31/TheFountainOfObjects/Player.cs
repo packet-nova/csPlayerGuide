@@ -16,7 +16,7 @@
         Location = location;
     }
 
-    public void Look(Map map, Maelstrom maelstrom)
+    public void Look(Game game)
     {
         Location northLocation = new(Location.x - 1, Location.y);
         Location southLocation = new(Location.x + 1, Location.y);
@@ -26,49 +26,49 @@
         Console.WriteLine("You spend a turn using heightenend sense.");
 
         // Check to the North
-        if (!map.IsOutOfBounds(northLocation.x, northLocation.y))
+        if (!game.Map.IsOutOfBounds(northLocation.x, northLocation.y))
         {
-            Console.WriteLine($"To the North: {map.GetRoomAt(northLocation)} - ");
-            if (northLocation.Equals(maelstrom.Location))
+            Console.WriteLine($"To the North: {game.Map.GetRoomAt(northLocation)} - ");
+            if (northLocation.Equals(game.Maelstrom.Location))
             {
                 Console.ForegroundColor = ConsoleColor.Magenta;
-                Console.WriteLine(maelstrom.SenseDescription);
+                Console.WriteLine(game.Maelstrom.SenseDescription);
                 Console.ResetColor();
             }
         }
 
         // Check to the South
-        if (!map.IsOutOfBounds(southLocation.x, southLocation.y))
+        if (!game.Map.IsOutOfBounds(southLocation.x, southLocation.y))
         {
-            Console.WriteLine($"To the South: {map.GetRoomAt(southLocation)} - ");
-            if (southLocation.Equals(maelstrom.Location))
+            Console.WriteLine($"To the South: {game.Map.GetRoomAt(southLocation)} - ");
+            if (southLocation.Equals(game.Maelstrom.Location))
             {
                 Console.ForegroundColor = ConsoleColor.Magenta;
-                Console.WriteLine(maelstrom.SenseDescription);
+                Console.WriteLine(game.Maelstrom.SenseDescription);
                 Console.ResetColor();
             }
         }
 
         // Check to the East
-        if (!map.IsOutOfBounds(eastLocation.x, eastLocation.y))
+        if (!game.Map.IsOutOfBounds(eastLocation.x, eastLocation.y))
         {
-            Console.WriteLine($"To the East: {map.GetRoomAt(eastLocation)} - ");
-            if (eastLocation.Equals(maelstrom.Location))
+            Console.WriteLine($"To the East: {game.Map.GetRoomAt(eastLocation)} - ");
+            if (eastLocation.Equals(game.Maelstrom.Location))
             {
                 Console.ForegroundColor = ConsoleColor.Magenta;
-                Console.WriteLine(maelstrom.SenseDescription);
+                Console.WriteLine(game.Maelstrom.SenseDescription);
                 Console.ResetColor();
             }
         }
 
         // Check to the West
-        if (!map.IsOutOfBounds(westLocation.x, westLocation.y))
+        if (!game.Map.IsOutOfBounds(westLocation.x, westLocation.y))
         { 
-            Console.WriteLine($"To the West: {map.GetRoomAt(westLocation)} - ");
-            if (westLocation.Equals(maelstrom.Location))
+            Console.WriteLine($"To the West: {game.Map.GetRoomAt(westLocation)} - ");
+            if (westLocation.Equals(game.Maelstrom.Location))
             {
                 Console.ForegroundColor = ConsoleColor.Magenta;
-                Console.WriteLine(maelstrom.SenseDescription);
+                Console.WriteLine(game.Maelstrom.SenseDescription);
                 Console.ResetColor();
             }
         }

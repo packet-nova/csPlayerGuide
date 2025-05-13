@@ -6,13 +6,13 @@
     private readonly FountainOfObjects _fountain;
     private readonly Maelstrom _maelstrom;
 
-    public ActionProcessor(Game game, Map map, Player player, FountainOfObjects fountain, Maelstrom maelstrom)
+    public ActionProcessor(Game game)
     {
-        _player = player;
-        _map = map;
         _game = game;
-        _fountain = fountain;
-        _maelstrom = maelstrom;
+        _map = game.Map;
+        _player = game.Player;
+        _fountain = game.Fountain;
+        _maelstrom = game.Maelstrom;
     }
 
     /// <summary>
@@ -32,7 +32,7 @@
 
         // Player look command
         else if (input == "look" || input == "l")
-            _player.Look(_map, _maelstrom);
+            _player.Look(_game);
 
         // Process additional commands
         else if (input == "help" || input == "h") GameUI.HelpMessage();
