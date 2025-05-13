@@ -12,7 +12,6 @@
         //Prompt user for game options before generating map and constructing game
         GameOptions options = GameOptions.PromptGameOptions();
         _map = MapGenerator.GenerateMap(options.MapSize);
-
         //Create and then set player spawn location
         var (playerSpawnX, playerSpawnY) = MapGenerator.PlayerSpawnLocation;
         _player = new Player(new(playerSpawnX, playerSpawnY));

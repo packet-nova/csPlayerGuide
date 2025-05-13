@@ -1,6 +1,9 @@
 ﻿public class Map
 {
     private readonly RoomType[,] _rooms;
+    public int XSize => _rooms.GetLength(0);
+    public int YSize => _rooms.GetLength(1);
+    
 
     public Map(int x, int y)
     {
