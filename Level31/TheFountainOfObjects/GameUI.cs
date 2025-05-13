@@ -19,7 +19,7 @@
         Console.Clear();
     }
 
-    public static void PlayerStatus(Player player, Map map, MapData mapData, Maelstrom maelstrom)
+    public static void PlayerStatus(Player player, Map map, Game game, Maelstrom maelstrom)
     {
         ConsoleColor previousColor = Console.ForegroundColor;
         Console.ForegroundColor = ConsoleColor.White;
@@ -30,7 +30,7 @@
         Console.ResetColor();
         Console.WriteLine($"-------------------------------------------------------------------------");
         // debug ouput line - only displays if Debug is enabled in Debug class
-        Debug.DebugOutput(map, player, mapData);
+        Debug.DebugOutput(game);
         Console.ForegroundColor = previousColor;
     }
 

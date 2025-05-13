@@ -6,9 +6,13 @@
     /// <summary>
     /// Prints out debug information to the console.
     /// </summary>
-    public static void DebugOutput(Map map, Player player, MapData mapData)
+    public static void DebugOutput(Game game)
     {
         if (!Enabled) return;
+
+        Map map = game.MapData.Map;
+        MapData mapData = game.MapData;
+        Player player = game.Player;
 
         Console.WriteLine($"-------------------------------------------------------------------------");
         Console.ForegroundColor = ConsoleColor.Magenta;

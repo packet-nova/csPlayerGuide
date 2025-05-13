@@ -10,6 +10,9 @@
     private bool _gameOver;
     private bool _suppressStatus;
 
+    public MapData MapData => _mapData;
+    public Player Player => _player;
+
     public Game()
     {
         //Prompt user for game options before generating map and constructing game
@@ -28,7 +31,7 @@
     public void Run()
     {
         if (!_suppressStatus)
-            GameUI.PlayerStatus(_player, _map, _mapData, _maelstrom);
+            GameUI.PlayerStatus(_player, _map, this, _maelstrom);
         else
             _suppressStatus = false;
 
