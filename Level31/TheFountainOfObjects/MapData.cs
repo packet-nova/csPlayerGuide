@@ -5,5 +5,4 @@
     public Location PlayerSpawn {  get; init; }
     public Location FountainSpawn { get; init; }
     public Location MaelstromSpawn { get; init; }
-    public Location CatSpawn { get; init; }
 }

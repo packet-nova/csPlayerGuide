@@ -19,18 +19,18 @@
         Console.Clear();
     }
 
-    public static void PlayerStatus(Player player, Map map)
+    public static void PlayerStatus(Player player, Map map, MapData mapData, Maelstrom maelstrom)
     {
         ConsoleColor previousColor = Console.ForegroundColor;
         Console.ForegroundColor = ConsoleColor.White;
         Console.WriteLine($"-------------------------------------------------------------------------");
-        Console.WriteLine($"You are in the room at {player.Location}");
+        Console.WriteLine($"Your Location: {player.Location}");
         Console.WriteLine($"Level: {player.PlayerLevel} Status: {(player.IsDead ? "Dead" : "Alive")} | HP: {player.CurrentHealth}/{player.MaxHealth}");
-        map.GetRoomDescription(player.Location);
+        map.GetRoomDescription(player.Location, maelstrom);
         Console.ResetColor();
         Console.WriteLine($"-------------------------------------------------------------------------");
         // debug ouput line - only displays if Debug is enabled in Debug class
-        Debug.DebugOutput(map, player);
+        Debug.DebugOutput(map, player, mapData);
         Console.ForegroundColor = previousColor;
     }
 

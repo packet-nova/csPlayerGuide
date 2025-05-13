@@ -16,7 +16,7 @@
         Location = location;
     }
 
-    public void Look(Map map)
+    public void Look(Map map, Maelstrom maelstrom)
     {
         Location northLocation = new(Location.x - 1, Location.y);
         Location southLocation = new(Location.x + 1, Location.y);
@@ -29,10 +29,10 @@
         if (!map.IsOutOfBounds(northLocation.x, northLocation.y))
         {
             Console.WriteLine($"To the North: {map.GetRoomAt(northLocation)} - ");
-            if (northLocation.Equals(MapGenerator.MaelstromLocation))
+            if (northLocation.Equals(maelstrom.Location))
             {
                 Console.ForegroundColor = ConsoleColor.Magenta;
-                Console.WriteLine(MapGenerator.MaelstromInstance.SenseDescription);
+                Console.WriteLine(maelstrom.SenseDescription);
                 Console.ResetColor();
             }
         }
@@ -41,10 +41,10 @@
         if (!map.IsOutOfBounds(southLocation.x, southLocation.y))
         {
             Console.WriteLine($"To the South: {map.GetRoomAt(southLocation)} - ");
-            if (southLocation.Equals(MapGenerator.MaelstromLocation))
+            if (southLocation.Equals(maelstrom.Location))
             {
                 Console.ForegroundColor = ConsoleColor.Magenta;
-                Console.WriteLine(MapGenerator.MaelstromInstance.SenseDescription);
+                Console.WriteLine(maelstrom.SenseDescription);
                 Console.ResetColor();
             }
         }
@@ -53,10 +53,10 @@
         if (!map.IsOutOfBounds(eastLocation.x, eastLocation.y))
         {
             Console.WriteLine($"To the East: {map.GetRoomAt(eastLocation)} - ");
-            if (eastLocation.Equals(MapGenerator.MaelstromLocation))
+            if (eastLocation.Equals(maelstrom.Location))
             {
                 Console.ForegroundColor = ConsoleColor.Magenta;
-                Console.WriteLine(MapGenerator.MaelstromInstance.SenseDescription);
+                Console.WriteLine(maelstrom.SenseDescription);
                 Console.ResetColor();
             }
         }
@@ -65,10 +65,10 @@
         if (!map.IsOutOfBounds(westLocation.x, westLocation.y))
         { 
             Console.WriteLine($"To the West: {map.GetRoomAt(westLocation)} - ");
-            if (westLocation.Equals(MapGenerator.MaelstromLocation))
+            if (westLocation.Equals(maelstrom.Location))
             {
                 Console.ForegroundColor = ConsoleColor.Magenta;
-                Console.WriteLine(MapGenerator.MaelstromInstance.SenseDescription);
+                Console.WriteLine(maelstrom.SenseDescription);
                 Console.ResetColor();
             }
         }

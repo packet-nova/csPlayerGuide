@@ -1,7 +1,10 @@
 ﻿public class Game
 {
+    private MapData _mapData;
     private Map _map;
     private Player _player;
+    private FountainOfObjects _fountain;
+    private Maelstrom _maelstrom;
     private ActionProcessor _actionProcessor;
 
     private bool _gameOver;
@@ -11,18 +14,21 @@
     {
         //Prompt user for game options before generating map and constructing game
         GameOptions options = GameOptions.PromptGameOptions();
-        _map = MapGenerator.GenerateMap(options.MapSize);
-        //Create and then set player spawn location
-        var (playerSpawnX, playerSpawnY) = MapGenerator.PlayerSpawnLocation;
-        _player = new Player(new(playerSpawnX, playerSpawnY));
 
-        _actionProcessor = new(_player, _map, this);
+        MapGenerator mapGenerator = new();
+        _mapData = mapGenerator.GenerateMap(options.MapSize);
+        _map = _mapData.Map;
+        _player = new(_mapData.PlayerSpawn);
+        _fountain = new(_mapData.FountainSpawn);
+        _maelstrom = new(_mapData.MaelstromSpawn);
+
+        _actionProcessor = new(this, _map, _player, _fountain, _maelstrom);
     }
 
     public void Run()
     {
         if (!_suppressStatus)
-            GameUI.PlayerStatus(_player, _map);
+            GameUI.PlayerStatus(_player, _map, _mapData, _maelstrom);
         else
             _suppressStatus = false;
 
@@ -46,7 +52,7 @@
         // Kill the player if there's a deadly encounter (one shot).
         if (HasDeadlyEncounter())
         {
-            _map.GetRoomDescription(_player.Location);
+            _map.GetRoomDescription(_player.Location, _maelstrom);
             KillPlayerByEntity();
         }
     }
@@ -61,11 +67,7 @@
 
     public bool HasDeadlyEncounter()
     {
-        if (_player.Location.Equals(MapGenerator.MaelstromLocation))
-        {
-            return true;
-        }
-        return false;
+        return (_player.Location.Equals(_maelstrom.Location));
     }
 
     public void SuppressNextStatus()

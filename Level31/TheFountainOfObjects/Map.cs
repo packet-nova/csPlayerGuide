@@ -10,7 +10,7 @@
         _rooms = new RoomType[x, y];
     }
 
-    public void GetRoomDescription(Location location)
+    public void GetRoomDescription(Location location, Maelstrom maelstrom)
     {
         RoomType room = _rooms[location.x, location.y];
 
@@ -46,19 +46,6 @@
                 Console.ResetColor();
                 break;
         }
-
-        if (location.Equals(MapGenerator.CatLocation))
-        {
-            Console.ForegroundColor = ConsoleColor.Magenta;
-            Console.WriteLine("There's a small, fluffy cat in this room. It looks at you curiously.");
-            Console.ResetColor();
-        }
-        if (location.Equals(MapGenerator.MaelstromLocation))
-        {
-            Console.ForegroundColor = ConsoleColor.DarkRed;
-            Console.WriteLine("There's a maelstrom here!");
-            Console.ResetColor();
-        }
     }
 
     public bool TryMoveTo(int newX, int newY, Direction direction)
@@ -66,16 +53,6 @@
         if (IsOutOfBounds(newX, newY))
             return false;
         else return true;
-    }
-
-    public int GetXSize() // get boundaries of East/West
-    {
-        return _rooms.GetLength(0);
-    }
-
-    public int GetYSize() // Get boundaries of North/South
-    {
-        return _rooms.GetLength(1);
     }
 
     public RoomType GetRoomAt(Location location) => _rooms[location.x, location.y];
@@ -87,8 +64,8 @@
 
     public bool IsOutOfBounds(int x, int y)
     {
-        if (x < 0 || x >= GetXSize()) return true;
-        if (y < 0 || y >= GetYSize()) return true;
+        if (x < 0 || x >= XSize) return true;
+        if (y < 0 || y >= YSize) return true;
         return false;
     }
 }

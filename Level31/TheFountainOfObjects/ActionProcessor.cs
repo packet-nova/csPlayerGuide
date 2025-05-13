@@ -1,14 +1,18 @@
 ﻿public class ActionProcessor
 {
-    private readonly Player _player;
-    private readonly Map _map;
     private readonly Game _game;
+    private readonly Map _map;
+    private readonly Player _player;
+    private readonly FountainOfObjects _fountain;
+    private readonly Maelstrom _maelstrom;
 
-    public ActionProcessor(Player player, Map map, Game game)
+    public ActionProcessor(Game game, Map map, Player player, FountainOfObjects fountain, Maelstrom maelstrom)
     {
         _player = player;
         _map = map;
         _game = game;
+        _fountain = fountain;
+        _maelstrom = maelstrom;
     }
 
     /// <summary>
@@ -28,7 +32,7 @@
 
         // Player look command
         else if (input == "look" || input == "l")
-            _player.Look(_map);
+            _player.Look(_map, _maelstrom);
 
         // Process additional commands
         else if (input == "help" || input == "h") GameUI.HelpMessage();
@@ -42,13 +46,7 @@
             // Check if player is at the fountain
             if (_map.GetRoomAt(_player.Location) == RoomType.Fountain)
             {
-                MapGenerator.FountainInstance.Interact();
-                _game.SuppressNextStatus();
-            }
-            // Check if player is at the cat location
-            else if (_player.Location.Equals(MapGenerator.CatLocation))
-            {
-                MapGenerator.CatInstance.Interact();
+                _fountain.Interact();
                 _game.SuppressNextStatus();
             }
         }
@@ -57,7 +55,7 @@
 
         _game.CheckForEncounter();
 
-        if (((MapGenerator.FountainInstance.Activated) || MapGenerator.CatInstance.Activated) && _map.GetRoomAt(_player.Location) == RoomType.Entrance)
+        if (((_fountain.Activated) && _map.GetRoomAt(_player.Location) == RoomType.Entrance))
         {
             GameUI.WinScreen();
             _game.GameOver();

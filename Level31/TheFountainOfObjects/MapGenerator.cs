@@ -12,7 +12,7 @@
     }
 
     /// <summary>
-    ///Generates a new map. Discrete static methods for different spawners.
+    ///Generates a new map and returns all data in a MapData object.
     /// </summary>
     /// 
     public MapData GenerateMap(MapSize size)
@@ -26,7 +26,6 @@
         Location fountainSpawn = SpawnFountain(map, random, entranceSpawn);
         Location playerSpawn = entranceSpawn; // Player always spawns at entrance
         Location maelstromSpawn = SpawnMaelstrom(map, random, entranceSpawn, fountainSpawn, playerSpawn);
-        Location catSpawn = SpawnCat(map, random);
 
         return new MapData
         {
@@ -35,7 +34,6 @@
             PlayerSpawn = playerSpawn,
             FountainSpawn = fountainSpawn,
             MaelstromSpawn = maelstromSpawn,
-            CatSpawn = catSpawn
         };
     }
 
@@ -48,7 +46,7 @@
         return new Location(entranceX, entranceY);
     }
 
-    // Spawns a fountain at the first random location only if it is RoomType.Empty
+    // Spawns a fountain at the first random location only if not adjacent to the entrance.
     private Location SpawnFountain(Map map, Random random, Location entranceSpawn)
     {
         int fountainX;
@@ -66,6 +64,7 @@
         return new Location(fountainX, fountainY);
     }
 
+    // Spawns a maelstrom at a random location only if not adjacent to the entrance, fountain, or player spawn.
     private Location SpawnMaelstrom(Map map, Random random, Location entranceSpawn, Location fountainSpawn, Location playerSpawn)
     {
         int maelstromX;
@@ -83,22 +82,4 @@
         map.SetRoomAt(maelstromX, maelstromY, RoomType.Encounter);
         return new Location(maelstromX, maelstromY);
     }
-
-    private Location SpawnCat(Map map, Random random)
-    {
-        int catX = random.Next(map.XSize);
-        int catY = random.Next(map.YSize);
-
-        map.SetRoomAt(catX, catY, RoomType.Encounter);
-        return new Location (catX, catY);
-    }
-
-    //Ignore
-    //Location SpawnPit()
-    //{
-    //    int pitX = random.Next(x);
-    //    int pitY = random.Next(y);
-    //    map.SetRoomAt(pitX, pitY, RoomType.Encounter);
-    //}
-
 }

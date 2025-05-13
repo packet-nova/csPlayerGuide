@@ -1,7 +1,23 @@
-﻿public class FountainOfObjects
+﻿public class FountainOfObjects : IInteractable
 {
     public Location Location { get; set; }
-    public bool Activated { get; private set; } = false;
+    public bool Activated { get; private set; }
+    public string SenseDescription
+    {
+        get
+        {
+            if (Activated)
+            {
+                Console.ForegroundColor = ConsoleColor.Blue;
+                return "You hear the sound of rushing water.";
+            }
+            else
+            {
+                Console.ForegroundColor = ConsoleColor.Blue;
+                return "You hear a faint trickle of water.";
+            }
+        }
+    }
 
     public FountainOfObjects(Location location)
     {

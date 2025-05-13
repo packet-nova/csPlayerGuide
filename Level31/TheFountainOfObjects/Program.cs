@@ -32,6 +32,8 @@ public interface IMovable
 
 public interface IInteractable
 {
+    public string SenseDescription { get; }
+    public Location Location { get; }
     void Interact();
 }
 
