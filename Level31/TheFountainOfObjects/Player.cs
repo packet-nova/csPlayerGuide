@@ -82,6 +82,7 @@
 
     public void KillPlayer()
     {
+        CurrentHealth = 0;
         _isDead = true;
     }
 

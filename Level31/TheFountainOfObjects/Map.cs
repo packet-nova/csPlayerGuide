@@ -10,6 +10,14 @@
         _rooms = new RoomType[x, y];
     }
 
+    /// <summary>
+    /// Displays a description of the room at the specified location based on its type.
+    /// </summary>
+    /// <remarks>The description is displayed in the console with color-coded text to indicate the type of
+    /// room. Room types include Empty, Entrance, Encounter, and Fountain. If the room type is not set, a default
+    /// message is displayed indicating a potential issue.</remarks>
+    /// <param name="location">The coordinates of the room to describe.</param>
+    /// <param name="maelstrom">The current state of the Maelstrom, which may influence the room's context.</param>
     public void GetRoomDescription(Location location, Maelstrom maelstrom)
     {
         RoomType room = _rooms[location.x, location.y];

@@ -10,6 +10,13 @@
     private bool _gameOver;
     private bool _suppressStatus;
 
+    /// <summary>
+    /// Initializes a new instance of the <see cref="Game"/> class, setting up the game environment based on
+    /// user-specified options.
+    /// </summary>
+    /// <remarks>This constructor prompts the user to configure game options, generates the game map, and
+    /// initializes key game components such as the player, fountain, and maelstrom. It also prepares the action
+    /// processor to handle player actions during gameplay.</remarks>
     public Game()
     {
         //Prompt user for game options before generating map and constructing game
@@ -36,6 +43,13 @@
         _actionProcessor.ProcessAction(input);
     }
 
+    /// <summary>
+    /// Prompts the user for an action by displaying a message and reading their input.
+    /// </summary>
+    /// <remarks>The user's input is converted to lowercase and trimmed of leading and trailing whitespace
+    /// before being returned. The console text color is temporarily changed to enhance readability during the
+    /// prompt.</remarks>
+    /// <returns>A string containing the user's input, converted to lowercase and trimmed of whitespace.</returns>
     public string PromptUserForAction()
     {
         ConsoleColor previousColor = Console.ForegroundColor;
@@ -49,7 +63,7 @@
 
     public void CheckForEncounter()
     {
-        // Kill the player if there's a deadly encounter (one shot).
+        /// Kill the player if they encounter a maelstrom.
         if (HasDeadlyEncounter())
         {
             Map.GetRoomDescription(Player.Location, Maelstrom);
