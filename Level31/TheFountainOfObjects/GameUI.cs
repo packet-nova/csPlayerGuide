@@ -24,9 +24,10 @@
         ConsoleColor previousColor = Console.ForegroundColor;
         Console.ForegroundColor = ConsoleColor.White;
         Console.WriteLine($"-------------------------------------------------------------------------");
-        Console.WriteLine($"Your Location: {player.Location}");
+        Console.WriteLine(DateTime.Now);
+        Console.WriteLine($"Your Location: {game.Player.Location}");
         Console.WriteLine($"Level: {game.Player.PlayerLevel} Status: {(game.Player.IsDead ? "Dead" : "Alive")} | HP: {game.Player.CurrentHealth}/{game.Player.MaxHealth}");
-        map.GetRoomDescription(game.Player.Location, game.Maelstrom);
+        game.Map.GetRoomDescription(game.Player.Location, game.Maelstrom);
         Console.ResetColor();
         Console.WriteLine($"-------------------------------------------------------------------------");
         // debug ouput line - only displays if Debug is enabled in Debug class
@@ -34,17 +35,19 @@
         Console.ForegroundColor = previousColor;
     }
 
-    public static void WinScreen()
+    public static void WinScreen(Game game)
     {
         Console.ForegroundColor = ConsoleColor.Green;
         Console.WriteLine("You activated the fountain and made a safe exit. You win!");
+        Console.WriteLine(game.FormattedTotalRunDuration());
         Console.ResetColor();
     }
 
-    public static void LoseScreen()
+    public static void LoseScreen(Game game)
     {
         Console.ForegroundColor = ConsoleColor.Red;
         Console.WriteLine("You have died. Game over.");
+        Console.WriteLine(game.FormattedTotalRunDuration());
         Console.ResetColor();
     }
 
@@ -60,6 +63,8 @@
             """);
         Console.ResetColor();
     }
+
+
 
     public static void LoadingDots(int countOfDots = 5, int delay = 5)
     {

@@ -5,10 +5,12 @@
     public Player Player { get; private set; }
     public FountainOfObjects Fountain { get; private set; }
     public Maelstrom Maelstrom { get; private set; }
-    
-    private ActionProcessor _actionProcessor;
+    public DateTime StartTime { get; } = DateTime.Now;
+
+private ActionProcessor _actionProcessor;
     private bool _gameOver;
     private bool _suppressStatus;
+    
 
     /// <summary>
     /// Initializes a new instance of the <see cref="Game"/> class, setting up the game environment based on
@@ -21,6 +23,8 @@
     {
         //Prompt user for game options before generating map and constructing game
         GameOptions options = GameOptions.PromptGameOptions();
+        
+
 
         MapGenerator mapGenerator = new();
         MapData = mapGenerator.GenerateMap(options.MapSize);
@@ -75,7 +79,7 @@
     {
         Player.KillPlayer();
         SuppressNextStatus();
-        GameUI.LoseScreen();
+        GameUI.LoseScreen(this);
         GameOver();
     }
 
@@ -96,5 +100,21 @@
     public void GameOver()
     {
         _gameOver = true;
+    }
+
+    /// <summary>
+    /// Calculates and returns the total run duration as a formatted string.
+    /// </summary>
+    /// <remarks>The total run duration is calculated as the difference between the current time and the  <see
+    /// cref="StartTime"/> property. The result is formatted as "Total run duration:
+    /// {hours}h:{minutes}m:{seconds}.".</remarks>
+    /// <returns>A string representing the total run duration in hours, minutes, and seconds.</returns>
+    public string FormattedTotalRunDuration()
+    {
+        DateTime endTime = DateTime.Now;
+        TimeSpan runDuration= endTime - StartTime;
+        Console.ForegroundColor = ConsoleColor.Yellow;
+        return $"Total run duration: {runDuration.Hours}h:{runDuration.Minutes}m:{runDuration.Seconds}s.";
+        Console.ResetColor();
     }
 }

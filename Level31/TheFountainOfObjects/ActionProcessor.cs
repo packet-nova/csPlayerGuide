@@ -57,7 +57,7 @@
 
         if (((_fountain.Activated) && _map.GetRoomAt(_player.Location) == RoomType.Entrance))
         {
-            GameUI.WinScreen();
+            GameUI.WinScreen(_game);
             _game.GameOver();
             return;
         }

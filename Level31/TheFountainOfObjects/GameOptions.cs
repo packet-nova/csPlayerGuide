@@ -2,6 +2,7 @@
 {
     public MapSize MapSize { get; private set; }
     public GameDifficulty Difficulty { get; private set; }
+    public bool ShowClock { get; private set; }
 
     public GameOptions(MapSize size, GameDifficulty difficulty)
     {
