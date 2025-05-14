@@ -5,7 +5,7 @@ static FoodType ChooseFoodType()
 {
     int i = 1;
     
-    foreach (string j in Enum.GetNames(typeof(FoodType)))
+    foreach (string j in Enum.GetNames<FoodType>())
     {
         Console.WriteLine($"{i}. {j}");
         i++;
@@ -31,7 +31,7 @@ static Seasoning ChooseSeasoning()
 {
     int i = 1;
     
-    foreach (string j in Enum.GetNames(typeof(Seasoning)))
+    foreach (string j in Enum.GetNames<Seasoning>())
     {
         Console.WriteLine($"{i}. {j}");
         i++;
@@ -57,7 +57,7 @@ static Ingredient ChooseIngredient()
 {
     int i = 1;
     
-    foreach (string j in Enum.GetNames(typeof(Ingredient)))
+    foreach (string j in Enum.GetNames<Ingredient>())
     {
         Console.WriteLine($"{i}. {j}");
         i++;
