@@ -21,7 +21,8 @@ if (robot.IsPowered)
         {
             robot.Commands.Add(command);
         }
-        if (command is StopCommand) stopRequested = true;
+        if (command.GetType() == typeof(StopCommand))
+            stopRequested = true;
     }
     robot.Run();
 }
