@@ -4,7 +4,7 @@ for (int i = 0; i < 10; i++)
 {
     Console.WriteLine(random.NextDouble(10));
     Console.WriteLine(random.NextString("red", "orange", "yellow", "green", "blue", "indigo"));
-    Console.WriteLine(random.CoinClip(90));
+    Console.WriteLine(random.CoinFlip(90));
     Console.WriteLine();
 }
 public static class RandomExtension
@@ -20,7 +20,7 @@ public static class RandomExtension
         return words[index];
     }
 
-    public static bool CoinClip(this Random random, int headsBias = 50)
+    public static bool CoinFlip(this Random random, int headsBias = 50)
     {
         bool heads = true;
         bool tails = false;
