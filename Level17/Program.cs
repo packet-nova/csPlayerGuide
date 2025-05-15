@@ -5,7 +5,7 @@ static FoodType ChooseFoodType()
 {
     int i = 1;
     
-    foreach (string j in Enum.GetNames(typeof(FoodType)))
+    foreach (string j in Enum.GetNames<FoodType>())
     {
         Console.WriteLine($"{i}. {j}");
         i++;
@@ -14,24 +14,25 @@ static FoodType ChooseFoodType()
     Console.Write("Pick a food: ");
     int choice = Convert.ToInt32(Console.ReadLine());
     
-    FoodType food = choice switch
-    {
-        1 => (FoodType)(0),
-        2 => (FoodType)(1),
-        3 => (FoodType)(2),
-        _ => FoodType.Soup
-    };
+    //FoodType food = choice switch
+    //{
+    //    1 => (FoodType)(0),
+    //    2 => (FoodType)(1),
+    //    3 => (FoodType)(2),
+    //    _ => FoodType.Soup
+    //};
     
-    Console.WriteLine($"You selected {food}.");
+    Console.WriteLine($"You selected {(FoodType)(choice -1)}.");
     Console.WriteLine();
-    return food;
+    return (FoodType)(choice - 1);
+    //return food;
 }
 
 static Seasoning ChooseSeasoning()
 {
     int i = 1;
     
-    foreach (string j in Enum.GetNames(typeof(Seasoning)))
+    foreach (string j in Enum.GetNames<Seasoning>())
     {
         Console.WriteLine($"{i}. {j}");
         i++;
@@ -57,7 +58,7 @@ static Ingredient ChooseIngredient()
 {
     int i = 1;
     
-    foreach (string j in Enum.GetNames(typeof(Ingredient)))
+    foreach (string j in Enum.GetNames<Ingredient>())
     {
         Console.WriteLine($"{i}. {j}");
         i++;
