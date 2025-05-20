@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.13.35931.197 d17.13
+VisualStudioVersion = 17.14.36109.1 d17.14
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sandbox", "Sandbox.csproj", "{8C7CDE7E-DD34-47C7-96B9-503D71789DA7}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Level35", "Level35.csproj", "{AE9409E1-E36B-4AFD-98F2-E317D183A99C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,15 +11,15 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{8C7CDE7E-DD34-47C7-96B9-503D71789DA7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{8C7CDE7E-DD34-47C7-96B9-503D71789DA7}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{8C7CDE7E-DD34-47C7-96B9-503D71789DA7}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{8C7CDE7E-DD34-47C7-96B9-503D71789DA7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AE9409E1-E36B-4AFD-98F2-E317D183A99C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AE9409E1-E36B-4AFD-98F2-E317D183A99C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AE9409E1-E36B-4AFD-98F2-E317D183A99C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AE9409E1-E36B-4AFD-98F2-E317D183A99C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {33DE4F7E-D3A8-4A65-849E-6F46A39CCCC5}
+		SolutionGuid = {0BD663AD-9EC4-42ED-A9E1-ABD01638594A}
 	EndGlobalSection
 EndGlobal
