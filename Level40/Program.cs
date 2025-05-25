@@ -1,54 +1,38 @@
-﻿/*
- The island of Pattren is home to skilled potion masters in need of some help. Potions are mixed by adding
-one ingredient at a time until they produce a valuable potion type. The potion masters will give you the
-Patterned Medallion if you help them make a program to build potions according to the rules below:
-• All potions start as water.
-• Adding stardust to water turns it into an elixir.
-• Adding snake venom to an elixir turns it into a poison potion.
-• Adding dragon breath to an elixir turns it into a flying potion.
-• Adding shadow glass to an elixir turns it into an invisibility potion.
-• Adding an eyeshine gem to an elixir turns it into a night sight potion.
-• Adding shadow glass to a night sight potion turns it into a cloudy brew.
-• Adding an eyeshine gem to an invisibility potion turns it into a cloudy brew.
-• Adding stardust to a cloudy brew turns it into a wraith potion.
-• Anything else results in a ruined potion.
+﻿Potion potion = new();
+bool keepBrewing = true;
 
-Objectives:
-• Create enumerations for the potion and ingredient types.
-• Tell the user what type of potion they currently have and what ingredient choices are available.
-• Allow them to enter an ingredient choice. Use a pattern to turn the user’s response into an
-ingredient.
-• Change the current potion type according to the rules above using a pattern.
-• Allow them to choose whether to complete the potion or continue before adding an ingredient. If
-the user decides to complete the potion, end the program.
-• When the user creates a ruined potion, tell them and start over with water.
- */
-
-Potion potion = Potion.Water;
-
-Console.WriteLine($"Your current potion is {potion}");
-SelectIngredient();
-Console.WriteLine($"Your potion is now {potion}");
-
-
-
-//Console.WriteLine("Which ingredients do you want to add?");
-//Ingredient choice = (Ingredient)Enum.Parse<Ingredient>(Console.ReadLine());
-//if (choice == Ingredient.Stardust) potion = Potion.Elixir;
-//if (choice == Ingredient.LacewingFly) potion = Potion.Polyjuice;
-
-
+while (keepBrewing && potion.Kind != PotionType.Ruined)
+{
+    Console.Write("Do you want to keep brewing your potion? y/N: ");
+    
+    if (Console.ReadKey().Key == ConsoleKey.Y)
+    {
+        Console.WriteLine();
+        potion.AddIngredient(SelectIngredient());
+        if (potion.Kind == PotionType.Ruined)
+        {
+            Console.WriteLine("Whoops! You ruined your potion. Dumping out the ruined potion and starting with fresh water...");
+            potion = new();
+            continue;
+        }
+        Console.WriteLine($"Your potion currently is a(n): {potion.Kind} potion.");
+    }
+    
+    else
+    {
+        Console.WriteLine();
+        Console.WriteLine($"Your finished potion is a(n) {potion.Kind}");
+        keepBrewing = false;
+    }
+}
 
 Ingredient SelectIngredient()
 {
     PrintIngredients();
-    Console.WriteLine("Which ingredients do you want to add?");
+    Console.Write("Which ingredients do you want to add? ");
     int choice = int.Parse(Console.ReadLine());
-    return choice switch
-    {
-        1 => Ingredient.ShadowGlass,
-        _ => Ingredient.Stardust
-    };
+    Console.WriteLine($"You selected: {(Ingredient)(choice - 1)}");
+    return (Ingredient)(choice - 1);
 }
 
 void PrintIngredients()
@@ -61,18 +45,33 @@ void PrintIngredients()
     }
 }
 
-void PrintPotions()
+public class Potion
 {
-    int i = 1;
-    foreach (string j in Enum.GetNames<Potion>())
+    public PotionType Kind { get; private set; }
+    public Potion()
     {
-        Console.WriteLine($"{i}. {j}");
-        i++;
+        Kind = PotionType.Water;
+    }
+    public PotionType AddIngredient(Ingredient ingredient)
+    {
+        Console.WriteLine($"Your current potion is {this.Kind}");
+        Console.WriteLine($"You've added {ingredient}.");
+        return (Kind, ingredient) switch
+        {
+            (PotionType.Water, Ingredient.Stardust) => this.Kind = PotionType.Elixir,
+            (PotionType.Elixir, Ingredient.SnakeVenom) => this.Kind = PotionType.Poison,
+            (PotionType.Elixir, Ingredient.DragonBreath) => this.Kind = PotionType.Flying,
+            (PotionType.Elixir, Ingredient.ShadowGlass) => this.Kind = PotionType.Invisibility,
+            (PotionType.Elixir, Ingredient.Eyeshine) => this.Kind = PotionType.NightSight,
+            (PotionType.NightSight, Ingredient.ShadowGlass) => this.Kind = PotionType.CloudyBrew,
+            (PotionType.Invisibility, Ingredient.Eyeshine) => this.Kind = PotionType.CloudyBrew,
+            (PotionType.CloudyBrew, Ingredient.Stardust) => this.Kind = PotionType.Wraith,
+            _ => this.Kind = PotionType.Ruined
+        };
     }
 }
 
-
-public enum Potion
+public enum PotionType
 {
     Water,
     Elixir,
@@ -82,7 +81,6 @@ public enum Potion
     NightSight,
     Wraith,
     CloudyBrew,
-    Polyjuice,
     Ruined
 }
 public enum Ingredient
@@ -92,5 +90,4 @@ public enum Ingredient
     DragonBreath,
     ShadowGlass,
     Eyeshine,
-    LacewingFly
 }
