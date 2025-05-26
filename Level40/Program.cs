@@ -56,18 +56,19 @@ public class Potion
     {
         Console.WriteLine($"Your current potion is {this.Kind}");
         Console.WriteLine($"You've added {ingredient}.");
-        return (Kind, ingredient) switch
+        this.Kind = (Kind, ingredient) switch
         {
-            (PotionType.Water, Ingredient.Stardust) => this.Kind = PotionType.Elixir,
-            (PotionType.Elixir, Ingredient.SnakeVenom) => this.Kind = PotionType.Poison,
-            (PotionType.Elixir, Ingredient.DragonBreath) => this.Kind = PotionType.Flying,
-            (PotionType.Elixir, Ingredient.ShadowGlass) => this.Kind = PotionType.Invisibility,
-            (PotionType.Elixir, Ingredient.Eyeshine) => this.Kind = PotionType.NightSight,
-            (PotionType.NightSight, Ingredient.ShadowGlass) => this.Kind = PotionType.CloudyBrew,
-            (PotionType.Invisibility, Ingredient.Eyeshine) => this.Kind = PotionType.CloudyBrew,
-            (PotionType.CloudyBrew, Ingredient.Stardust) => this.Kind = PotionType.Wraith,
-            _ => this.Kind = PotionType.Ruined
+            (PotionType.Water, Ingredient.Stardust) => PotionType.Elixir,
+            (PotionType.Elixir, Ingredient.SnakeVenom) => PotionType.Poison,
+            (PotionType.Elixir, Ingredient.DragonBreath) => PotionType.Flying,
+            (PotionType.Elixir, Ingredient.ShadowGlass) => PotionType.Invisibility,
+            (PotionType.Elixir, Ingredient.Eyeshine) => PotionType.NightSight,
+            (PotionType.NightSight, Ingredient.ShadowGlass) => PotionType.CloudyBrew,
+            (PotionType.Invisibility, Ingredient.Eyeshine) => PotionType.CloudyBrew,
+            (PotionType.CloudyBrew, Ingredient.Stardust) => PotionType.Wraith,
+            _ => PotionType.Ruined
         };
+        return this.Kind;
     }
 }
 
