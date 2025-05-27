@@ -80,30 +80,60 @@ x.Where(n => n < 0), etc.)
 
 int[] numbers = new int[] { 1, 9, 2, 8, 3, 7, 4, 6, 5 };
 
-GetEvensProcedural(numbers);
+DoubleEvensProcedural(numbers);
+Console.WriteLine();
+DoubleEvensKeyword(numbers);
+Console.WriteLine();
+DoubleEvensMethodCall(numbers);
 
-IEnumerable<int> GetEvensProcedural(int[] array)
+IEnumerable<int> DoubleEvensProcedural(int[] array)
 {
     Array.Sort(array);
     List<int> result = new List<int>();
-    foreach (int i in numbers)
+    
+    foreach (int i in array)
         if (i % 2 == 0)
         {
             result.Add(i * 2);
         }
+
+    Console.WriteLine("Procedural: ");
+    foreach (var n in result)
+    {
+        Console.WriteLine(n);
+    }
     return result;
 }
 
-IEnumerable<int> GetEvensKeyword(int[] array)
+
+IEnumerable<int> DoubleEvensKeyword(int[] array)
 {
-    var evenNumbers = from n in numbers
+    var evenNumbers = from n in array
                       where n % 2 == 0
                       orderby n
-                      select n;
-    return evenNumbers;
+                      select n * 2;
+    List<int> result = evenNumbers.ToList();
+
+    Console.WriteLine("Keyword: ");
+    foreach (var n in result)
+    {
+        Console.WriteLine(n);
+    }
+    return result;
 }
 
-//Console.WriteLine(evenNumbers);
+IEnumerable<int> DoubleEvensMethodCall(int[] array)
+{
+    var evenNumbers = array
+        .Where(n => n % 2 == 0)
+        .OrderBy(n => n)
+        .Select(n => n * 2)
+        .ToList();
 
-//foreach (var n in evenNumbers)
-//    Console.WriteLine(n);
+    Console.WriteLine("Method-Call: ");
+    foreach (var n in evenNumbers)
+    {
+        Console.WriteLine(n);
+    }
+    return evenNumbers;
+}
