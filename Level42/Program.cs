@@ -9,8 +9,14 @@ players.Add(new Player(2, "Player 2", "Blue"));
 
 IEnumerable<GameObject> everything = from o in objects
                                      select o;
+var ids = from o in objects
+          select o.ID;
 
-Console.WriteLine(everything);
+var healthStatus = from o in objects
+                   select (o, $"{o.HP}/{o.MaxHP}");
+
+Console.WriteLine(healthStatus);
+
 
 
 public class GameObject
