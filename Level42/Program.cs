@@ -13,6 +13,12 @@ IEnumerable<GameObject> everything = from o in objects
 Console.WriteLine(everything);
 
 
+
+var results = objects
+.Where(o => o.HP > 0)
+.OrderBy(o => o.HP)
+.Select(o => o.HP / o.MaxHP);
+
 public class GameObject
 {
     public int ID { get; set; }
