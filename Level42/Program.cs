@@ -1,4 +1,4 @@
-﻿List<GameObject> objects = new List<GameObject>();
+﻿/*List<GameObject> objects = new List<GameObject>();
 objects.Add(new Ship { ID = 1, X = 0, Y = 0, HP = 50, MaxHP = 100, PlayerID = 1 });
 objects.Add(new Ship { ID = 2, X = 4, Y = 2, HP = 75, MaxHP = 100, PlayerID = 1 });
 objects.Add(new Ship { ID = 3, X = 9, Y = 3, HP = 0, MaxHP = 100, PlayerID = 2 });
@@ -16,14 +16,30 @@ var healthStatus = from o in objects
                    select (o, $"{o.HP}/{o.MaxHP}");
 
 Console.WriteLine(healthStatus);
+foreach (var health in healthStatus)
+    Console.WriteLine(health);
+
+IEnumerable<Ship> ships = from Ship s in objects
+                          select s;
+foreach (var ship in ships)
+    Console.WriteLine(ship);
 
 
 
+*//*
+//Consider this keyword-based query
+var results = from o in objects
+              where o.HP > 0
+              orderby o.HP
+              select o.HP / o.MaxHP;
 
+//With method call syntax, it would look like this
 var results = objects
 .Where(o => o.HP > 0)
 .OrderBy(o => o.HP)
 .Select(o => o.HP / o.MaxHP);
+//These methods typically have delegate parameters, so lambda expressions are common
+*//*
 
 public class GameObject
 {
@@ -36,4 +52,9 @@ public class GameObject
 }
 
 public class Ship : GameObject { }
-public record Player(int ID, string UserName, string TeamColor);
+public record Player(int ID, string UserName, string TeamColor);*/
+
+//================================================
+//              The Three Lenses
+//================================================
+
