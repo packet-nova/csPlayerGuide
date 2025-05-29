@@ -42,27 +42,30 @@ several seconds, and my math indicates that a 10-letter word may take nearly two
 Display the time elapsed (Level 32)
  */
 
-Console.WriteLine($"Total Attempts: {(RandomlyCreate("four"))}");
+DateTime programStart= DateTime.Now;
+Console.WriteLine($"Total Attempts: {(RandomlyCreate("seven"))}");
+
 
 int RandomlyCreate(string word)
 {
     int attempts = 0;
     word = word.ToLower().Trim();
-    string randomWord = "";
+    string randomWord;
     Random random = new Random();
 
     do
     {
-        List<char> chars = new List<char>();
+        char[] chars = new char[word.Length];
 
         for (int i = 0; i < word.Length; i++)
         {
-            chars.Add((char)('a' + random.Next(26)));
+            chars[i] = (char)('a' + random.Next(26));
         }
-        randomWord = string.Join("", chars);
+        randomWord = new string(chars);
         Console.WriteLine(randomWord);
         attempts++;
     }
+
     while (randomWord != word);
     return attempts;
 }
