@@ -43,7 +43,7 @@ Display the time elapsed (Level 32)
  */
 
 DateTime programStart= DateTime.Now;
-Console.WriteLine($"Total Attempts: {(RandomlyCreate("seven"))}");
+Console.WriteLine($"Total Attempts: {(RandomlyCreate("bananas")):N0}");
 
 
 int RandomlyCreate(string word)
@@ -62,7 +62,7 @@ int RandomlyCreate(string word)
             chars[i] = (char)('a' + random.Next(26));
         }
         randomWord = new string(chars);
-        Console.WriteLine(randomWord);
+        //Console.WriteLine(randomWord);
         attempts++;
     }
 
