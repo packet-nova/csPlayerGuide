@@ -8,10 +8,19 @@ wait for the next word. You can generate many words in parallel this way. Hint: 
 time and output logic to another async method may make this easier.
  */
 
+while (true)
+{
+    ProcessWord(UserInputWord());
+}
 
-
-//string userWord = Console.ReadLine().ToLower().Trim();
-await RandomlyRecreateAsync(UserInputWord());
+async Task ProcessWord(string word)
+{
+    DateTime startTime = DateTime.Now;
+    int attempts = await RandomlyRecreateAsync(word);
+    DateTime endTime = DateTime.Now;
+    TimeSpan elapsedTime = endTime - startTime;
+    Console.WriteLine($"The word '{word}' was generated after {attempts:N0} attempts in {elapsedTime} seconds.");
+}
 
 string UserInputWord()
 {
@@ -27,7 +36,6 @@ async Task<int> RandomlyRecreateAsync(string word)
         string randomWord;
         Random random = new Random();
 
-        DateTime startTime = DateTime.Now;
         do
         {
             char[] chars = new char[word.Length];
@@ -40,11 +48,6 @@ async Task<int> RandomlyRecreateAsync(string word)
             attempts++;
         }
         while (randomWord != word);
-
-        DateTime endTime = DateTime.Now;
-        TimeSpan timeSpan = endTime - startTime;
-        Console.WriteLine($"The word '{word}' was generated after {attempts:N0} attempts in {timeSpan} seconds.");
-
         return attempts;
     });
 }
