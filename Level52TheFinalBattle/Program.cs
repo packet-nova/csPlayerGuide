@@ -15,22 +15,18 @@ game.Run(s1, s2);
 public class Game
 {
     public Skeleton SkeletonTurn { get; private set; } 
-    public Game()
-    {
-
-    }
     public void Run(Skeleton s1, Skeleton s2)
     {
         while (true)
         {
             SkeletonTurn = s1;
             Thread.Sleep(500);
-            s1.DoNothing();
             Console.WriteLine($"It is {Skeleton.Name}'s turn.");
+            s1.DoNothing();
             Thread.Sleep(500);
-            s2.DoNothing();
             SkeletonTurn = SkeletonTurn == s1 ? s2 : s1;
             Console.WriteLine($"It is {Skeleton.Name}'s turn.");
+            s2.DoNothing();
         }
     }
 }
@@ -54,9 +50,4 @@ public class Skeleton
         Console.WriteLine($"{Name} did NOTHING.");
         Console.WriteLine();
     }
-}
-
-public class CombatLog
-{
-
 }
