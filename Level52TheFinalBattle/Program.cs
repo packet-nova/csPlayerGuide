@@ -52,6 +52,7 @@ public class Skeleton
     public void DoNothing()
     {
         Console.WriteLine($"{Name} did NOTHING.");
+        Console.WriteLine();
     }
 }
 
