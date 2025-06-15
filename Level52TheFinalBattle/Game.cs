@@ -1,6 +1,6 @@
 ﻿public class Game
 {
-    private readonly List<ICombat> _playerParty;
+    private readonly List<ICombat> _heroParty;
     private readonly List<ICombat> _monsterParty;
 
     public List<ICombat> CurrentTurn { get; private set; }
@@ -10,22 +10,22 @@
         Console.Write("What is the True Programmer's name? ");
         string trueProgrammer = Console.ReadLine();
         TrueProgrammer player = new(trueProgrammer);
-        Skeleton s1 = new("SKELETON");
+        Skeleton skeleton1 = new("SKELETON");
 
-        _playerParty = new List<ICombat>();
+        _heroParty = new List<ICombat>();
         _monsterParty = new List<ICombat>();
 
-        _playerParty.Add(player);
-        _monsterParty.Add(s1);
+        _heroParty.Add(player);
+        _monsterParty.Add(skeleton1);
 
-        CurrentTurn = _playerParty;
+        CurrentTurn = _heroParty;
     }
 
     public void Run()
     {
         while (true)
         {
-            if (CurrentTurn == _playerParty)
+            if (CurrentTurn == _heroParty)
             {
                 PlayerPartyTurn();
             }
@@ -34,13 +34,13 @@
                 MonsterPartyTurn();
             }
 
-            CurrentTurn = CurrentTurn == _playerParty ? _monsterParty : _playerParty;
+            CurrentTurn = CurrentTurn == _heroParty ? _monsterParty : _heroParty;
         }
     }
 
     public void PlayerPartyTurn()
     {
-        foreach (var member in _playerParty)
+        foreach (var member in _heroParty)
         {
             Console.WriteLine($"It is {member.Name}'s turn.");
             Console.Write("Action? ");
