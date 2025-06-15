@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.14.36203.30 d17.14
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ColoredConsole", "ColoredConsole.csproj", "{7C6F79F2-593F-4100-BC68-7377AFBF5588}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ColoredConsole.Common", "..\ColoredConsole.Common\ColoredConsole.Common.csproj", "{07DDE96E-C178-4276-8F76-9F6114859FD1}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7C6F79F2-593F-4100-BC68-7377AFBF5588}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7C6F79F2-593F-4100-BC68-7377AFBF5588}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7C6F79F2-593F-4100-BC68-7377AFBF5588}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7C6F79F2-593F-4100-BC68-7377AFBF5588}.Release|Any CPU.Build.0 = Release|Any CPU
+		{07DDE96E-C178-4276-8F76-9F6114859FD1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{07DDE96E-C178-4276-8F76-9F6114859FD1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{07DDE96E-C178-4276-8F76-9F6114859FD1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{07DDE96E-C178-4276-8F76-9F6114859FD1}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {05BAB6B4-5A99-4F26-A075-2574B05B0D1A}
+	EndGlobalSection
+EndGlobal
