@@ -6,7 +6,6 @@
         [CombatAction.Attack]       = "Attack",
     };
 
-
     public List<CombatAction> Actions { get; } = Enum.GetValues<CombatAction>().ToList();
 
     public void DisplayMenu()
@@ -16,6 +15,8 @@
             Console.WriteLine($"{i + 1}. {_displayActions[Actions[i]]}");
         }
         Console.Write($"Choose an action [1-{Actions.Count}]: ");
+        Console.WriteLine();
+        Thread.Sleep(500);
     }
 }
 public enum CombatAction { DoNothing, Attack }

@@ -4,38 +4,30 @@
     private readonly List<ICombat> _monsterParty;
 
     public CombatMenu CombatMenu { get; private set; }
-    public TrueProgrammer TrueProgrammer { get; private set; }
     public List<ICombat> CurrentTurn { get; private set; }
 
-    public Combat(List<ICombat> heroParty, List<ICombat> monsterParty)
+    public Combat(List<ICombat> heroParty, List<ICombat> monsterParty, CombatMenu menu)
     {
         _heroParty = heroParty;
         _monsterParty = monsterParty;
+        CombatMenu = menu;
         CurrentTurn = _heroParty;
-        CombatMenu = new();
     }
 
-    public void CombatTurn()
+    public void TurnTracker()
     {
         if (CurrentTurn == _heroParty)
-        {
-            Thread.Sleep(500);
-            PlayerPartyTurn();
-            Console.WriteLine();
-        }
+            HeroPartyTurn();
         else
-        {
-            Thread.Sleep(500);
             MonsterPartyTurn();
-            Console.WriteLine();
-        }
 
         CurrentTurn = CurrentTurn == _heroParty ? _monsterParty : _heroParty;
     }
-    public void PlayerPartyTurn()
+    public void HeroPartyTurn()
     {
         foreach (var member in _heroParty)
         {
+            Console.WriteLine();
             Console.WriteLine($"It is {member.Name}'s turn.");
             CombatMenu.DisplayMenu();
         }
@@ -45,6 +37,7 @@
     {
         foreach (var member in _monsterParty)
         {
+            Console.WriteLine();
             Console.WriteLine($"It is {member.Name}'s turn.");
             CombatMenu.DisplayMenu();
         }

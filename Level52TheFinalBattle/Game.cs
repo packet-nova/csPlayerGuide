@@ -7,18 +7,20 @@
 
     public Game()
     {
+
         TrueProgrammer = new(CreateTrueProgrammer());
-        CurrentCombat = new(_heroParty, _monsterParty);
-        Skeleton skeleton1 = new("SKELETON");
+        Skeleton skeleton1 = new();
         _heroParty.Add(TrueProgrammer);
         _monsterParty.Add(skeleton1);
+        CombatMenu menu = new();
+        CurrentCombat = new(_heroParty, _monsterParty, menu);
     }
 
     public void Run()
     {
         while (true)
         {
-            CurrentCombat.CombatTurn();
+            CurrentCombat.TurnTracker();
         }
     }
 

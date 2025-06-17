@@ -7,10 +7,10 @@
     public Maelstrom Maelstrom { get; private set; }
     public DateTime StartTime { get; } = DateTime.Now;
 
-private ActionProcessor _actionProcessor;
+    private ActionProcessor _actionProcessor;
     private bool _gameOver;
     private bool _suppressStatus;
-    
+
 
     /// <summary>
     /// Initializes a new instance of the <see cref="Game"/> class, setting up the game environment based on
@@ -23,7 +23,7 @@ private ActionProcessor _actionProcessor;
     {
         //Prompt user for game options before generating map and constructing game
         GameOptions options = GameOptions.PromptGameOptions();
-        
+
 
 
         MapGenerator mapGenerator = new();
@@ -112,7 +112,7 @@ private ActionProcessor _actionProcessor;
     public string FormattedTotalRunDuration()
     {
         DateTime endTime = DateTime.Now;
-        TimeSpan runDuration= endTime - StartTime;
+        TimeSpan runDuration = endTime - StartTime;
         Console.ForegroundColor = ConsoleColor.Yellow;
         return $"Total run duration: {runDuration.Hours}h:{runDuration.Minutes}m:{runDuration.Seconds}s.";
         Console.ResetColor();
