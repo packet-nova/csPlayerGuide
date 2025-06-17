@@ -1,6 +1,4 @@
-﻿using System.Runtime.CompilerServices;
-
-public class Game
+﻿public class Game
 {
     private readonly List<ICombat> _heroParty = new List<ICombat>();
     private readonly List<ICombat> _monsterParty = new List<ICombat>();
