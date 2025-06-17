@@ -1,17 +1,13 @@
 ﻿public class CombatMenu
 {
-    public List<CombatActions> Actions { get; private set; } = new List<CombatActions>();
-    private readonly Dictionary<CombatActions, string> _displayActions = new Dictionary<CombatActions, string>()
+    private readonly Dictionary<CombatAction, string> _displayActions = new()
     {
-        {CombatActions.DoNothing,   "Do Nothing"},
-        {CombatActions.Attack,      "Attack" }
+        [CombatAction.DoNothing]    = "Do Nothing",
+        [CombatAction.Attack]       = "Attack",
     };
 
 
-    public CombatMenu()
-    {
-        Actions.AddRange(Enum.GetValues<CombatActions>());
-    }
+    public List<CombatAction> Actions { get; } = Enum.GetValues<CombatAction>().ToList();
 
     public void DisplayMenu()
     {
@@ -20,7 +16,6 @@
             Console.WriteLine($"{i + 1}. {_displayActions[Actions[i]]}");
         }
         Console.Write($"Choose an action [1-{Actions.Count}]: ");
-        //Console.ReadLine();
     }
 }
-public enum CombatActions { DoNothing, Attack }
+public enum CombatAction { DoNothing, Attack }
