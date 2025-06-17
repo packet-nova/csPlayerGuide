@@ -242,6 +242,24 @@ void LogDamage(string cannonType, int cannonDamage)
     }
     Console.ResetColor();
 }
+int SetNumberInRange(string message, int min, int max)
+{
+    while (true)
+    {
+        Console.Write(message);
+        int number = Convert.ToInt32(Console.ReadLine());
+
+        if (number < min || number > max)
+        {
+            Console.WriteLine($"Invalid entry. Must be {min}-{max}: ");
+            continue;
+        }
+        else
+        {
+            return number;
+        }
+    }
+}
 
 static void CityLose()
 {
@@ -305,21 +323,3 @@ static void SplashLogo()
 Please wait...");
 }
 
-int SetNumberInRange(string message, int min, int max)
-{
-    while (true)
-    {
-        Console.Write(message);
-        int number = Convert.ToInt32(Console.ReadLine());
-
-        if (number < min || number > max)
-        {
-            Console.WriteLine($"Invalid entry. Must be {min}-{max}: ");
-            continue;
-        }
-        else
-        {
-            return number;
-        }
-    }
-}
