@@ -1,21 +1,21 @@
-﻿public class Game
-{
-    private readonly List<ICombat> _heroParty;
-    private readonly List<ICombat> _monsterParty;
+﻿using System.Runtime.CompilerServices;
 
+public class Game
+{
+    private readonly List<ICombat> _heroParty = new List<ICombat>();
+    private readonly List<ICombat> _monsterParty = new List<ICombat>();
+
+    public CombatMenu Menu { get; private set; }
+    public TrueProgrammer TrueProgrammer { get; private set; }
     public List<ICombat> CurrentTurn { get; private set; }
 
     public Game()
     {
-        Console.Write("What is the True Programmer's name? ");
-        string trueProgrammer = Console.ReadLine();
-        TrueProgrammer player = new(trueProgrammer);
+        TrueProgrammer = new(CreateTrueProgrammer());
+        Menu = new CombatMenu();
         Skeleton skeleton1 = new("SKELETON");
 
-        _heroParty = new List<ICombat>();
-        _monsterParty = new List<ICombat>();
-
-        _heroParty.Add(player);
+        _heroParty.Add(TrueProgrammer);
         _monsterParty.Add(skeleton1);
 
         CurrentTurn = _heroParty;
@@ -27,36 +27,40 @@
         {
             if (CurrentTurn == _heroParty)
             {
-                PlayerPartyTurn();
+                Thread.Sleep(500);
+                PlayerPartyTurn(Menu);
             }
             else
             {
-                MonsterPartyTurn();
+                Thread.Sleep(500);
+                MonsterPartyTurn(Menu);
             }
 
             CurrentTurn = CurrentTurn == _heroParty ? _monsterParty : _heroParty;
         }
     }
 
-    public void PlayerPartyTurn()
+    public void PlayerPartyTurn(CombatMenu menu)
     {
         foreach (var member in _heroParty)
         {
             Console.WriteLine($"It is {member.Name}'s turn.");
-            Console.Write("Action? ");
-            Console.ReadLine();
-            member.DoNothing();
+            Menu.DisplayMenu();
         }
     }
 
-    public void MonsterPartyTurn()
+    public void MonsterPartyTurn(CombatMenu menu)
     {
         foreach (var member in _monsterParty)
         {
             Console.WriteLine($"It is {member.Name}'s turn.");
-            Console.Write("Action? ");
-            Console.ReadLine();
-            member.DoNothing();
+            Menu.DisplayMenu();
         }
+    }
+
+    public string CreateTrueProgrammer()
+    {
+        Console.Write("What is the True Programmer's name? ");
+        return Console.ReadLine();
     }
 }
