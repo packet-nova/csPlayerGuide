@@ -1,26 +1,33 @@
 ﻿public class Game
 {
     private readonly List<ICombat> _heroParty = new List<ICombat>();
-    private readonly List<ICombat> _monsterParty = new List<ICombat>();
+    private readonly Player _heroPlayer;
+    private readonly Player _monsterPlayer;
     public TrueProgrammer TrueProgrammer { get; private set; }
     public Combat CurrentCombat { get; private set; }
 
-    public Game()
+    public Game(Player heroPlayer, Player monsterPlayer)
     {
+        _heroPlayer = heroPlayer;
+        _monsterPlayer = monsterPlayer;
         TrueProgrammer = new(CreateTrueProgrammer());
-        Skeleton skeleton1 = new();
         _heroParty.Add(TrueProgrammer);
-        _monsterParty.Add(skeleton1);
-        CombatMenu menu = new();
-        CurrentCombat = new(_heroParty, _monsterParty, menu);
+        StartCombat();
     }
 
     public void Run()
     {
         while (true)
         {
-            CurrentCombat.TurnTracker();
+            CurrentCombat.TurnTracker(_heroPlayer, _monsterPlayer);
         }
+    }
+
+    public void StartCombat()
+    {
+        var monsterParty = new List<ICombat> { new Skeleton() };
+        CombatMenu menu = new();
+        CurrentCombat = new(_heroParty, monsterParty, menu);
     }
 
     public string CreateTrueProgrammer()

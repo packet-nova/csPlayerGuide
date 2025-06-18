@@ -15,7 +15,6 @@
             Console.WriteLine($"{i + 1}. {_displayActions[Actions[i]]}");
         }
         Console.Write($"Choose an action [1-{Actions.Count}]: ");
-        Console.WriteLine();
         Thread.Sleep(500);
     }
 }

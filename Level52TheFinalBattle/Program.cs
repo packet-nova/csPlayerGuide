@@ -1,20 +1,8 @@
-﻿Game game = new();
+﻿Player c1Player = new(PlayerType.Computer);
+Player c2Player = new(PlayerType.Human);
+Game game = new(c1Player, c2Player);
 
 game.Run();
-
-public interface ICombat
-{
-    public string Name { get; }
-    public void DoNothing()
-    {
-        Console.WriteLine($"{Name} did NOTHING.");
-    }
-
-    public void Attack()
-    {
-        Console.WriteLine($"{Name} attacks!");
-    }
-}
 
 
 

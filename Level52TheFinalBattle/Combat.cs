@@ -14,34 +14,13 @@
         CurrentTurn = _heroParty;
     }
 
-    public void TurnTracker()
+    public void TurnTracker(Player heroPlayer, Player monsterPlayer)
     {
         if (CurrentTurn == _heroParty)
-            HeroPartyTurn();
+            heroPlayer.TakeTurn(CombatMenu, _heroParty);
         else
-            MonsterPartyTurn();
+            monsterPlayer.TakeTurn(CombatMenu, _monsterParty);
 
         CurrentTurn = CurrentTurn == _heroParty ? _monsterParty : _heroParty;
-    }
-    public void HeroPartyTurn()
-    {
-        foreach (var member in _heroParty)
-        {
-            Console.WriteLine();
-            Console.WriteLine($"It is {member.Name}'s turn.");
-            CombatMenu.DisplayMenu();
-            member.DoNothing();
-        }
-    }
-
-    public void MonsterPartyTurn()
-    {
-        foreach (var member in _monsterParty)
-        {
-            Console.WriteLine();
-            Console.WriteLine($"It is {member.Name}'s turn.");
-            CombatMenu.DisplayMenu();
-            member.DoNothing();
-        }
     }
 }
