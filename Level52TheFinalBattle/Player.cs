@@ -13,19 +13,25 @@
         {
             Console.WriteLine();
             Console.WriteLine($"It is {member.Name}'s turn.");
-            
+
             if (PlayerType == PlayerType.Human)
+            {
                 menu.DisplayMenu();
+            }
 
             if (PlayerInputChoice() == 1)
+            {
                 member.DoNothing();
+            }
         }
     }
 
     private int PlayerInputChoice()
     {
         if (PlayerType == PlayerType.Computer)
+        {
             return 1;
+        }
 
         return Convert.ToInt32(Console.ReadLine());
 
