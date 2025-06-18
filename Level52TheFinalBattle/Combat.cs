@@ -30,6 +30,7 @@
             Console.WriteLine();
             Console.WriteLine($"It is {member.Name}'s turn.");
             CombatMenu.DisplayMenu();
+            member.DoNothing();
         }
     }
 
@@ -40,6 +41,7 @@
             Console.WriteLine();
             Console.WriteLine($"It is {member.Name}'s turn.");
             CombatMenu.DisplayMenu();
+            member.DoNothing();
         }
     }
 }

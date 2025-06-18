@@ -8,13 +8,11 @@ public interface ICombat
     public void DoNothing()
     {
         Console.WriteLine($"{Name} did NOTHING.");
-        Console.WriteLine();
     }
 
     public void Attack()
     {
         Console.WriteLine($"{Name} attacks!");
-        Console.WriteLine();
     }
 }
 

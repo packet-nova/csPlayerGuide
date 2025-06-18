@@ -7,7 +7,6 @@
 
     public Game()
     {
-
         TrueProgrammer = new(CreateTrueProgrammer());
         Skeleton skeleton1 = new();
         _heroParty.Add(TrueProgrammer);
