@@ -1,4 +1,4 @@
-﻿public class TrueProgrammer : ICombat
+﻿public class TrueProgrammer : IBattleEntity
 {
     public string Name { get; private set; }
 

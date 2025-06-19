@@ -1,4 +1,4 @@
-﻿public class Skeleton : ICombat
+﻿public class Skeleton : IBattleEntity
 {
     public string Name { get; } = "SKELETON";
 }

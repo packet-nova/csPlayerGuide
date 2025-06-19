@@ -7,22 +7,21 @@
         PlayerType = playerType;
     }
 
-    public void TakeTurn(CombatMenu menu, List<ICombat> party)
+    public void TakeTurn(BattleMenu menu, List<IBattleEntity> party)
     {
-        foreach (var member in party)
+        foreach (var entity in party)
         {
             Console.WriteLine();
-            Console.WriteLine($"It is {member.Name}'s turn.");
+            Console.WriteLine($"It is {entity.Name}'s turn.");
 
             if (PlayerType == PlayerType.Human)
             {
                 menu.DisplayMenu();
             }
 
-            if (PlayerInputChoice() == 1)
-            {
-                member.DoNothing();
-            }
+            BattleAction action = menu.AvailableActions[PlayerInputChoice() - 1];
+            var command = BattleCommandFactory.PlayerCommand(action);
+            command.Execute(entity);
         }
     }
 
