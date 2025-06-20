@@ -1,12 +1,12 @@
 ﻿public class BattleMenu
 {
+    public List<BattleAction> AvailableActions { get; private set; } = Enum.GetValues<BattleAction>().ToList();
+
     private readonly Dictionary<BattleAction, string> _displayActions = new()
     {
         [BattleAction.DoNothing]    = "Do Nothing",
         [BattleAction.Attack]       = "Attack",
     };
-
-    public List<BattleAction> AvailableActions { get; private set; } = Enum.GetValues<BattleAction>().ToList();
 
     public void PrintActionMenu()
     {
