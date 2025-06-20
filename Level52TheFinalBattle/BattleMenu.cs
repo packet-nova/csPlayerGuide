@@ -1,19 +1,14 @@
 ﻿public class BattleMenu
 {
-    private readonly Battle _currentBattle;
     private readonly Dictionary<BattleAction, string> _displayActions = new()
     {
         [BattleAction.DoNothing]    = "Do Nothing",
         [BattleAction.Attack]       = "Attack",
     };
+
     public List<BattleAction> AvailableActions { get; private set; } = Enum.GetValues<BattleAction>().ToList();
 
-
-    public BattleMenu(Battle battle)
-    {
-        _currentBattle = battle;
-    }
-    public void DisplayMenu()
+    public void PrintActionMenu()
     {
         for (int i = 0; i < AvailableActions.Count; i++)
         {
@@ -21,5 +16,10 @@
         }
         Console.Write($"Choose an action [1-{AvailableActions.Count}]: ");
     }
+
+    public void PrintEntityTurnNotification(IBattleEntity entity)
+    {
+        Console.WriteLine();
+        Console.WriteLine($"It is {entity.Name}'s turn.");
+    }
 }
-public enum BattleAction { DoNothing, Attack }

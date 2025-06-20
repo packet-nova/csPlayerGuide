@@ -2,25 +2,24 @@
 {
     private readonly BattleParty _heroParty;
     private readonly BattleParty _monsterParty;
-    private BattleMenu _battleMenu;
-    private BattleParty _currentTurn;
+    private readonly BattleMenu _battleMenu;
+    private CurrentTurn _currentTurn;
 
-    public Battle(BattleParty heroParty, BattleParty monsterParty)
+    public Battle(BattleData data)
     {
-        _heroParty = heroParty;
-        _monsterParty = monsterParty;
-        _currentTurn = heroParty;
-        _battleMenu = new(this);
+        _heroParty = data.HeroParty;
+        _monsterParty = data.MonsterParty;
+        _currentTurn = data.FirstTurn;
+        _battleMenu = new();
     }
 
-
-    public void ExecuteTurn(Player heroPlayer, Player monsterPlayer)
+    public void ExecuteTurn()
     {
-        if (_currentTurn == _heroParty)
-            heroPlayer.TakeTurn(_battleMenu, _heroParty);
+        if (_currentTurn == CurrentTurn.Heroes)
+            _heroParty.PlayerController.TakeTurn(_battleMenu, _heroParty);
         else
-            monsterPlayer.TakeTurn(_battleMenu, _monsterParty);
+            _monsterParty.PlayerController.TakeTurn(_battleMenu, _monsterParty);
 
-        _currentTurn = _currentTurn == _heroParty ? _monsterParty : _heroParty;
+        _currentTurn = _currentTurn == CurrentTurn.Heroes ? CurrentTurn.Monsters : CurrentTurn.Heroes;
     }
 }

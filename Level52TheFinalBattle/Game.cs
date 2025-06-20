@@ -1,6 +1,5 @@
 ﻿public class Game
 {
-    private readonly List<IBattleEntity> _heroParty = new List<IBattleEntity>();
     private readonly Player _heroPlayer;
     private readonly Player _monsterPlayer;
     private TrueProgrammer _trueProgrammer;
@@ -11,7 +10,6 @@
         _heroPlayer = heroPlayer;
         _monsterPlayer = monsterPlayer;
         _trueProgrammer = new(CreateTrueProgrammer());
-        _heroParty.Add(_trueProgrammer);
         StartBattle();
     }
 
@@ -19,15 +17,13 @@
     {
         while (true)
         {
-            _currentBattle.ExecuteTurn(_heroPlayer, _monsterPlayer);
+            _currentBattle.ExecuteTurn();
         }
     }
 
     public void StartBattle()
     {
-        var monsterParty = new List<IBattleEntity> { new Skeleton() };
-        BattleMenu menu = new();
-        _currentBattle = new(_heroParty, monsterParty);
+        _currentBattle = new(BattleGenerator.CreateBasicSkeletonBattle(_trueProgrammer));
     }
 
     public string CreateTrueProgrammer()

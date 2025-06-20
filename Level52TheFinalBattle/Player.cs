@@ -11,12 +11,11 @@
     {
         foreach (var entity in party.Entities)
         {
-            Console.WriteLine();
-            Console.WriteLine($"It is {entity.Name}'s turn.");
-
+            menu.PrintEntityTurnNotification(entity);
+            
             if (PlayerType == PlayerType.Human)
             {
-                menu.DisplayMenu();
+                menu.PrintActionMenu();
             }
 
             BattleAction action = menu.AvailableActions[PlayerInputChoice() - 1];
@@ -37,4 +36,3 @@
     }
 }
 
-public enum PlayerType { Human, Computer }
