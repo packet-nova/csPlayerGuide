@@ -3,7 +3,8 @@
     public static BattleData CreateBasicSkeletonBattle(
         TrueProgrammer trueProgrammer,
         Player heroPlayer,
-        Player monsterPlayer)
+        Player monsterPlayer
+        )
     {
         Skeleton skeleton = new();
 
