@@ -1,8 +1,16 @@
-﻿Player c1Player = new(PlayerType.Human);
-Player c2Player = new(PlayerType.Computer);
-Game game = new(c1Player, c2Player);
+﻿Player humanPlayer = new(PlayerType.Human);
+Player computerPlayer = new(PlayerType.Computer);
+Player computer2Player = new(PlayerType.Computer);
+TrueProgrammer trueProgrammer = new(CreateTrueProgrammer());
+
+Game game = new(trueProgrammer, humanPlayer, computerPlayer);
 
 game.Run();
 
+string CreateTrueProgrammer()
+{
+    Console.Write("What is the True Programmer's name? ");
+    return Console.ReadLine();
+}
 
 

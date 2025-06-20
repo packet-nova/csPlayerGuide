@@ -1,11 +1,11 @@
 ﻿public class BattleGenerator
 {
-    public static BattleData CreateBasicSkeletonBattle(TrueProgrammer trueProgrammer)
+    public static BattleData CreateBasicSkeletonBattle(
+        TrueProgrammer trueProgrammer,
+        Player heroPlayer,
+        Player monsterPlayer)
     {
-        Player heroPlayer = new(PlayerType.Human);
-        Player monsterPlayer = new(PlayerType.Computer);
-
-        Skeleton skeleton = new Skeleton();
+        Skeleton skeleton = new();
 
         var heroParty = new BattleParty(
             new List<IBattleEntity> { trueProgrammer },

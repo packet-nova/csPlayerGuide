@@ -2,19 +2,20 @@
 {
     private readonly Player _heroPlayer;
     private readonly Player _monsterPlayer;
-    private TrueProgrammer _trueProgrammer;
+    private readonly TrueProgrammer _trueProgrammer;
     private Battle _currentBattle;
 
-    public Game(Player heroPlayer, Player monsterPlayer)
+    public Game(TrueProgrammer trueProgrammer, Player heroPlayer, Player monsterPlayer)
     {
+        _trueProgrammer = trueProgrammer;
         _heroPlayer = heroPlayer;
         _monsterPlayer = monsterPlayer;
-        _trueProgrammer = new(CreateTrueProgrammer());
-        StartBattle();
     }
 
     public void Run()
     {
+        StartBattle();
+
         while (true)
         {
             _currentBattle.ExecuteTurn();
@@ -23,12 +24,10 @@
 
     public void StartBattle()
     {
-        _currentBattle = new(BattleGenerator.CreateBasicSkeletonBattle(_trueProgrammer));
+        _currentBattle = new(BattleGenerator.CreateBasicSkeletonBattle(
+            _trueProgrammer,
+            _heroPlayer,
+            _monsterPlayer));
     }
 
-    public string CreateTrueProgrammer()
-    {
-        Console.Write("What is the True Programmer's name? ");
-        return Console.ReadLine();
-    }
 }
