@@ -7,9 +7,9 @@
         PlayerType = playerType;
     }
 
-    public void TakeTurn(BattleMenu menu, List<IBattleEntity> party)
+    public void TakeTurn(BattleMenu menu, BattleParty party)
     {
-        foreach (var entity in party)
+        foreach (var entity in party.Entities)
         {
             Console.WriteLine();
             Console.WriteLine($"It is {entity.Name}'s turn.");

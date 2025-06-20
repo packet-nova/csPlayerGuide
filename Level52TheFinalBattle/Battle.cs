@@ -5,12 +5,12 @@
     private BattleMenu _battleMenu;
     private BattleParty _currentTurn;
 
-    public Battle(BattleParty heroParty, BattleParty monsterParty, BattleMenu menu)
+    public Battle(BattleParty heroParty, BattleParty monsterParty)
     {
         _heroParty = heroParty;
         _monsterParty = monsterParty;
-        _battleMenu = menu;
         _currentTurn = heroParty;
+        _battleMenu = new(this);
     }
 
 

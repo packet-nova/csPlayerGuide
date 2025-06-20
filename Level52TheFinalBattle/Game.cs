@@ -27,7 +27,7 @@
     {
         var monsterParty = new List<IBattleEntity> { new Skeleton() };
         BattleMenu menu = new();
-        _currentBattle = new(_heroParty, monsterParty, menu);
+        _currentBattle = new(_heroParty, monsterParty);
     }
 
     public string CreateTrueProgrammer()
