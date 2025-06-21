@@ -33,12 +33,12 @@
         Player heroController = _heroParty.Controller;
         Player monsterController = _monsterParty.Controller;
 
-        if (_currentTurn == CurrentTurn.Heroes)
+        if (_currentTurn == CurrentTurn.Hero)
             heroController.TakeTurn(_battleMenu, _heroParty, _turnHandler);
         else
             monsterController.TakeTurn(_battleMenu, _monsterParty, _turnHandler);
 
-        _currentTurn = _currentTurn == CurrentTurn.Heroes ? CurrentTurn.Monsters : CurrentTurn.Heroes;
+        _currentTurn = _currentTurn == CurrentTurn.Hero ? CurrentTurn.Monster : CurrentTurn.Hero;
     }
 
     public IReadOnlyList<IBattleEntity> GetHeroEntities() => _heroParty.Entities;

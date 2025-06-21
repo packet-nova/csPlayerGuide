@@ -1,6 +1,7 @@
 ﻿public class BattleMenu
 {
     public List<BattleAction> AvailableActions { get; private set; } = Enum.GetValues<BattleAction>().ToList();
+    public List<IBattleCommand> AvailableCommands { get; private set; }
 
     private readonly Dictionary<BattleAction, string> _displayActions = new()
     {

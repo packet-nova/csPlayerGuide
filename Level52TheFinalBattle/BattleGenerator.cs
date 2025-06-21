@@ -20,7 +20,7 @@
         return new BattleData(
             HeroParty: heroParty,
             MonsterParty: monsterParty,
-            FirstTurn: CurrentTurn.Heroes
+            FirstTurn: CurrentTurn.Hero
             );
     }
 }
