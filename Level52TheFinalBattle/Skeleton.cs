@@ -8,5 +8,4 @@
         AvailableCommands.Add(new DoNothing());
         AvailableCommands.Add(new Attack());
     }
-
 }

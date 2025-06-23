@@ -2,8 +2,7 @@
 {
     private readonly BattleParty _heroParty;
     private readonly BattleParty _monsterParty;
-    private readonly BattleMenu _battleMenu;
-    private readonly TurnHandler _turnHandler;
+    private readonly BattleUI _battleUI;
     private CurrentTurn _currentTurn;
 
     public Battle(BattleData data)
@@ -11,30 +10,25 @@
         _heroParty = data.HeroParty;
         _monsterParty = data.MonsterParty;
         _currentTurn = data.FirstTurn;
-        _battleMenu = new();
-        _turnHandler = new();
-    }
-
-    public void TakeTurn(BattleParty party, TurnHandler handler)
-    {
-        foreach (var entity in party.Entities)
-        {
-            handler.ExecuteEntityTurn(entity, handler);
-        }
+        _battleUI = new();
     }
 
     public void ExecuteTurn()
     {
-        Player heroController = _heroParty.Controller;
-        Player monsterController = _monsterParty.Controller;
-
-        if (_currentTurn == CurrentTurn.Hero)
+        BattleParty activeParty = _currentTurn == CurrentTurn.Hero ? _heroParty : _monsterParty;
+        
+        foreach (var entity in activeParty.Entities)
         {
-            _battleMenu.PrintEntityTurnNotification(GetHeroEntities()[0]);
-            heroController.TakeTurn(_heroParty, _turnHandler);
+            if (activeParty == _heroParty)
+            {
+                _battleUI.PrintTurnNotification(entity);
+                _battleUI.PrintAvailableActions(entity);
+            }
+
+            int choice = activeParty.Controller.InputActionChoice();
+            var selectedAction = entity.AvailableCommands[choice - 1];
+            selectedAction.Execute(entity, GetMonsterEntities()[0]);
         }
-        else
-            monsterController.TakeTurn(_monsterParty, _turnHandler);
 
         _currentTurn = _currentTurn == CurrentTurn.Hero ? CurrentTurn.Monster : CurrentTurn.Hero;
     }

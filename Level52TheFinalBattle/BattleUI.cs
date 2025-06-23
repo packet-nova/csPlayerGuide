@@ -1,16 +1,15 @@
-﻿public class BattleMenu
+﻿public class BattleUI
 {
-
-    public void PrintActionMenu(IBattleEntity entity)
+    public void PrintAvailableActions(IBattleEntity entity)
     {
         for(int i = 0; i < entity.AvailableCommands.Count; i++)
         {
             Console.WriteLine($"{i + 1}. {entity.AvailableCommands[i].GetDisplayName(entity)}");
         }
-        Console.WriteLine($"Choose an action [1-{entity.AvailableCommands.Count}]");
+        Console.Write($"Choose an action [1-{entity.AvailableCommands.Count}]: ");
     }
 
-    public void PrintEntityTurnNotification(IBattleEntity entity)
+    public void PrintTurnNotification(IBattleEntity entity)
     {
         Console.WriteLine();
         Console.WriteLine($"It is {entity.Name}'s turn.");

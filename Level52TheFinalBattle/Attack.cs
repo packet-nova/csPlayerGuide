@@ -1,8 +1,8 @@
 ﻿public class Attack : IBattleCommand
 {
-    public void Execute(IBattleEntity entity)
+    public void Execute(IBattleEntity source, IBattleEntity target)
     {
-        Console.WriteLine($"{entity.Name} attacked.");
+        Console.WriteLine($"{source.Name} attacked {target.Name}");
     }
 
     public string GetDisplayName(IBattleEntity entity) => entity switch
