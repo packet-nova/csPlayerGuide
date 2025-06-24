@@ -7,14 +7,16 @@
         PlayerType = playerType;
     }
 
-    public int InputActionChoice()
+    public IBattleCommand InputActionChoice(IBattleEntity entity, Battle battle)
     {
+        List<IBattleCommand> commands = entity.GetAvailableCommands(battle);
         if (PlayerType == PlayerType.Computer)
         {
-            return 1;
+            return commands[0];
         }
 
-        return Convert.ToInt32(Console.ReadLine());
+        int index = Convert.ToInt32(Console.ReadLine());
+        return commands[index - 1];
     }
 }
 
