@@ -6,6 +6,7 @@
     {
         _target = target;
     }
+
     public void Execute(IBattleEntity source)
     {
         Console.WriteLine($"{source.Name} attacked {_target.Name}");

@@ -25,8 +25,7 @@
                 _battleUI.PrintAvailableActions(entity);
             }
 
-            int choice = activeParty.Controller.InputActionChoice();
-            var selectedAction = entity.AvailableCommands[choice - 1];
+            var selectedAction = activeParty.Controller.InputActionChoice(entity, this);
             selectedAction.Execute(entity);
         }
 
