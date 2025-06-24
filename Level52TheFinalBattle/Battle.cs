@@ -27,7 +27,7 @@
 
             int choice = activeParty.Controller.InputActionChoice();
             var selectedAction = entity.AvailableCommands[choice - 1];
-            selectedAction.Execute(entity, GetMonsterEntities()[0]);
+            selectedAction.Execute(entity);
         }
 
         _currentTurn = _currentTurn == CurrentTurn.Hero ? CurrentTurn.Monster : CurrentTurn.Hero;
