@@ -12,7 +12,6 @@
         _currentTurn = data.FirstTurn;
         _battleUI = new(this);
     }
-
     public void ExecuteTurn()
     {
         BattleParty activeParty = _currentTurn == CurrentTurn.Hero ? _heroParty : _monsterParty;
@@ -31,7 +30,15 @@
 
         _currentTurn = _currentTurn == CurrentTurn.Hero ? CurrentTurn.Monster : CurrentTurn.Hero;
     }
+    public IReadOnlyList<IBattleEntity> GetAllEntities()
+    {
+        List<IBattleEntity> entities = new();
 
+        entities.AddRange(GetMonsterEntities());
+        entities.AddRange(GetHeroEntities());
+
+        return entities;
+    }
     public IReadOnlyList<IBattleEntity> GetHeroEntities() => _heroParty.Entities;
     public IReadOnlyList<IBattleEntity> GetMonsterEntities() => _monsterParty.Entities;
 }
