@@ -1,11 +1,19 @@
 ﻿public class Skeleton : IBattleEntity
 {
     public string Name { get; } = "SKELETON";
-    public List<IBattleCommand> AvailableCommands { get; private set; } = new List<IBattleCommand>();
 
-    public Skeleton()
+    public List<IBattleCommand> GetAvailableCommands(Battle battle)
     {
-        AvailableCommands.Add(new DoNothing());
-        AvailableCommands.Add(new Attack());
+        List<IBattleCommand> options = new();
+
+        options.Add(new DoNothing());
+
+        foreach (var hostileTarget in battle.GetMonsterEntities())
+            options.Add(new Attack(hostileTarget));
+
+        foreach (var friendlyTarget in battle.GetHeroEntities())
+            options.Add(new Attack(friendlyTarget));
+
+        return options;
     }
 }

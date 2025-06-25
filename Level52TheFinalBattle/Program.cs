@@ -1,9 +1,8 @@
-﻿Player humanPlayer = new(PlayerType.Human);
-Player computerPlayer = new(PlayerType.Computer);
-Player computerPlayer2 = new(PlayerType.Computer);
+﻿HumanPlayer p1 = new();
+ComputerPlayer p2 = new();
 TrueProgrammer trueProgrammer = new(CreateTrueProgrammer());
 
-Game game = new(trueProgrammer, humanPlayer, computerPlayer);
+Game game = new(trueProgrammer, p1, p2);
 
 game.Run();
 

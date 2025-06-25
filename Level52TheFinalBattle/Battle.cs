@@ -10,7 +10,7 @@
         _heroParty = data.HeroParty;
         _monsterParty = data.MonsterParty;
         _currentTurn = data.FirstTurn;
-        _battleUI = new();
+        _battleUI = new(this);
     }
 
     public void ExecuteTurn()
@@ -25,8 +25,7 @@
                 _battleUI.PrintAvailableActions(entity);
             }
 
-            int choice = activeParty.Controller.InputActionChoice();
-            var selectedAction = entity.AvailableCommands[choice - 1];
+            var selectedAction = activeParty.Controller.InputActionChoice(entity, this);
             selectedAction.Execute(entity);
         }
 
