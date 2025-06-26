@@ -1,4 +1,4 @@
-﻿//=============================================
+//=============================================
 /*
 CountToTen();
 CountAscending(20);
@@ -165,10 +165,10 @@ void BuyCards(int min, int max)
         
         if (!isValidChoice)
         {
-            // here's an example of where that array of `allowedChoices` could be handy.
-            // instead of repeating ourselves (and potentially misspelling or accidentally omitting an option)
-            // we could re-use that `allowedChoices` array to say:
-            // Console.WriteLine($"Incorrect option. Please choose one of: '{string.Join("', '", allowedChoices)}'");
+            validChoice = true;
+        }
+        else
+        {
             Console.WriteLine("Incorrect option. Please choose 'estate', 'duchy', or 'province'.");
         }
     }
