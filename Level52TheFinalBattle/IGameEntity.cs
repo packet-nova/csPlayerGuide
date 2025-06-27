@@ -40,7 +40,7 @@ public interface IBattleAction
     public BattleActionType Type { get; init; }
 }
 
-public class BattleAction
+public class BattleAction : IBattleAction
 {
     public string Name { get; init; }
 
