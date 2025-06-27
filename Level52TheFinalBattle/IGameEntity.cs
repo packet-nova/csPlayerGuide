@@ -1,4 +1,6 @@
-﻿/// <summary>
+﻿using System.Text;
+
+/// <summary>
 /// Describes an entity in the game, such as a player, enemy, etc.
 /// </summary>
 public interface IGameEntity 
@@ -25,6 +27,10 @@ public class GameEntity : IGameEntity
 
     public List<IBattleAction> Actions { get; set; }
     public ControlledBy ControlledBy { get; set; }
+    public override string ToString()
+    {
+        return Name;
+    }
 }
 
 /// <summary>
@@ -38,6 +44,7 @@ public interface IBattleAction
     public string Name { get; init; }
 
     public BattleActionType Type { get; init; }
+
 }
 
 public class BattleAction : IBattleAction
@@ -45,6 +52,10 @@ public class BattleAction : IBattleAction
     public string Name { get; init; }
 
     public BattleActionType Type { get; init; }
+    public override string ToString()
+    {
+        return $"{Name}";
+    }
 }
 
 public enum BattleActionType
@@ -65,7 +76,7 @@ public class GameBattle
 {
     public List<IGameEntity> HeroParty { get; set; }
 
-    public List<IGameEntity> EnemyParty { get; set; }
+    public List<IGameEntity> MonsterParty { get; set; }
 
     public List<CombatLogEntry> CombatLogEntry { get; set; }
 
@@ -73,9 +84,24 @@ public class GameBattle
 
 public class CombatLogEntry
 {
-    public IGameEntity SourceEntity { get; set; }
+    public required IGameEntity SourceEntity { get; set; }
     public IGameEntity? TargetEntity { get; set; }
-    public IBattleAction ActionPerformed { get; set; }
-}
+    public required IBattleAction ActionPerformed { get; set; }
 
-// collab branch add
+    public override string ToString()
+    {
+        var sb = new StringBuilder();
+        
+        sb.Append($"{SourceEntity.Name} did ");
+        sb.Append(ActionPerformed);
+        
+        if (TargetEntity != null)
+        {
+            sb.Append($" to {TargetEntity.Name}");
+        }
+
+        sb.Append(".");
+
+        return sb.ToString();
+    }
+}

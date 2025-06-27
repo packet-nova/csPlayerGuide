@@ -12,9 +12,13 @@
 //    return Console.ReadLine();
 //}
 
+
+
+
 var nothingAction = new BattleAction
 {
     Name = "Nothing",
+
     Type = BattleActionType.Nothing
 };
 
@@ -22,15 +26,15 @@ var trueProgrammer = new GameEntity
 {
     Name = "Nate",
 
-    ControlledBy = ControlledBy.Computer,
+    ControlledBy = ControlledBy.Human,
 
-    Actions = new List<BattleAction>
+    Actions = new List<IBattleAction>
     {
          nothingAction,
 
         new BattleAction
         {
-            Name = "Punch",
+            Name = "PUNCH",
             Type = BattleActionType.Attack
         }
     }
@@ -42,15 +46,15 @@ var skeleton = new GameEntity
 
     ControlledBy = ControlledBy.Computer,
 
-    Actions = new List<BattleAction>
+    Actions = new List<IBattleAction>
     {
-        
+
         new BattleAction
         {
             Name = "BONE CRUNCH",
             Type = BattleActionType.Attack
         },
-        
+
         nothingAction,
 
     }
@@ -58,11 +62,12 @@ var skeleton = new GameEntity
 
 var battle = new GameBattle
 {
-    HeroParty = new List<IGameEntity> {
+    HeroParty = new List<IGameEntity>
+    {
         trueProgrammer
     },
 
-    EnemyParty = new List<IGameEntity>
+    MonsterParty = new List<IGameEntity>
     {
         skeleton
     },
@@ -72,29 +77,126 @@ var battle = new GameBattle
 
 while (true)
 {
+    // Hero Party's Turn
     foreach (var hero in battle.HeroParty)
     {
-        if (hero.ControlledBy == ControlledBy.Computer)
-        {
-            var action = hero.Actions.FirstOrDefault(action => action.Type == BattleActionType.Nothing);
+        Console.WriteLine($"It is {hero.Name}'s turn.");
 
-            battle.CombatLogEntry.Add(new CombatLogEntry
-            {
-                SourceEntity = hero,
-                TargetEntity = null,
-                ActionPerformed = action
-            });
+        // Action menu display/select
+        switch (hero.ControlledBy)
+        {
+            case ControlledBy.Human:
+
+                // Display available actions
+                for (int index = 0; index < hero.Actions.Count; index++)
+                {
+                    Console.WriteLine($"{index + 1}. {hero.Actions[index]}");
+                }
+
+                Console.Write($"What Action? (1-{hero.Actions.Count}): ");
+
+                // Get user action choice
+                var isValidActionChoice = int.TryParse(Console.ReadLine(), out int actionChoice) &&
+                    (actionChoice is > 0 && actionChoice <= hero.Actions.Count);
+
+                while (isValidActionChoice == false)
+                {
+                    Console.WriteLine("Invalid entry.");
+                    Console.Write($"What Action? (1-{hero.Actions.Count}): ");
+
+                    isValidActionChoice = int.TryParse(Console.ReadLine(), out actionChoice) &&
+                        (actionChoice is > 0 && actionChoice <= hero.Actions.Count);
+                }
+
+                // Assigning action choice
+                var selectedAction = hero.Actions[actionChoice - 1];
+                Thread.Sleep(500);
+
+
+                // Display available targets
+                for (int index = 0; index < battle.MonsterParty.Count; index++)
+                {
+                    Console.WriteLine($"{index + 1}. {battle.MonsterParty[index]}");
+                }
+
+                // Get user target choice
+                Console.Write($"What target? (1-{battle.MonsterParty.Count}): ");
+
+                var isValidTargetChoice = int.TryParse(Console.ReadLine(), out int targetChoice) &&
+                    (targetChoice is > 0 && targetChoice <= battle.MonsterParty.Count);
+
+                while (isValidTargetChoice == false)
+                {
+                    Console.WriteLine("Invalid entry.");
+                    Console.Write($"What target? (1-{battle.MonsterParty.Count}): ");
+
+                    isValidTargetChoice = int.TryParse(Console.ReadLine(), out targetChoice) &&
+                        (targetChoice is > 0 && targetChoice <= battle.MonsterParty.Count);
+                }
+
+                // Assigning target choice
+                var selectedTarget = battle.MonsterParty[targetChoice - 1];
+
+                // Log entry
+                var heroLogEntry = new CombatLogEntry()
+                {
+                    SourceEntity = hero,
+                    TargetEntity = selectedTarget,
+                    ActionPerformed = selectedAction
+                };
+
+                battle.CombatLogEntry.Add(heroLogEntry);
+
+                Console.WriteLine(heroLogEntry);
+                Console.WriteLine();
+                break;
+
+            case ControlledBy.Computer:
+
+                var target = battle.HeroParty.First();
+
+                //var action = hero.Actions.First(action => action.Type == BattleActionType.Nothing);
+                var action = hero.Actions.First(action => action.Type == BattleActionType.Attack);
+                Thread.Sleep(500);
+
+                var logEntry = new CombatLogEntry()
+                {
+                    SourceEntity = hero,
+                    TargetEntity = target,
+                    ActionPerformed = action
+                };
+
+                battle.CombatLogEntry.Add(logEntry);
+
+                Console.WriteLine(logEntry);
+                Console.WriteLine();
+                break;
         }
-        // show a menu with the actions the hero can perform
     }
 
-    foreach (var monster in battle.EnemyParty)
+    // Monster Party's Turn
+    foreach (var monster in battle.MonsterParty)
     {
-        if (monster.ControlledBy == ControlledBy.Computer)
+        Console.WriteLine($"It is {monster.Name}'s turn.");
+
+        var target = battle.HeroParty.First();
+
+        //var action = hero.Actions.First(action => action.Type == BattleActionType.Nothing);
+        var action = monster.Actions.First(action => action.Type == BattleActionType.Attack);
+        Thread.Sleep(500);
+
+        var logEntry = new CombatLogEntry()
         {
-            var action = monster.Actions.FirstOrDefault(action => action.Type == BattleActionType.Nothing);
-        }
-        // show a menu with the actions the hero can perform
+            SourceEntity = monster,
+            TargetEntity = target,
+            ActionPerformed = action
+        };
+
+        battle.CombatLogEntry.Add(logEntry);
+
+        Console.WriteLine(logEntry);
+        Console.WriteLine();
+        break;
     }
 }
 
