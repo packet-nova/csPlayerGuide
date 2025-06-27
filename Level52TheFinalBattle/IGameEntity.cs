@@ -77,3 +77,5 @@ public class CombatLogEntry
     public IGameEntity? TargetEntity { get; set; }
     public IBattleAction ActionPerformed { get; set; }
 }
+
+// collab branch add
