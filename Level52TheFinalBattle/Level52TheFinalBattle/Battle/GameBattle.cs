@@ -52,6 +52,7 @@ public class GameBattle
 
             // Assigning action choice
             selectedAction = sourceEntity.Actions[actionChoice - 1];
+
         }
         else
         {
@@ -103,6 +104,9 @@ public class GameBattle
             TargetEntity = selectedTarget,
             ActionPerformed = selectedAction
         };
+
+        selectedAction.Execute(selectedTarget);
+        Console.WriteLine($"Target Health: {selectedTarget.Health}/{selectedTarget.MaxHealth}");
 
         CombatLogEntry.Add(logEntry);
 

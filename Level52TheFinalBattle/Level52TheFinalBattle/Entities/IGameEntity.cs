@@ -13,9 +13,19 @@ public interface IGameEntity
     public string Name { get; set; }
 
     /// <summary>
+    /// The maximum hit points of this entity
+    /// </summary>
+    public int MaxHealth { get; set; }
+
+    /// <summary>
     /// The hit points of this entity, representing its health
     /// </summary>
     public int Health { get; set; }
+
+    /// <summary>
+    /// Evaluates true if the entity is dead
+    /// </summary>
+    public bool IsDead { get; }
 
     /// <summary>
     /// The actions that this entity can perform

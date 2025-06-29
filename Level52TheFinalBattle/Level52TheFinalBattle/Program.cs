@@ -1,12 +1,19 @@
 ﻿using Level52TheFinalBattle.Battle;
 using Level52TheFinalBattle.Entities;
 
+Console.Write("What is the True Programmer's name? ");
+var trueProgrammerName = Console.ReadLine();
+
 // set up the player character
 var trueProgrammer = new GameEntity
 {
-    Name = "Nate",
+    Name = trueProgrammerName,
 
     ControlledBy = ControlledBy.Human,
+
+    MaxHealth = 25,
+
+    Health = 25,
 
     Actions =
     [
@@ -15,7 +22,7 @@ var trueProgrammer = new GameEntity
         new BattleAction
         {
             Name = "PUNCH",
-            Type = BattleActionType.Attack
+            Type = BattleActionType.Attack,
         }
     ]
 };
@@ -24,6 +31,10 @@ var trueProgrammer = new GameEntity
 var skeleton = new GameEntity
 {
     Name = "SKELETON",
+
+    MaxHealth = 5,
+
+    Health = 5,
 
     ControlledBy = ControlledBy.Computer,
 
@@ -68,3 +79,5 @@ while (true)
         battle.TakeTurn(monster);
     }
 }
+
+

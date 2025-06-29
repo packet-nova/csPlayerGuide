@@ -1,4 +1,6 @@
-﻿namespace Level52TheFinalBattle.Battle;
+﻿using Level52TheFinalBattle.Entities;
+
+namespace Level52TheFinalBattle.Battle;
 
 /// <summary>
 /// Represents an action that can be performed during a battle.
@@ -17,5 +19,11 @@ public interface IBattleAction
     /// The type of the battle action, which categorizes the action into a specific type such as "Attack", "Defend", etc.
     /// </summary>
     public BattleActionType Type { get; init; }
+
+    /// <summary>
+    /// Modifies the health of the action target
+    /// </summary>
+    public int GetHealthModifier();
+    public void Execute(IGameEntity target);
 }
 
