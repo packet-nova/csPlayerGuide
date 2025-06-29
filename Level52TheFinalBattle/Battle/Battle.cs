@@ -41,4 +41,21 @@
     }
     public IReadOnlyList<IBattleEntity> GetHeroEntities() => _heroParty.Entities;
     public IReadOnlyList<IBattleEntity> GetMonsterEntities() => _monsterParty.Entities;
+
+
+
+    public void PrintAvailableActions(IBattleEntity entity)
+    {
+        for (int i = 0; i < entity.GetAvailableCommands(this).Count; i++)
+        {
+            Console.WriteLine($"{i + 1}. {entity.GetAvailableCommands(this)[i].GetDisplayName(entity)}");
+        }
+        Console.Write($"Choose an action [1-{entity.GetAvailableCommands(this).Count}]: ");
+    }
+
+    public void PrintTurnNotification(IBattleEntity entity)
+    {
+        Console.WriteLine();
+        Console.WriteLine($"It is {entity.Name}'s turn.");
+    }
 }

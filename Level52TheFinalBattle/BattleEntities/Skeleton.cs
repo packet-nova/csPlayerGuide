@@ -4,17 +4,16 @@
 
     public List<IBattleCommand> GetAvailableCommands(Battle battle)
     {
-        List<IBattleCommand> options = new();
+        List<IBattleCommand> commands = new();
 
-        options.Add(new DoNothing());
+        commands.Add(new DoNothing());
 
         foreach (var hostileTarget in battle.GetHeroEntities())
-            options.Add(new Attack(hostileTarget));
+            commands.Add(new Attack(hostileTarget));
 
         foreach (var friendlyTarget in battle.GetMonsterEntities())
-            options.Add(new Attack(friendlyTarget));
+            commands.Add(new Attack(friendlyTarget));
 
-        return options;
+        return commands;
     }
-
 }
