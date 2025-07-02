@@ -24,10 +24,10 @@
 
     public void StartBattle()
     {
-        _currentBattle = new(BattleGenerator.CreateBasicSkeletonBattle(
+        _currentBattle = Battle.CreateBasicSkeletonBattle(
             _trueProgrammer,
             _heroPlayer,
-            _monsterPlayer));
+            _monsterPlayer);
     }
 
 }

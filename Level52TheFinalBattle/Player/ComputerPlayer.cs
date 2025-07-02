@@ -2,7 +2,7 @@
 {
     public override IBattleCommand InputActionChoice(IBattleEntity entity, Battle battle)
     {
-        List<IBattleCommand> commands = entity.GetAvailableCommands(battle);
+        List<IBattleCommand> commands = entity.BattleCommands;
             return commands[0];
         }
     }

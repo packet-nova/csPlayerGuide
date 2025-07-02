@@ -2,35 +2,51 @@
 {
     private readonly BattleParty _heroParty;
     private readonly BattleParty _monsterParty;
-    private CurrentTurn _currentTurn;
+    private BattleParty _activeParty;
 
-    public Battle(BattleData data)
+    public Battle(BattleParty heroParty, BattleParty monsterParty)
     {
-        _heroParty = data.HeroParty;
-        _monsterParty = data.MonsterParty;
-        _currentTurn = data.FirstTurn;
+        _heroParty = heroParty;
+        _monsterParty = monsterParty;
+        _activeParty = heroParty;
     }
 
     /// <summary>
-    /// Executes a single turn in the battle, allowing each entity in the active party to perform an action. The the active party changes sides.
+    /// Creates a basic battle scenario between a True Programmer and a Skeleton.
+    /// </summary>
+    public static Battle CreateBasicSkeletonBattle(
+        TrueProgrammer trueProgrammer, 
+        Player heroPlayer, 
+        Player monsterPlayer)
+    {
+        Skeleton skeleton = new();
+
+        var heroParty = new BattleParty([trueProgrammer], heroPlayer);
+        var monsterParty = new BattleParty([skeleton], monsterPlayer);
+
+        return new Battle(heroParty, monsterParty);
+    }
+
+    /// <summary>
+    /// Executes a single turn in the battle, allowing each entity in the active party to perform an action. Then the active party changes sides.
     /// </summary>
     public void ExecuteTurn()
     {
-        BattleParty activeParty = _currentTurn == CurrentTurn.Hero ? _heroParty : _monsterParty;
+        var enemyParty = _activeParty == _heroParty ? _monsterParty : _heroParty;
 
-        foreach (var entity in activeParty.Entities)
+        foreach (var entity in _activeParty.Entities)
         {
-            if (activeParty == _heroParty)
+            if (_activeParty == _heroParty)
             {
                 PrintTurnNotification(entity);
                 PrintAvailableActions(entity);
             }
 
-            var selectedAction = activeParty.Controller.InputActionChoice(entity, this);
+            var selectedAction = _activeParty.Controller.InputActionChoice(entity, this);
             selectedAction.Execute(entity);
         }
 
-        _currentTurn = _currentTurn == CurrentTurn.Hero ? CurrentTurn.Monster : CurrentTurn.Hero;
+        _activeParty = enemyParty;
     }
 
     /// <summary>
@@ -49,11 +65,11 @@
     /// </summary>
     public void PrintAvailableActions(IBattleEntity entity)
     {
-        for (int i = 0; i < entity.GetAvailableCommands(this).Count; i++)
+        for (int i = 0; i < entity.BattleCommands.Count; i++)
         {
-            Console.WriteLine($"{i + 1}. {entity.GetAvailableCommands(this)[i].GetDisplayName(entity)}");
+            Console.WriteLine($"{i + 1}. {entity.BattleCommands[i].GetDisplayName(entity)}");
         }
-        Console.Write($"Choose an action [1-{entity.GetAvailableCommands(this).Count}]: ");
+        Console.Write($"Choose an action [1-{entity.BattleCommands.Count}]: ");
     }
 
     /// <summary>
