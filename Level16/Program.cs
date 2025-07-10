@@ -7,10 +7,10 @@ while (true)
 
     if (state == ChestState.Locked && action == "unlock")
     {
-        state = ChestState.Unlocked;
+        state = ChestState.Closed;
     }
 
-    else if (state == ChestState.Unlocked && action == "open")
+    else if (state == ChestState.Closed && action == "open")
     {
         state = ChestState.Opened;
     }
@@ -31,4 +31,4 @@ while (true)
     }
 }
 
-enum ChestState { Locked, Opened, Closed, Unlocked }
+enum ChestState { Locked, Opened, Closed }
