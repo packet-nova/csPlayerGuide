@@ -1,6 +1,6 @@
 ﻿public enum ActionType
 {
-    DoNothing,
+    Nothing,
     Attack,
     //Magic,
     //Item,
