@@ -1,5 +1,6 @@
 ﻿public class Attack : IBattleCommand
 {
+    public ActionType ActionType => ActionType.Attack;
     public void Execute(IBattleEntity source)
     {
         Console.WriteLine($"{source.Name} attacked ");
