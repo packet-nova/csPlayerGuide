@@ -2,13 +2,8 @@
 {
     public string Name { get; }
 
-    /// <summary>
-    /// All available battle commands this entity can perform.
-    /// </summary>
+/// <summary>
+/// Gets the collection of battle commands available for use in combat scenarios.
+/// </summary>
     public List<IBattleCommand> BattleCommands { get; }
-
-    /// <summary>
-    /// Retrieves a list of available battle commands based on the current state of the specified battle.
-    /// </summary>
-
 }

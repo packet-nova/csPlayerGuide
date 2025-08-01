@@ -12,7 +12,7 @@
     }
 
     /// <summary>
-    /// Creates a basic battle scenario between a True Programmer and a Skeleton.
+    /// Creates a basic battle scenario between a hero and a skeleton monster.
     /// </summary>
     public static Battle CreateBasicSkeletonBattle(
         TrueProgrammer trueProgrammer, 
@@ -50,9 +50,8 @@
     }
 
     /// <summary>
-    /// Retrieves all battle entities, including both monsters and heroes.
+    /// Retrieves a read-only list of all battle entities, including both monsters and heroes.
     /// </summary>
-    /// <returns>A read-only list of all battle entities. The list includes both monster entities and hero entities.</returns>
     public IReadOnlyList<IBattleEntity> GetAllBattleEntities() => [.. GetMonsterEntities(), .. GetHeroEntities()];
 
     public IReadOnlyList<IBattleEntity> GetHeroEntities() => _heroParty.Entities;
