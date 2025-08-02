@@ -44,7 +44,14 @@
             }
 
             var selectedAction = _activeParty.Controller.InputActionChoice(entity, this);
-            selectedAction.Execute(entity);
+            Console.WriteLine();
+
+            if (selectedAction.RequiresTarget)
+            {
+                IBattleEntity target = SelectTarget();
+                Console.WriteLine($"{entity.Name}'s {selectedAction} deals 1 damage to {target.Name}.");
+            }
+
             Console.WriteLine();
         }
 
@@ -60,6 +67,23 @@
 
     public IReadOnlyList<IBattleEntity> GetMonsterEntities() => _monsterParty.Entities;
 
+
+    public IBattleEntity SelectTarget()
+    {
+        var validTargets = GetAllBattleEntities();
+
+        Console.WriteLine("Choose a target: ");
+        for (int i = 0; i < validTargets.Count; i++)
+        {
+            Console.WriteLine($"{i + 1}. {validTargets[i].Name}");
+        }
+
+        Console.Write("Target: ");
+        int entityChoice = Convert.ToInt32(Console.ReadLine());
+
+        return validTargets[entityChoice - 1];
+
+    }
 
     /// <summary>
     /// Displays the list of available actions for the specified battle entity and prompts the user to choose one.
