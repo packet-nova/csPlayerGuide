@@ -15,12 +15,11 @@
     /// Creates a basic battle scenario between a hero and a skeleton monster.
     /// </summary>
     public static Battle CreateBasicSkeletonBattle(
-        TrueProgrammer trueProgrammer, 
-        Player heroPlayer, 
+        TrueProgrammer trueProgrammer,
+        Player heroPlayer,
         Player monsterPlayer)
     {
-        Skeleton skeleton = new();
-
+        var skeleton = new Skeleton();
         var heroParty = new BattleParty([trueProgrammer], heroPlayer);
         var monsterParty = new BattleParty([skeleton], monsterPlayer);
 
@@ -28,8 +27,11 @@
     }
 
     /// <summary>
-    /// Executes a single turn in the battle, allowing each entity in the active party to perform an action. Then the active party changes sides.
+    /// Executes a single turn in the battle, allowing each entity in the active party to perform an action.
     /// </summary>
+    /// <remarks>During the turn, each entity in the active party selects and performs an action. If the action
+    /// requires a target,  the target is selected from the opposing party. After all entities in the active party have
+    /// acted, the turn ends  and control switches to the opposing party.</remarks>
     public void ExecuteTurn()
     {
         var enemyParty = _activeParty == _heroParty ? _monsterParty : _heroParty;
@@ -67,7 +69,9 @@
 
     public IReadOnlyList<IBattleEntity> GetMonsterEntities() => _monsterParty.Entities;
 
-
+    /// <summary>
+    /// Prompts the user to select a target from a list of available battle entities.
+    /// </summary>
     public IBattleEntity SelectTarget()
     {
         var validTargets = GetAllBattleEntities();
@@ -90,6 +94,15 @@
     /// </summary>
     public void PrintAvailableActions(IBattleEntity entity)
     {
+        var actionTypes = Enum.GetValues<ActionType>();
+
+        Console.WriteLine("Choose an action: ");
+        for (int i = 0; i < Enum.GetNames<ActionType>().Length; i++)
+        {
+            Console.WriteLine($"{i + 1}. {actionTypes[i]}");
+        }
+
+
         for (int i = 0; i < entity.BattleCommands.Count; i++)
         {
             Console.WriteLine($"{i + 1}. {entity.BattleCommands[i].DisplayName}");
