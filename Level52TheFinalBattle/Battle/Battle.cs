@@ -36,14 +36,16 @@
 
         foreach (var entity in _activeParty.Entities)
         {
+            PrintTurnNotification(entity);
+
             if (_activeParty == _heroParty)
             {
-                PrintTurnNotification(entity);
                 PrintAvailableActions(entity);
             }
 
             var selectedAction = _activeParty.Controller.InputActionChoice(entity, this);
             selectedAction.Execute(entity);
+            Console.WriteLine();
         }
 
         _activeParty = enemyParty;
@@ -76,7 +78,6 @@
     /// </summary>
     public void PrintTurnNotification(IBattleEntity entity)
     {
-        Console.WriteLine();
         Console.WriteLine($"It is {entity.Name}'s turn.");
     }
 }
