@@ -102,12 +102,23 @@
             Console.WriteLine($"{i + 1}. {actionTypes[i]}");
         }
 
-
         for (int i = 0; i < entity.BattleCommands.Count; i++)
         {
             Console.WriteLine($"{i + 1}. {entity.BattleCommands[i].DisplayName}");
         }
         Console.Write($"Choose an action [1-{entity.BattleCommands.Count}]: ");
+    }
+
+    public void PrintAttackActions(IBattleEntity entity)
+    {
+        var attackActions = entity.BattleCommands
+            .Where(action => action.Category == ActionType.Attack);
+        
+        int index = 1;
+        foreach (var action in attackActions)
+        {
+            Console.WriteLine($"{index++}. {action.DisplayName}");
+        }
     }
 
     /// <summary>
