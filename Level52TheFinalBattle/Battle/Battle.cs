@@ -66,7 +66,7 @@
     {
         for (int i = 0; i < entity.BattleCommands.Count; i++)
         {
-            Console.WriteLine($"{i + 1}. {entity.BattleCommands[i].GetDisplayName(entity)}");
+            Console.WriteLine($"{i + 1}. {entity.BattleCommands[i].DisplayName}");
         }
         Console.Write($"Choose an action [1-{entity.BattleCommands.Count}]: ");
     }

@@ -5,6 +5,6 @@
     public List<IBattleCommand> BattleCommands { get; } =
     [
        new DoNothing(),
-       new Attack()
+       new Punch()
     ];
 }

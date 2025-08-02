@@ -1,16 +1,10 @@
 ﻿public class Punch : IBattleCommand
 {
-    public ActionType Category => ActionType.Attack;
+    public string DisplayName => "Punch";
+    public int Damage { get; } = 1;
 
     public void Execute(IBattleEntity source)
     {
-        throw new NotImplementedException();
+        Console.WriteLine($"{source.Name} does {DisplayName}.");
     }
-
-    public string GetDisplayName(IBattleEntity entity)
-    {
-        throw new NotImplementedException();
-    }
-
-    public override string ToString() => "Punch";
 }

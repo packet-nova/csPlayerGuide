@@ -1,11 +1,9 @@
 ﻿public class DoNothing : IBattleCommand
 {
-    public ActionType Category => ActionType.Nothing;
+    public string DisplayName => "Do Nothing";
 
-    public void Execute(IBattleEntity entity)
+    public void Execute(IBattleEntity source)
     {
-        Console.WriteLine($"{entity.Name} did NOTHING.");
+        Console.WriteLine($"{source.Name} did NOTHING.");
     }
-
-    public string GetDisplayName(IBattleEntity entity) => "Do Nothing";
 }
