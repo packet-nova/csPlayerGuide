@@ -4,6 +4,13 @@
     private readonly BattleParty _monsterParty;
     private BattleParty _activeParty;
 
+    public IReadOnlyList<IBattleEntity> AllBattleEntities => [.. MonsterEntities, .. HeroEntities];
+
+    public IReadOnlyList<IBattleEntity> HeroEntities => _heroParty.Entities;
+
+    public IReadOnlyList<IBattleEntity> MonsterEntities => _monsterParty.Entities;
+
+
     public Battle(BattleParty heroParty, BattleParty monsterParty)
     {
         _heroParty = heroParty;
@@ -42,17 +49,18 @@
 
             if (_activeParty == _heroParty)
             {
-                PrintAvailableActions(entity);
+                GetHumanPlayerAction(entity);
             }
 
-            var selectedAction = _activeParty.Controller.InputActionChoice(entity, this);
+
+            //var selectedAction = _activeParty.Controller.UserInputChoice(entity, this);
             Console.WriteLine();
 
-            if (selectedAction.RequiresTarget)
-            {
-                IBattleEntity target = SelectTarget();
-                Console.WriteLine($"{entity.Name}'s {selectedAction} deals 1 damage to {target.Name}.");
-            }
+            //if (selectedAction.RequiresTarget)
+            //{
+            //    IBattleEntity target = SelectTarget();
+            //    Console.WriteLine($"{entity.Name}'s {selectedAction} deals 1 damage to {target.Name}.");
+            //}
 
             Console.WriteLine();
         }
@@ -60,65 +68,64 @@
         _activeParty = enemyParty;
     }
 
-    /// <summary>
-    /// Retrieves a read-only list of all battle entities, including both monsters and heroes.
-    /// </summary>
-    public IReadOnlyList<IBattleEntity> GetAllBattleEntities() => [.. GetMonsterEntities(), .. GetHeroEntities()];
+    public void GetHumanPlayerAction(IBattleEntity entity)
+    {
+        if (SelectActionCategory(entity) is ActionType.Attack)
+        {
+            SelectAttack(entity);
+        }
 
-    public IReadOnlyList<IBattleEntity> GetHeroEntities() => _heroParty.Entities;
-
-    public IReadOnlyList<IBattleEntity> GetMonsterEntities() => _monsterParty.Entities;
+    }
 
     /// <summary>
     /// Prompts the user to select a target from a list of available battle entities.
     /// </summary>
     public IBattleEntity SelectTarget()
     {
-        var validTargets = GetAllBattleEntities();
-
         Console.WriteLine("Choose a target: ");
-        for (int i = 0; i < validTargets.Count; i++)
+        for (int i = 0; i < AllBattleEntities.Count; i++)
         {
-            Console.WriteLine($"{i + 1}. {validTargets[i].Name}");
+            Console.WriteLine($"{i + 1}. {AllBattleEntities[i].Name}");
         }
 
         Console.Write("Target: ");
         int entityChoice = Convert.ToInt32(Console.ReadLine());
 
-        return validTargets[entityChoice - 1];
+        return AllBattleEntities[entityChoice - 1];
 
     }
 
     /// <summary>
     /// Displays the list of available actions for the specified battle entity and prompts the user to choose one.
     /// </summary>
-    public void PrintAvailableActions(IBattleEntity entity)
+    public ActionType SelectActionCategory(IBattleEntity entity)
     {
         var actionTypes = Enum.GetValues<ActionType>();
 
-        Console.WriteLine("Choose an action: ");
         for (int i = 0; i < Enum.GetNames<ActionType>().Length; i++)
         {
             Console.WriteLine($"{i + 1}. {actionTypes[i]}");
         }
 
-        for (int i = 0; i < entity.BattleCommands.Count; i++)
-        {
-            Console.WriteLine($"{i + 1}. {entity.BattleCommands[i].DisplayName}");
-        }
-        Console.Write($"Choose an action [1-{entity.BattleCommands.Count}]: ");
+        Console.Write("What do you want to do? ");
+        int choice = Convert.ToInt32(Console.ReadLine());
+        return actionTypes[choice - 1];
     }
 
-    public void PrintAttackActions(IBattleEntity entity)
+    /// <summary>
+    /// Displays a list of attack actions available to the specified battle entity and prompts the user to select one.
+    /// </summary>
+    public void SelectAttack(IBattleEntity entity)
     {
         var attackActions = entity.BattleCommands
             .Where(action => action.Category == ActionType.Attack);
-        
+
         int index = 1;
         foreach (var action in attackActions)
         {
             Console.WriteLine($"{index++}. {action.DisplayName}");
         }
+        Console.Write("Which action? ");
     }
 
     /// <summary>
