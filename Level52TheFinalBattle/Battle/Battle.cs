@@ -5,11 +5,8 @@
     private BattleParty _activeParty;
 
     public IReadOnlyList<IBattleEntity> AllBattleEntities => [.. MonsterEntities, .. HeroEntities];
-
     public IReadOnlyList<IBattleEntity> HeroEntities => _heroParty.Entities;
-
     public IReadOnlyList<IBattleEntity> MonsterEntities => _monsterParty.Entities;
-
 
     public Battle(BattleParty heroParty, BattleParty monsterParty)
     {
