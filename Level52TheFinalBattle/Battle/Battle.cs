@@ -33,9 +33,6 @@
     /// <summary>
     /// Executes a single turn in the battle, allowing each entity in the active party to perform an action.
     /// </summary>
-    /// <remarks>During the turn, each entity in the active party selects and performs an action. If the action
-    /// requires a target,  the target is selected from the opposing party. After all entities in the active party have
-    /// acted, the turn ends  and control switches to the opposing party.</remarks>
     public void ExecuteTurn()
     {
         var enemyParty = _activeParty == _heroParty ? _monsterParty : _heroParty;
@@ -43,35 +40,79 @@
         foreach (var entity in _activeParty.Entities)
         {
             PrintTurnNotification(entity);
+            Console.WriteLine();
 
             if (_activeParty == _heroParty)
             {
                 GetHumanPlayerAction(entity);
             }
-
-
-            //var selectedAction = _activeParty.Controller.UserInputChoice(entity, this);
-            Console.WriteLine();
-
-            //if (selectedAction.RequiresTarget)
-            //{
-            //    IBattleEntity target = SelectTarget();
-            //    Console.WriteLine($"{entity.Name}'s {selectedAction} deals 1 damage to {target.Name}.");
-            //}
-
-            Console.WriteLine();
         }
 
         _activeParty = enemyParty;
     }
-
+    /// <summary>
+    /// Prompts the human player to select an action for the specified battle entity.
+    /// </summary>
     public void GetHumanPlayerAction(IBattleEntity entity)
     {
+
+        //var actionType = SelectActionCategory(entity);
+
+        //switch (actionType)
+        //{
+        //    case ActionType.Attack:
+                
+        //}
         if (SelectActionCategory(entity) is ActionType.Attack)
         {
-            SelectAttack(entity);
+            if (SelectAttack(entity).RequiresTarget)
+            {
+                SelectTarget();
+            }
+        }
+    }
+
+    /// <summary>
+    /// Displays the list of available actions for the specified battle entity and prompts the user to choose one.
+    /// </summary>
+    public ActionType SelectActionCategory(IBattleEntity entity)
+    {
+        var actionTypes = Enum.GetValues<ActionType>();
+
+        Console.WriteLine("What do you want to do?");
+        
+        for (int i = 0; i < Enum.GetNames<ActionType>().Length; i++)
+        {
+            Console.WriteLine($"{i + 1}. {actionTypes[i]}");
         }
 
+        Console.Write(">  ");
+        int choice = Convert.ToInt32(Console.ReadLine());
+        Console.WriteLine();
+
+        return actionTypes[choice - 1];
+    }
+
+    /// <summary>
+    /// Displays a list of attack actions available to the specified battle entity and prompts the user to select one.
+    /// </summary>
+    public IBattleCommand SelectAttack(IBattleEntity entity)
+    {
+        var attackActions = entity.BattleCommands
+            .Where(action => action.Category == ActionType.Attack);
+
+        int index = 1;
+        Console.WriteLine("Which attack?");
+
+        foreach (var action in attackActions)
+        {
+            Console.WriteLine($"{index++}. {action.DisplayName}");
+        }
+        
+        Console.Write(">  ");
+        int choice = Convert.ToInt32(Console.ReadLine());
+        Console.WriteLine();
+        return attackActions.ElementAt(choice - 1);
     }
 
     /// <summary>
@@ -85,44 +126,12 @@
             Console.WriteLine($"{i + 1}. {AllBattleEntities[i].Name}");
         }
 
-        Console.Write("Target: ");
+        Console.Write("> ");
         int entityChoice = Convert.ToInt32(Console.ReadLine());
+        Console.WriteLine();
 
         return AllBattleEntities[entityChoice - 1];
 
-    }
-
-    /// <summary>
-    /// Displays the list of available actions for the specified battle entity and prompts the user to choose one.
-    /// </summary>
-    public ActionType SelectActionCategory(IBattleEntity entity)
-    {
-        var actionTypes = Enum.GetValues<ActionType>();
-
-        for (int i = 0; i < Enum.GetNames<ActionType>().Length; i++)
-        {
-            Console.WriteLine($"{i + 1}. {actionTypes[i]}");
-        }
-
-        Console.Write("What do you want to do? ");
-        int choice = Convert.ToInt32(Console.ReadLine());
-        return actionTypes[choice - 1];
-    }
-
-    /// <summary>
-    /// Displays a list of attack actions available to the specified battle entity and prompts the user to select one.
-    /// </summary>
-    public void SelectAttack(IBattleEntity entity)
-    {
-        var attackActions = entity.BattleCommands
-            .Where(action => action.Category == ActionType.Attack);
-
-        int index = 1;
-        foreach (var action in attackActions)
-        {
-            Console.WriteLine($"{index++}. {action.DisplayName}");
-        }
-        Console.Write("Which action? ");
     }
 
     /// <summary>
