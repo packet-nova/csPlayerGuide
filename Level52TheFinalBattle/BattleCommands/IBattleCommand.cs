@@ -1,5 +1,7 @@
 ﻿public interface IBattleCommand
 {
-    public void Execute(IBattleEntity source);
-    public string GetDisplayName(IBattleEntity entity);
+    public ActionType Category { get; }
+    public string DisplayName { get; }
+    public bool RequiresTarget { get; }
+    public void Execute();
 }

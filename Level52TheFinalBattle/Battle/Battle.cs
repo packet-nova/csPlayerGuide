@@ -4,6 +4,10 @@
     private readonly BattleParty _monsterParty;
     private BattleParty _activeParty;
 
+    public IReadOnlyList<IBattleEntity> AllBattleEntities => [.. MonsterEntities, .. HeroEntities];
+    public IReadOnlyList<IBattleEntity> HeroEntities => _heroParty.Entities;
+    public IReadOnlyList<IBattleEntity> MonsterEntities => _monsterParty.Entities;
+
     public Battle(BattleParty heroParty, BattleParty monsterParty)
     {
         _heroParty = heroParty;
@@ -15,12 +19,11 @@
     /// Creates a basic battle scenario between a hero and a skeleton monster.
     /// </summary>
     public static Battle CreateBasicSkeletonBattle(
-        TrueProgrammer trueProgrammer, 
-        Player heroPlayer, 
+        TrueProgrammer trueProgrammer,
+        Player heroPlayer,
         Player monsterPlayer)
     {
-        Skeleton skeleton = new();
-
+        var skeleton = new Skeleton();
         var heroParty = new BattleParty([trueProgrammer], heroPlayer);
         var monsterParty = new BattleParty([skeleton], monsterPlayer);
 
@@ -28,7 +31,7 @@
     }
 
     /// <summary>
-    /// Executes a single turn in the battle, allowing each entity in the active party to perform an action. Then the active party changes sides.
+    /// Executes a single turn in the battle, allowing each entity in the active party to perform an action.
     /// </summary>
     public void ExecuteTurn()
     {
@@ -36,39 +39,99 @@
 
         foreach (var entity in _activeParty.Entities)
         {
+            PrintTurnNotification(entity);
+            Console.WriteLine();
+
             if (_activeParty == _heroParty)
             {
-                PrintTurnNotification(entity);
-                PrintAvailableActions(entity);
+                GetHumanPlayerAction(entity);
             }
-
-            var selectedAction = _activeParty.Controller.InputActionChoice(entity, this);
-            selectedAction.Execute(entity);
         }
 
         _activeParty = enemyParty;
     }
-
     /// <summary>
-    /// Retrieves a read-only list of all battle entities, including both monsters and heroes.
+    /// Prompts the human player to select an action for the specified battle entity.
     /// </summary>
-    public IReadOnlyList<IBattleEntity> GetAllBattleEntities() => [.. GetMonsterEntities(), .. GetHeroEntities()];
+    public void GetHumanPlayerAction(IBattleEntity entity)
+    {
 
-    public IReadOnlyList<IBattleEntity> GetHeroEntities() => _heroParty.Entities;
+        //var actionType = SelectActionCategory(entity);
 
-    public IReadOnlyList<IBattleEntity> GetMonsterEntities() => _monsterParty.Entities;
-
+        //switch (actionType)
+        //{
+        //    case ActionType.Attack:
+                
+        //}
+        if (SelectActionCategory(entity) is ActionType.Attack)
+        {
+            if (SelectAttack(entity).RequiresTarget)
+            {
+                SelectTarget();
+            }
+        }
+    }
 
     /// <summary>
     /// Displays the list of available actions for the specified battle entity and prompts the user to choose one.
     /// </summary>
-    public void PrintAvailableActions(IBattleEntity entity)
+    public ActionType SelectActionCategory(IBattleEntity entity)
     {
-        for (int i = 0; i < entity.BattleCommands.Count; i++)
+        var actionTypes = Enum.GetValues<ActionType>();
+
+        Console.WriteLine("What do you want to do?");
+        
+        for (int i = 0; i < Enum.GetNames<ActionType>().Length; i++)
         {
-            Console.WriteLine($"{i + 1}. {entity.BattleCommands[i].GetDisplayName(entity)}");
+            Console.WriteLine($"{i + 1}. {actionTypes[i]}");
         }
-        Console.Write($"Choose an action [1-{entity.BattleCommands.Count}]: ");
+
+        Console.Write(">  ");
+        int choice = Convert.ToInt32(Console.ReadLine());
+        Console.WriteLine();
+
+        return actionTypes[choice - 1];
+    }
+
+    /// <summary>
+    /// Displays a list of attack actions available to the specified battle entity and prompts the user to select one.
+    /// </summary>
+    public IBattleCommand SelectAttack(IBattleEntity entity)
+    {
+        var attackActions = entity.BattleCommands
+            .Where(action => action.Category == ActionType.Attack);
+
+        int index = 1;
+        Console.WriteLine("Which attack?");
+
+        foreach (var action in attackActions)
+        {
+            Console.WriteLine($"{index++}. {action.DisplayName}");
+        }
+        
+        Console.Write(">  ");
+        int choice = Convert.ToInt32(Console.ReadLine());
+        Console.WriteLine();
+        return attackActions.ElementAt(choice - 1);
+    }
+
+    /// <summary>
+    /// Prompts the user to select a target from a list of available battle entities.
+    /// </summary>
+    public IBattleEntity SelectTarget()
+    {
+        Console.WriteLine("Choose a target: ");
+        for (int i = 0; i < AllBattleEntities.Count; i++)
+        {
+            Console.WriteLine($"{i + 1}. {AllBattleEntities[i].Name}");
+        }
+
+        Console.Write("> ");
+        int entityChoice = Convert.ToInt32(Console.ReadLine());
+        Console.WriteLine();
+
+        return AllBattleEntities[entityChoice - 1];
+
     }
 
     /// <summary>
@@ -76,7 +139,6 @@
     /// </summary>
     public void PrintTurnNotification(IBattleEntity entity)
     {
-        Console.WriteLine();
         Console.WriteLine($"It is {entity.Name}'s turn.");
     }
 }
