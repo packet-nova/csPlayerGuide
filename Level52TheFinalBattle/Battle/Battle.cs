@@ -1,4 +1,6 @@
-﻿public class Battle
+﻿using System.Xml.Serialization;
+
+public class Battle
 {
     private readonly BattleParty _heroParty;
     private readonly BattleParty _monsterParty;
@@ -35,6 +37,8 @@
     /// </summary>
     public void ExecuteTurn()
     {
+        // The enemy party is relative to the current active party.
+        // If the current active party is _heroParty, the enemy party is _monsterParty and vice-versa.
         var enemyParty = _activeParty == _heroParty ? _monsterParty : _heroParty;
 
         foreach (var entity in _activeParty.Entities)
@@ -45,6 +49,10 @@
             if (_activeParty == _heroParty)
             {
                 GetHumanPlayerAction(entity);
+            }
+            else
+            {
+                GetComputerPlayerAction(entity);
             }
         }
 
@@ -79,7 +87,18 @@
         }
     }
 
-
+    public void GetComputerPlayerAction(IBattleEntity source)
+    {
+        Random rng = new();
+        if (source is Skeleton)
+        {
+            var targetIndex = rng.Next(HeroEntities.Count);
+            var target = HeroEntities[targetIndex];
+            IBattleCommand attackChoice = source.BattleCommands[0];
+            Console.WriteLine($"{source.Name}'s {attackChoice.DisplayName} deals {attackChoice.BaseDamage} to {target.Name}.");
+            attackChoice.Execute();
+        }
+    }
     /// <summary>
     /// Displays the list of available actions for the specified battle entity and prompts the user to choose one.
     /// </summary>
