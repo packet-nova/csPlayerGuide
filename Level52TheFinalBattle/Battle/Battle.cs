@@ -1,6 +1,4 @@
-﻿using System.Xml.Serialization;
-
-public class Battle
+﻿public class Battle
 {
     private readonly BattleParty _heroParty;
     private readonly BattleParty _monsterParty;
@@ -73,20 +71,21 @@ public class Battle
                 if (attackChoice.RequiresTarget)
                 {
                     var target = SelectTarget();
-                    Console.WriteLine($"{source.Name}'s {attackChoice.DisplayName} does {attackChoice.BaseDamage} damage to {target.Name}.");
+                    attackChoice.Execute(source, target);
                 }
                 else
                 {
                     Console.WriteLine($"{source.Name} uses {attackChoice.DisplayName}.");
                 }
-                attackChoice.Execute();
                 break;
             case ActionType.Nothing:
                 Console.WriteLine($"{source.Name} does nothing.");
                 break;
         }
     }
-
+    /// <summary>
+    /// Determines and executes the action for a computer-controlled player during a battle.
+    /// </summary>
     public void GetComputerPlayerAction(IBattleEntity source)
     {
         Random rng = new();
@@ -95,8 +94,7 @@ public class Battle
             var targetIndex = rng.Next(HeroEntities.Count);
             var target = HeroEntities[targetIndex];
             IBattleCommand attackChoice = source.BattleCommands[0];
-            Console.WriteLine($"{source.Name}'s {attackChoice.DisplayName} deals {attackChoice.BaseDamage} damage to {target.Name}.");
-            attackChoice.Execute();
+            attackChoice.Execute(source, target);
         }
         else
         {
@@ -162,7 +160,6 @@ public class Battle
         Console.WriteLine();
 
         return AllBattleEntities[entityChoice - 1];
-
     }
 
     /// <summary>

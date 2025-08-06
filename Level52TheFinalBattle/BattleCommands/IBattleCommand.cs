@@ -4,5 +4,5 @@
     public string DisplayName { get; }
     public bool RequiresTarget { get; }
     public int BaseDamage { get; }
-    public void Execute();
+    public void Execute(IBattleEntity source, IBattleEntity target);
 }

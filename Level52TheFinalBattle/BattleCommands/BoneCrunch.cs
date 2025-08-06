@@ -6,14 +6,13 @@
 
     public bool RequiresTarget { get; } = true;
 
-    public int BaseDamage
-    {
-        get
-        {
-            Random random = new();
-            return random.Next(2);
-        }
-    }
+    public int BaseDamage { get; }
 
-    public void Execute() { }
+    public void Execute(IBattleEntity source, IBattleEntity target)
+    {
+        Random random = new();
+        int damage = random.Next(2);
+        Console.WriteLine($"{source.Name}'s {DisplayName} deals {damage} damage to {target.Name}.");
+        target.TakeDamage(damage);
+    }
 }
