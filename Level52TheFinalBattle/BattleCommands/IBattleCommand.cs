@@ -1,8 +1,8 @@
 ﻿public interface IBattleCommand
 {
-    public ActionType Category { get; }
-    public string DisplayName { get; }
-    public bool RequiresTarget { get; }
-    public int BaseDamage { get; }
-    public void Execute(IBattleEntity source, IBattleEntity target);
+    ActionType Category { get; }
+    string DisplayName { get; }
+    bool RequiresTarget { get; }
+    int BaseDamage { get; }
+    void Execute(IBattleEntity source, IBattleEntity target);
 }
