@@ -50,25 +50,32 @@
 
         _activeParty = enemyParty;
     }
+
     /// <summary>
     /// Prompts the human player to select an action for the specified battle entity.
     /// </summary>
-    public void GetHumanPlayerAction(IBattleEntity entity)
+    public void GetHumanPlayerAction(IBattleEntity source)
     {
+        var actionType = SelectActionCategory(source);
 
-        //var actionType = SelectActionCategory(entity);
-
-        //switch (actionType)
-        //{
-        //    case ActionType.Attack:
-                
-        //}
-        if (SelectActionCategory(entity) is ActionType.Attack)
+        switch (actionType)
         {
-            if (SelectAttack(entity).RequiresTarget)
-            {
-                SelectTarget();
-            }
+            case ActionType.Attack:
+                var attackChoice = SelectAttack(source);
+                if (attackChoice.RequiresTarget)
+                {
+                    var target = SelectTarget();
+                    Console.WriteLine($"{source.Name}'s {attackChoice.DisplayName} does {attackChoice.BaseDamage} damage to {target.Name}.");
+                }
+                else
+                {
+                    Console.WriteLine($"{source.Name} uses {attackChoice.DisplayName}.");
+                }
+                attackChoice.Execute();
+                break;
+            case ActionType.Nothing:
+                Console.WriteLine($"{source.Name} does nothing.");
+                break;
         }
     }
 
@@ -80,7 +87,7 @@
         var actionTypes = Enum.GetValues<ActionType>();
 
         Console.WriteLine("What do you want to do?");
-        
+
         for (int i = 0; i < Enum.GetNames<ActionType>().Length; i++)
         {
             Console.WriteLine($"{i + 1}. {actionTypes[i]}");
@@ -108,7 +115,7 @@
         {
             Console.WriteLine($"{index++}. {action.DisplayName}");
         }
-        
+
         Console.Write(">  ");
         int choice = Convert.ToInt32(Console.ReadLine());
         Console.WriteLine();
