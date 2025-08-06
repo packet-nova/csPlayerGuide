@@ -95,8 +95,12 @@ public class Battle
             var targetIndex = rng.Next(HeroEntities.Count);
             var target = HeroEntities[targetIndex];
             IBattleCommand attackChoice = source.BattleCommands[0];
-            Console.WriteLine($"{source.Name}'s {attackChoice.DisplayName} deals {attackChoice.BaseDamage} to {target.Name}.");
+            Console.WriteLine($"{source.Name}'s {attackChoice.DisplayName} deals {attackChoice.BaseDamage} damage to {target.Name}.");
             attackChoice.Execute();
+        }
+        else
+        {
+            Console.WriteLine($"{source.Name} does nothing.");
         }
     }
     /// <summary>
