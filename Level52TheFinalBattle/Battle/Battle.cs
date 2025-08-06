@@ -79,6 +79,7 @@
         }
     }
 
+
     /// <summary>
     /// Displays the list of available actions for the specified battle entity and prompts the user to choose one.
     /// </summary>
