@@ -3,6 +3,10 @@
     string Name { get; }
     int MaxHP { get; }
     int CurrentHP { get; }
+    bool IsDead { get; }
+
+    event Action<IBattleEntity> Died;
+
 
     /// <summary>
     /// Gets the collection of battle commands available for use in combat scenarios.

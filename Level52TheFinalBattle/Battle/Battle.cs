@@ -3,16 +3,18 @@
     private readonly BattleParty _heroParty;
     private readonly BattleParty _monsterParty;
     private BattleParty _activeParty;
+    private IBattleLogger _consoleLogger;
 
     public IReadOnlyList<IBattleEntity> AllBattleEntities => [.. MonsterEntities, .. HeroEntities];
     public IReadOnlyList<IBattleEntity> HeroEntities => _heroParty.Entities;
     public IReadOnlyList<IBattleEntity> MonsterEntities => _monsterParty.Entities;
 
-    public Battle(BattleParty heroParty, BattleParty monsterParty)
+    public Battle(BattleParty heroParty, BattleParty monsterParty, IBattleLogger logger)
     {
         _heroParty = heroParty;
         _monsterParty = monsterParty;
         _activeParty = heroParty;
+        _consoleLogger = logger;
     }
 
     /// <summary>
@@ -26,8 +28,9 @@
         var skeleton = new Skeleton();
         var heroParty = new BattleParty([trueProgrammer], heroPlayer);
         var monsterParty = new BattleParty([skeleton], monsterPlayer);
+        var consoleLogger = new ConsoleLogger();
 
-        return new Battle(heroParty, monsterParty);
+        return new Battle(heroParty, monsterParty, consoleLogger);
     }
 
     /// <summary>
@@ -41,8 +44,7 @@
 
         foreach (var entity in _activeParty.Entities)
         {
-            PrintTurnNotification(entity);
-            Console.WriteLine();
+            _consoleLogger.TurnNotification(entity);
 
             if (_activeParty == _heroParty)
             {
@@ -160,13 +162,5 @@
         Console.WriteLine();
 
         return AllBattleEntities[entityChoice - 1];
-    }
-
-    /// <summary>
-    /// Displays a notification indicating whose turn it is in the battle.
-    /// </summary>
-    public void PrintTurnNotification(IBattleEntity entity)
-    {
-        Console.WriteLine($"It is {entity.Name}'s turn.");
     }
 }

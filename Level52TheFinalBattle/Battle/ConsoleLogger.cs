@@ -1,12 +1,24 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Level52TheFinalBattle.Battle
+﻿public class ConsoleLogger : IBattleLogger
 {
-    internal class ConsoleLogger
+    public void LogMessage(string message)
     {
+        Console.WriteLine(message);
+    }
+    public void TurnNotification(IBattleEntity entity)
+    {
+        ConsoleColor previousColor = Console.ForegroundColor;
+        Console.ForegroundColor = ConsoleColor.Yellow;
+        Console.WriteLine($"It is {entity.Name}'s turn.");
+        Console.WriteLine();
+        Console.ForegroundColor = previousColor;
+    }
+
+    public void LogKill(IBattleEntity entity)
+    {
+        ConsoleColor previousColor = Console.ForegroundColor;
+        Console.ForegroundColor = ConsoleColor.Red;
+        Console.WriteLine($"{entity.Name} has been defeated!");
+        Console.WriteLine();
+        Console.ForegroundColor = previousColor;
     }
 }
