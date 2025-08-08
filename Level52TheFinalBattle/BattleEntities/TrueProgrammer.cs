@@ -3,6 +3,7 @@
     public string Name { get; private set; }
     public int MaxHP { get; } = 25;
     public int CurrentHP { get; private set; }
+    public bool IsDead { get; private set; }
 
     public TrueProgrammer(string name)
     {
@@ -18,6 +19,14 @@
     public void TakeDamage(int damageValue)
     {
         CurrentHP -= damageValue;
-        Console.WriteLine($"{Name} HP is now {CurrentHP}/{MaxHP}.");
+        if (CurrentHP <= 0)
+        {
+            CurrentHP = 0;
+            IsDead = true;
+        }
+        else
+        {
+            Console.WriteLine($"{Name} HP is now {CurrentHP}/{MaxHP}.");
+        }
     }
 }
