@@ -55,6 +55,7 @@
                 GetComputerPlayerAction(entity);
             }
         }
+        HandleDead();
 
         _activeParty = enemyParty;
     }
@@ -163,4 +164,18 @@
 
         return AllBattleEntities[entityChoice - 1];
     }
+
+    public void HandleDead()
+    {
+        foreach (var entity in AllBattleEntities)
+        {
+            if (entity.IsDead)
+            {
+                _consoleLogger.LogKill(entity);
+                GetPartyFor(entity).Entities.Remove(entity);
+            }
+        }
+    }
+
+    public BattleParty GetPartyFor(IBattleEntity entity) => HeroEntities.Contains(entity) ? _heroParty : _monsterParty;
 }

@@ -3,9 +3,7 @@
     public string Name { get; } = "Skeleton";
     public int MaxHP { get; } = 5;
     public int CurrentHP { get; private set; }
-    public bool IsDead { get; private set; }
-
-    public event Action<IBattleEntity> Died;
+    public bool IsDead => CurrentHP <= 0;
 
     public Skeleton()
     {
@@ -23,8 +21,6 @@
         if (CurrentHP <= 0 )
         {
             CurrentHP = 0;
-            IsDead = true;
-            Died?.Invoke(this);
         }
         else
         {
