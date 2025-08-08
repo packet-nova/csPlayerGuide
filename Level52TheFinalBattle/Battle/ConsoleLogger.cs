@@ -21,4 +21,13 @@
         Console.WriteLine();
         Console.ForegroundColor = previousColor;
     }
+
+    public void PlayerWin()
+    {
+        Console.WriteLine("You won.");
+    }
+    public void PlayerLose()
+    {
+        Console.WriteLine("You lose.");
+    }
 }

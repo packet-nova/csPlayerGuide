@@ -8,6 +8,7 @@
     public IReadOnlyList<IBattleEntity> AllBattleEntities => [.. MonsterEntities, .. HeroEntities];
     public IReadOnlyList<IBattleEntity> HeroEntities => _heroParty.Entities;
     public IReadOnlyList<IBattleEntity> MonsterEntities => _monsterParty.Entities;
+    public bool IsActive => !_heroParty.IsEmpty && !_monsterParty.IsEmpty;
 
     public Battle(BattleParty heroParty, BattleParty monsterParty, IBattleLogger logger)
     {
@@ -55,7 +56,17 @@
                 GetComputerPlayerAction(entity);
             }
         }
+
         HandleDead();
+
+        if (_monsterParty.IsEmpty)
+        {
+            _consoleLogger.PlayerWin();
+        }
+        else
+        {
+            _consoleLogger.PlayerLose();
+        }
 
         _activeParty = enemyParty;
     }
@@ -86,6 +97,7 @@
                 break;
         }
     }
+
     /// <summary>
     /// Determines and executes the action for a computer-controlled player during a battle.
     /// </summary>
@@ -104,6 +116,8 @@
             Console.WriteLine($"{source.Name} does nothing.");
         }
     }
+
+    public BattleParty GetPartyFor(IBattleEntity entity) => HeroEntities.Contains(entity) ? _heroParty : _monsterParty;
     /// <summary>
     /// Displays the list of available actions for the specified battle entity and prompts the user to choose one.
     /// </summary>
@@ -177,5 +191,5 @@
         }
     }
 
-    public BattleParty GetPartyFor(IBattleEntity entity) => HeroEntities.Contains(entity) ? _heroParty : _monsterParty;
+
 }

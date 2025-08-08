@@ -16,7 +16,7 @@
     {
         StartBattle();
 
-        while (true)
+        while (_currentBattle.IsActive)
         {
             _currentBattle.ExecuteTurn();
         }
@@ -29,5 +29,4 @@
             _heroPlayer,
             _monsterPlayer);
     }
-
 }
