@@ -1,31 +1,10 @@
-﻿public class TrueProgrammer : IBattleEntity
+﻿public class TrueProgrammer : Character
 {
-    public string Name { get; private set; }
-    public int MaxHP { get; } = 25;
-    public int CurrentHP { get; private set; }
-    public bool IsDead => CurrentHP <= 0;
-
-    public TrueProgrammer(string name)
+    public override string Name { get; }
+    public override int MaxHP { get; } = 25;
+    public TrueProgrammer(string name) : base()
     {
         Name = name;
-        CurrentHP = MaxHP;
-    }
-
-    public List<IBattleCommand> BattleCommands { get; } =
-    [
-       new Punch()
-    ];
-
-    public void TakeDamage(int damageValue)
-    {
-        CurrentHP -= damageValue;
-        if (CurrentHP <= 0)
-        {
-            CurrentHP = 0;
-        }
-        else
-        {
-            Console.WriteLine($"{Name} HP is now {CurrentHP}/{MaxHP}.");
-        }
+        BattleCommands = [new Punch()];
     }
 }

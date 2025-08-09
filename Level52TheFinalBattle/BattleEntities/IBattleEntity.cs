@@ -13,5 +13,5 @@
     /// <summary>
     /// Reduces the health of the entity by the specified damage value.
     /// </summary>
-    void TakeDamage(int damageValue) { }
+    void TakeDamage(int damageValue);
 }
