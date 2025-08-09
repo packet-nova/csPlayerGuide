@@ -74,7 +74,7 @@
         {
             _consoleLogger.TurnNotification(entity);
 
-            if (_activeParty == _heroParty)
+            if (_activeParty.Controller is HumanPlayer)
             {
                 GetHumanPlayerAction(entity);
             }
@@ -130,11 +130,12 @@
     /// </summary>
     public void GetComputerPlayerAction(IBattleEntity source)
     {
+        var enemyParty = _activeParty == _heroParty ? _monsterParty : _heroParty;
         Random rng = new();
         if (source.BattleCommands.Count > 0)
         {
-            var targetIndex = rng.Next(HeroEntities.Count);
-            var target = HeroEntities[targetIndex];
+            var targetIndex = rng.Next(enemyParty.Entities.Count);
+            var target = enemyParty.Entities[targetIndex];
             IBattleCommand attackChoice = source.BattleCommands[0];
             attackChoice.Execute(source, target);
         }
