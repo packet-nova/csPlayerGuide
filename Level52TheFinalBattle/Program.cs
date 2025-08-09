@@ -10,7 +10,6 @@ int userChoice = Convert.ToInt32(Console.ReadLine());
 Player p1;
 Player p2;
 
-
 switch (userChoice)
 {
     case 1:
