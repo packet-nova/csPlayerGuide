@@ -4,6 +4,7 @@
     private readonly Player _monsterPlayer;
     private readonly TrueProgrammer _trueProgrammer;
     private Battle _currentBattle;
+    private int _battleTier = 0;
 
     public Game(TrueProgrammer trueProgrammer, Player heroPlayer, Player monsterPlayer)
     {
