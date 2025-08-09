@@ -22,9 +22,9 @@
     /// Creates a basic battle scenario between a hero and a skeleton monster.
     /// </summary>
     public static Battle SingleSkeletonBattle(
-        TrueProgrammer trueProgrammer,
-        Player heroPlayer,
-        Player monsterPlayer)
+    TrueProgrammer trueProgrammer,
+    Player heroPlayer,
+    Player monsterPlayer)
     {
         var skeleton = new Skeleton();
         var heroParty = new BattleParty([trueProgrammer], heroPlayer);
@@ -43,6 +43,19 @@
         var skeleton2 = new Skeleton();
         var heroParty = new BattleParty([trueProgrammer], heroPlayer);
         var monsterParty = new BattleParty([skeleton, skeleton2], monsterPlayer);
+        var consoleLogger = new ConsoleLogger();
+
+        return new Battle(heroParty, monsterParty, consoleLogger);
+    }
+
+    public static Battle CodedOneBattle(
+    TrueProgrammer trueProgrammer,
+    Player heroPlayer,
+    Player monsterPlayer)
+    {
+        var codedOne = new TheCodedOne();
+        var heroParty = new BattleParty([trueProgrammer], heroPlayer);
+        var monsterParty = new BattleParty([codedOne], monsterPlayer);
         var consoleLogger = new ConsoleLogger();
 
         return new Battle(heroParty, monsterParty, consoleLogger);
@@ -118,7 +131,7 @@
     public void GetComputerPlayerAction(IBattleEntity source)
     {
         Random rng = new();
-        if (source is Skeleton)
+        if (source.BattleCommands.Count > 0)
         {
             var targetIndex = rng.Next(HeroEntities.Count);
             var target = HeroEntities[targetIndex];
