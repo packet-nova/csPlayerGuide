@@ -3,7 +3,7 @@
     public string Name { get; private set; }
     public int MaxHP { get; } = 25;
     public int CurrentHP { get; private set; }
-    public bool IsDead { get; private set; }
+    public bool IsDead => CurrentHP <= 0;
 
     public TrueProgrammer(string name)
     {
@@ -22,7 +22,6 @@
         if (CurrentHP <= 0)
         {
             CurrentHP = 0;
-            IsDead = true;
         }
         else
         {

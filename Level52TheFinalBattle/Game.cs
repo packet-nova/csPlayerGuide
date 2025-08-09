@@ -24,7 +24,7 @@
 
     public void StartBattle()
     {
-        _currentBattle = Battle.CreateBasicSkeletonBattle(
+        _currentBattle = Battle.CreateTwoSkeletonBattle(
             _trueProgrammer,
             _heroPlayer,
             _monsterPlayer);

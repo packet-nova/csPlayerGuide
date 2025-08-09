@@ -21,7 +21,7 @@
     /// <summary>
     /// Creates a basic battle scenario between a hero and a skeleton monster.
     /// </summary>
-    public static Battle CreateBasicSkeletonBattle(
+    public static Battle CreateSingleSkeletonBattle(
         TrueProgrammer trueProgrammer,
         Player heroPlayer,
         Player monsterPlayer)
@@ -29,6 +29,20 @@
         var skeleton = new Skeleton();
         var heroParty = new BattleParty([trueProgrammer], heroPlayer);
         var monsterParty = new BattleParty([skeleton], monsterPlayer);
+        var consoleLogger = new ConsoleLogger();
+
+        return new Battle(heroParty, monsterParty, consoleLogger);
+    }
+
+    public static Battle CreateTwoSkeletonBattle(
+    TrueProgrammer trueProgrammer,
+    Player heroPlayer,
+    Player monsterPlayer)
+    {
+        var skeleton = new Skeleton();
+        var skeleton2 = new Skeleton();
+        var heroParty = new BattleParty([trueProgrammer], heroPlayer);
+        var monsterParty = new BattleParty([skeleton, skeleton2], monsterPlayer);
         var consoleLogger = new ConsoleLogger();
 
         return new Battle(heroParty, monsterParty, consoleLogger);
@@ -63,7 +77,7 @@
         {
             _consoleLogger.PlayerWin();
         }
-        else
+        else if (_heroParty.IsEmpty)
         {
             _consoleLogger.PlayerLose();
         }
@@ -169,7 +183,7 @@
         Console.WriteLine("Choose a target: ");
         for (int i = 0; i < AllBattleEntities.Count; i++)
         {
-            Console.WriteLine($"{i + 1}. {AllBattleEntities[i].Name}");
+            Console.WriteLine($"{i + 1}. {AllBattleEntities[i].Name} ({AllBattleEntities[i].CurrentHP}/{AllBattleEntities[i].MaxHP} HP)");
         }
 
         Console.Write("> ");
@@ -190,6 +204,4 @@
             }
         }
     }
-
-
 }
