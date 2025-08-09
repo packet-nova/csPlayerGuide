@@ -1,4 +1,4 @@
-﻿public class Character : IBattleEntity
+﻿public abstract class Character : IBattleEntity
 {
     public virtual string Name { get; }
 
