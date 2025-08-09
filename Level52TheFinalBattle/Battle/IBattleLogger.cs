@@ -3,6 +3,6 @@
     void LogMessage(string message);
     void TurnNotification(IBattleEntity entity);
     void LogKill(IBattleEntity entity);
-    void PlayerWin();
-    void PlayerLose();
+    void PlayerWinBattle();
+    void PlayerLoseBattle();
 }

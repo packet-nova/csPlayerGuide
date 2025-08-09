@@ -1,7 +1,7 @@
 ﻿public class Skeleton : Character
 {
     public override string Name { get; } = "Skeleton";
-    public override int MaxHP { get; } = 5;
+    public override int MaxHP { get; } = 1;
 
     public Skeleton() : base()
     {

@@ -21,7 +21,7 @@
     /// <summary>
     /// Creates a basic battle scenario between a hero and a skeleton monster.
     /// </summary>
-    public static Battle CreateSingleSkeletonBattle(
+    public static Battle SingleSkeletonBattle(
         TrueProgrammer trueProgrammer,
         Player heroPlayer,
         Player monsterPlayer)
@@ -34,7 +34,7 @@
         return new Battle(heroParty, monsterParty, consoleLogger);
     }
 
-    public static Battle CreateTwoSkeletonBattle(
+    public static Battle TwoSkeletonBattle(
     TrueProgrammer trueProgrammer,
     Player heroPlayer,
     Player monsterPlayer)
@@ -75,11 +75,11 @@
 
         if (_monsterParty.IsEmpty)
         {
-            _consoleLogger.PlayerWin();
+            _consoleLogger.PlayerWinBattle();
         }
         else if (_heroParty.IsEmpty)
         {
-            _consoleLogger.PlayerLose();
+            _consoleLogger.PlayerLoseBattle();
         }
 
         _activeParty = enemyParty;

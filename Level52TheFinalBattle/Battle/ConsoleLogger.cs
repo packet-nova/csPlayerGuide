@@ -22,12 +22,12 @@
         Console.ForegroundColor = previousColor;
     }
 
-    public void PlayerWin()
+    public void PlayerWinBattle()
     {
-        Console.WriteLine("You won.");
+        Console.WriteLine("You won the battle!");
     }
-    public void PlayerLose()
+    public void PlayerLoseBattle()
     {
-        Console.WriteLine("You lose.");
+        Console.WriteLine("You lost the battle!");
     }
 }

@@ -4,7 +4,7 @@
     private readonly Player _monsterPlayer;
     private readonly TrueProgrammer _trueProgrammer;
     private Battle _currentBattle;
-    private int _battleTier = 0;
+    private int _battleTier = 1;
 
     public Game(TrueProgrammer trueProgrammer, Player heroPlayer, Player monsterPlayer)
     {
@@ -15,19 +15,43 @@
 
     public void Run()
     {
-        StartBattle();
-
-        while (_currentBattle.IsActive)
+        while (_battleTier <= 2)
         {
-            _currentBattle.ExecuteTurn();
-        }
-    }
+            _currentBattle = _battleTier switch
+            {
+                1 => Battle.SingleSkeletonBattle(_trueProgrammer, _heroPlayer, _monsterPlayer),
+                2 => Battle.TwoSkeletonBattle(_trueProgrammer, _heroPlayer, _monsterPlayer),
+                _ => throw new InvalidOperationException($"No battle implemented for battle tier: {_battleTier}.")
+            };
+            Console.Write("Press a key to begin!");
+            Console.ReadKey();
+            Console.Clear();
+            Console.Write($"Loading battle {_battleTier}");
+            Thread.Sleep(250);
+            Console.Write(".");
+            Thread.Sleep(250);
+            Console.Write(".");
+            Thread.Sleep(250);
+            Console.Write(".");
+            Console.WriteLine();
+            Console.WriteLine();
 
-    public void StartBattle()
-    {
-        _currentBattle = Battle.CreateTwoSkeletonBattle(
-            _trueProgrammer,
-            _heroPlayer,
-            _monsterPlayer);
+
+            while (_currentBattle.IsActive)
+            {
+                _currentBattle.ExecuteTurn();
+            }
+
+            // Check to see if player lost the game
+            if (_currentBattle.HeroEntities.Count == 0)
+            {
+                Console.WriteLine("You lose! Press any key to exit...");
+                Console.ReadKey();
+            }
+
+            // Player won battle. Go to next battle (tier).
+            _battleTier++;
+        }
+        Console.WriteLine("You won the game. There are no more battles.");
     }
 }
