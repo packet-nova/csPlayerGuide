@@ -3,7 +3,7 @@
     public override string Name { get; } = "Skeleton";
     public override int MaxHP { get; } = 1;
 
-    public Skeleton() : base()
+    public Skeleton()
     {
         BattleCommands = [new BoneCrunch()];
     }
