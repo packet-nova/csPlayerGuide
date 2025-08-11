@@ -1,10 +1,15 @@
-﻿public class TrueProgrammer : Character
+﻿using Level52TheFinalBattle.BattleCommands;
+
+namespace Level52TheFinalBattle.BattleEntities
 {
-    public override string Name { get; }
-    public override int MaxHP { get; } = 25;
-    public TrueProgrammer(string name)
+    public class TrueProgrammer : Character
     {
-        Name = name;
-        BattleCommands = [new Punch()];
+        public override string Name { get; }
+        public override int MaxHP { get; } = 25;
+        public TrueProgrammer(string name)
+        {
+            Name = name;
+            BattleCommands = [new Punch()];
+        }
     }
 }

@@ -1,4 +1,7 @@
-﻿public class Game
+﻿using Level52TheFinalBattle.Battle;
+using Level52TheFinalBattle.BattleEntities;
+
+public class Game
 {
     private readonly Player _heroPlayer;
     private readonly Player _monsterPlayer;

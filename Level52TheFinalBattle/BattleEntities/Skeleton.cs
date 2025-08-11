@@ -1,10 +1,15 @@
-﻿public class Skeleton : Character
-{
-    public override string Name { get; } = "Skeleton";
-    public override int MaxHP { get; } = 1;
+﻿using Level52TheFinalBattle.BattleCommands;
 
-    public Skeleton()
+namespace Level52TheFinalBattle.BattleEntities
+{
+    public class Skeleton : Character
     {
-        BattleCommands = [new BoneCrunch()];
+        public override string Name { get; } = "Skeleton";
+        public override int MaxHP { get; } = 1;
+
+        public Skeleton()
+        {
+            BattleCommands = [new BoneCrunch()];
+        }
     }
 }

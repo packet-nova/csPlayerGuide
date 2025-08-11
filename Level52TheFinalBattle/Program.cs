@@ -1,4 +1,6 @@
-﻿TrueProgrammer trueProgrammer = new(CreateTrueProgrammer());
+﻿using Level52TheFinalBattle.BattleEntities;
+
+TrueProgrammer trueProgrammer = new(CreateTrueProgrammer());
 
 Console.WriteLine("What type of game do you want to play?");
 Console.WriteLine("1. Player vs. Computer");

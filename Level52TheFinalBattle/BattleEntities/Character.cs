@@ -1,30 +1,35 @@
-﻿public abstract class Character : IBattleEntity
+﻿using Level52TheFinalBattle.BattleCommands;
+
+namespace Level52TheFinalBattle.BattleEntities
 {
-    public virtual string Name { get; }
-
-    public virtual int MaxHP { get; }
-
-    public virtual int CurrentHP {get; protected set;}
-
-    public bool IsDead => CurrentHP <= 0;
-
-    public virtual List<IBattleCommand> BattleCommands { get; protected set; }
-
-    public Character()
+    public abstract class Character : IBattleEntity
     {
-        CurrentHP = MaxHP;
-    }
+        public virtual string Name { get; }
 
-    public void TakeDamage(int damageValue)
-    {
-        CurrentHP -= damageValue;
-        if (CurrentHP <= 0)
+        public virtual int MaxHP { get; }
+
+        public virtual int CurrentHP { get; protected set; }
+
+        public bool IsDead => CurrentHP <= 0;
+
+        public virtual List<IBattleCommand> BattleCommands { get; protected set; }
+
+        public Character()
         {
-            CurrentHP = 0;
+            CurrentHP = MaxHP;
         }
-        else
+
+        public void TakeDamage(int damageValue)
         {
-            Console.WriteLine($"{Name} HP is now {CurrentHP}/{MaxHP}.");
+            CurrentHP -= damageValue;
+            if (CurrentHP <= 0)
+            {
+                CurrentHP = 0;
+            }
+            else
+            {
+                Console.WriteLine($"{Name} HP is now {CurrentHP}/{MaxHP}.");
+            }
         }
     }
 }

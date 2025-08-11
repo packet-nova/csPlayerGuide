@@ -1,8 +1,13 @@
-﻿public interface IBattleCommand
+﻿using Level52TheFinalBattle.BattleEntities;
+
+namespace Level52TheFinalBattle.BattleCommands
 {
-    ActionType Category { get; }
-    string DisplayName { get; }
-    bool RequiresTarget { get; }
-    int BaseDamage { get; }
-    void Execute(IBattleEntity source, IBattleEntity target);
+    public interface IBattleCommand
+    {
+        ActionType Category { get; }
+        string DisplayName { get; }
+        bool RequiresTarget { get; }
+        int BaseDamage { get; }
+        void Execute(IBattleEntity source, IBattleEntity target);
+    }
 }

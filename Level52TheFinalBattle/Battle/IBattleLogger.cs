@@ -1,8 +1,13 @@
-﻿public interface IBattleLogger
+﻿using Level52TheFinalBattle.BattleEntities;
+
+namespace Level52TheFinalBattle.Battle
 {
-    void LogMessage(string message);
-    void TurnNotification(IBattleEntity entity);
-    void LogKill(IBattleEntity entity);
-    void PlayerWinBattle();
-    void PlayerLoseBattle();
+    public interface IBattleLogger
+    {
+        void LogMessage(string message);
+        void TurnNotification(IBattleEntity entity);
+        void LogKill(IBattleEntity entity);
+        void PlayerWinBattle();
+        void PlayerLoseBattle();
+    }
 }

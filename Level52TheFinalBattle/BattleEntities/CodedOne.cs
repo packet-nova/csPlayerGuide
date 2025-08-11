@@ -1,12 +1,13 @@
-﻿using System.Runtime.CompilerServices;
-
-public class TheCodedOne : Character
+﻿namespace Level52TheFinalBattle.BattleEntities
 {
-    public override string Name { get; } = "The Coded One";
-    public override int MaxHP { get; } = 30;
-
-    public TheCodedOne()
+    public class TheCodedOne : Character
     {
-        BattleCommands = [new UnravelingAttack()];
+        public override string Name { get; } = "The Coded One";
+        public override int MaxHP { get; } = 30;
+
+        public TheCodedOne()
+        {
+            BattleCommands = [new UnravelingAttack()];
+        }
     }
 }

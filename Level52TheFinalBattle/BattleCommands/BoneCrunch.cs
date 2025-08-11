@@ -1,18 +1,23 @@
-﻿public class BoneCrunch : IBattleCommand
+﻿using Level52TheFinalBattle.BattleEntities;
+
+namespace Level52TheFinalBattle.BattleCommands
 {
-    public ActionType Category => ActionType.Attack;
-
-    public string DisplayName => "Bone Crunch";
-
-    public bool RequiresTarget { get; } = true;
-
-    public int BaseDamage { get; }
-
-    public void Execute(IBattleEntity source, IBattleEntity target)
+    public class BoneCrunch : IBattleCommand
     {
-        Random random = new();
-        int damage = random.Next(2);
-        Console.WriteLine($"{source.Name}'s {DisplayName} deals {damage} damage to {target.Name}.");
-        target.TakeDamage(damage);
+        public ActionType Category => ActionType.Attack;
+
+        public string DisplayName => "Bone Crunch";
+
+        public bool RequiresTarget { get; } = true;
+
+        public int BaseDamage { get; }
+
+        public void Execute(IBattleEntity source, IBattleEntity target)
+        {
+            Random random = new();
+            int damage = random.Next(2);
+            Console.WriteLine($"{source.Name}'s {DisplayName} deals {damage} damage to {target.Name}.");
+            target.TakeDamage(damage);
+        }
     }
 }

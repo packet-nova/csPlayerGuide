@@ -1,8 +1,11 @@
-﻿public enum ActionType
+﻿namespace Level52TheFinalBattle.BattleCommands
 {
-    Attack,
-    Nothing,
-    //Magic,
-    //Item,
-    //Escape
+    public enum ActionType
+    {
+        Attack,
+        Nothing,
+        //Magic,
+        //Item,
+        //Escape
+    }
 }
