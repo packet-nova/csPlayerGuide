@@ -7,9 +7,9 @@ namespace Level52TheFinalBattle.Battle
     {
         private readonly BattleParty _heroParty;
         private readonly BattleParty _monsterParty;
+        private readonly IBattleLogger _consoleLogger;
+        private readonly BattleInputHandler _inputHandler;
         private BattleParty _activeParty;
-        private IBattleLogger _consoleLogger;
-        private BattleInputHandler _inputHandler;
 
         public IReadOnlyList<IBattleEntity> AllBattleEntities => [.. MonsterEntities, .. HeroEntities];
         public IReadOnlyList<IBattleEntity> HeroEntities => _heroParty.Entities;
@@ -22,6 +22,7 @@ namespace Level52TheFinalBattle.Battle
             _monsterParty = monsterParty;
             _activeParty = heroParty;
             _consoleLogger = logger;
+            _inputHandler = new BattleInputHandler();
         }
 
         /// <summary>

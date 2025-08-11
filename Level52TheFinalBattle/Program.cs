@@ -43,5 +43,10 @@ game.Run();
 string CreateTrueProgrammer()
 {
     Console.Write("What is the True Programmer's name? ");
-    return Console.ReadLine();
+    string? name = Console.ReadLine();
+    if (string.IsNullOrWhiteSpace(name))
+    {
+        throw new InvalidOperationException("Name cannot be null or empty.");
+    }
+    return name;
 }
