@@ -110,7 +110,7 @@ namespace Level52TheFinalBattle.Battle
         /// </summary>
         public void GetHumanPlayerAction(IBattleEntity source)
         {
-            var actionType = _inputHandler.SelectActionCategory(source);
+            var actionType = _inputHandler.SelectActionCategory();
 
             switch (actionType)
             {
