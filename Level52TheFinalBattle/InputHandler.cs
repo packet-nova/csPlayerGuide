@@ -11,16 +11,14 @@ public class InputHandler
         var actionTypes = Enum.GetValues<ActionType>();
 
         Console.WriteLine("What do you want to do?");
-
         for (int i = 0; i < Enum.GetNames<ActionType>().Length; i++)
         {
             Console.WriteLine($"{i + 1}. {actionTypes[i]}");
         }
 
-        Console.Write(">  ");
-        int choice = Convert.ToInt32(Console.ReadLine());
-        Console.WriteLine();
+        int choice = GetValidInput("> ", 1, actionTypes.Length);
 
+        Console.WriteLine();
         return actionTypes[choice - 1];
     }
 
@@ -30,19 +28,18 @@ public class InputHandler
     public IBattleCommand SelectAttack(IBattleEntity entity)
     {
         var attackActions = entity.BattleCommands
-            .Where(action => action.Category == ActionType.Attack);
-
-        int index = 1;
+            .Where(action => action.Category == ActionType.Attack)
+            .ToList();
+        
         Console.WriteLine("Which attack?");
-
-        foreach (var action in attackActions)
+        for (int i = 0; i < attackActions.Count; i++)
         {
-            Console.WriteLine($"{index++}. {action.DisplayName}");
+            Console.WriteLine($"{i + 1}. {attackActions[i].DisplayName}");
         }
 
-        Console.Write(">  ");
-        int choice = Convert.ToInt32(Console.ReadLine());
+        int choice = GetValidInput("> ", 1, attackActions.Count);
         Console.WriteLine();
+
         return attackActions.ElementAt(choice - 1);
     }
 
@@ -57,18 +54,20 @@ public class InputHandler
             Console.WriteLine($"{i + 1}. {allEntities[i].Name} ({allEntities[i].CurrentHP}/{allEntities[i].MaxHP} HP)");
         }
 
-        Console.Write("> ");
-        int entityChoice = Convert.ToInt32(Console.ReadLine());
+        int choice = GetValidInput("> ", 1, allEntities.Count);
         Console.WriteLine();
 
-        return allEntities[entityChoice - 1];
+        return allEntities[choice - 1];
     }
 
+    /// <summary>
+    /// Prompts the user for input and validates that it is an integer within the specified range.
+    /// </summary>
     public int GetValidInput(string prompt, int minValue, int maxValue)
     {
         while (true)
         {
-            Console.WriteLine(prompt);
+            Console.Write(prompt);
             string? input = Console.ReadLine();
 
             if (int.TryParse(input, out int number) && number >= minValue && number <= maxValue)
@@ -76,7 +75,7 @@ public class InputHandler
                 return number;
             }
 
-            Console.WriteLine($"Input must be a number must be between {minValue} and {maxValue}.");
+            Console.WriteLine($"Input must be a number between {minValue} and {maxValue}.");
         }
     }
 }

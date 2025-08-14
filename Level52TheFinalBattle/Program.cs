@@ -7,7 +7,7 @@ Console.WriteLine("1. Player vs. Computer");
 Console.WriteLine("2. Player vs. Player");
 Console.WriteLine("3. Computer vs. Computer");
 Console.Write("Choice: ");
-int userChoice = Convert.ToInt32(Console.ReadLine());
+int.TryParse(Console.ReadLine(), out int userChoice);
 
 Player p1;
 Player p2;
