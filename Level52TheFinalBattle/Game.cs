@@ -6,7 +6,7 @@ public class Game
     private readonly Player _heroPlayer;
     private readonly Player _monsterPlayer;
     private readonly TrueProgrammer _trueProgrammer;
-    private Battle _currentBattle;
+    private Battle? _currentBattle;  // null is handled in Run()
     private int _battleTier = 1;
 
     public Game(TrueProgrammer trueProgrammer, Player heroPlayer, Player monsterPlayer)
@@ -51,6 +51,7 @@ public class Game
             {
                 Console.WriteLine("You lose! Press any key to exit...");
                 Console.ReadKey();
+                break;
             }
 
             // Player won battle. Go to next battle (tier).

@@ -8,7 +8,7 @@ namespace Level52TheFinalBattle.Battle
         /// <summary>
         /// Displays the list of available actions for the specified battle entity and prompts the user to choose one.
         /// </summary>
-        public ActionType SelectActionCategory(IBattleEntity entity)
+        public ActionType SelectActionCategory()
         {
             var actionTypes = Enum.GetValues<ActionType>();
 
