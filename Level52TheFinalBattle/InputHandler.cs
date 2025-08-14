@@ -64,9 +64,19 @@ public class InputHandler
         return allEntities[entityChoice - 1];
     }
 
-    //public int GetValidInput(string prompt, int minValue, int maxValue)
-    //{
-    //    Console.WriteLine(prompt);
+    public int GetValidInput(string prompt, int minValue, int maxValue)
+    {
+        while (true)
+        {
+            Console.WriteLine(prompt);
+            string? input = Console.ReadLine();
 
-    //}
+            if (int.TryParse(input, out int number) && number >= minValue && number <= maxValue)
+            {
+                return number;
+            }
+
+            Console.WriteLine($"Input must be a number must be between {minValue} and {maxValue}.");
+        }
+    }
 }
