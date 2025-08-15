@@ -54,6 +54,18 @@ namespace Level52TheFinalBattle.Battle
 
             return new Battle(heroParty, monsterParty, consoleLogger);
         }
+        public static Battle ZombieBattle(
+        TrueProgrammer trueProgrammer,
+        Player heroPlayer,
+        Player monsterPlayer)
+        {
+            var zombie = new Zombie();
+            var heroParty = new BattleParty([trueProgrammer], heroPlayer);
+            var monsterParty = new BattleParty([zombie], monsterPlayer);
+            var consoleLogger = new ConsoleLogger();
+
+            return new Battle(heroParty, monsterParty, consoleLogger);
+        }
 
         public static Battle CodedOneBattle(
         TrueProgrammer trueProgrammer,
