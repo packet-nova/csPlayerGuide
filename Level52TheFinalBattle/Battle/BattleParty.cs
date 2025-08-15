@@ -4,11 +4,16 @@ namespace Level52TheFinalBattle.Battle
 {
     public class BattleParty
     {
+        /// <summary>
+        /// Gets the collection of battle entities currently managed by the system.
+        /// </summary>
         public List<IBattleEntity> Entities { get; }
+
         /// <summary>
         /// Gets the player that controls the current entity.
         /// </summary>
         public Player Controller { get; }
+
         /// <summary>
         /// Returns a bool indicating whether the this Battle Party contains any entities.
         /// </summary>
