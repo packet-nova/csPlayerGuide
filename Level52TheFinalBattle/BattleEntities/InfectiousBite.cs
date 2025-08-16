@@ -17,8 +17,8 @@ namespace Level52TheFinalBattle.BattleEntities
             ConsoleColor prevColor = Console.ForegroundColor;
             Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine($"{source.Name}'s {DisplayName} deals {BaseDamage} damage to {target.Name}.");
-            target.TakeDamage(BaseDamage);
             Console.ForegroundColor = prevColor;
+            target.TakeDamage(BaseDamage);
         }
     }
 }

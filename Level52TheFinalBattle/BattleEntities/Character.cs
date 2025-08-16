@@ -4,9 +4,9 @@ namespace Level52TheFinalBattle.BattleEntities
 {
     public abstract class Character : IBattleEntity
     {
-        public virtual string Name { get; }
+        public abstract string Name { get; }
 
-        public virtual int MaxHP { get; }
+        public abstract int MaxHP { get; }
 
         public virtual int CurrentHP { get; protected set; }
 
@@ -17,6 +17,7 @@ namespace Level52TheFinalBattle.BattleEntities
         public Character()
         {
             CurrentHP = MaxHP;
+            BattleCommands = [];
         }
 
         public void TakeDamage(int damageValue)
