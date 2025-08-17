@@ -18,19 +18,16 @@ public class Game
 
     public void Run()
     {
-        while (_battleTier <= 4)
+        while (_battleTier <= 3)
         {
             _currentBattle = _battleTier switch
             {
                 1 => Battle.SingleSkeletonBattle(_trueProgrammer, _heroPlayer, _monsterPlayer),
                 2 => Battle.TwoSkeletonBattle(_trueProgrammer, _heroPlayer, _monsterPlayer),
-                3 => Battle.ZombieBattle(_trueProgrammer, _heroPlayer, _monsterPlayer),
-                4 => Battle.CodedOneBattle(_trueProgrammer, _heroPlayer, _monsterPlayer),
+                3 => Battle.CodedOneBattle(_trueProgrammer, _heroPlayer, _monsterPlayer),
                 _ => throw new InvalidOperationException($"No battle implemented for battle tier: {_battleTier}.")
             };
-            Console.Write("Press a key to begin!");
-            Console.ReadKey();
-            Console.Clear();
+
             Console.Write($"Loading battle {_battleTier}");
             Thread.Sleep(250);
             Console.Write(".");

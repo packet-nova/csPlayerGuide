@@ -38,6 +38,10 @@ switch (userChoice)
 
 Game game = new(trueProgrammer, p1, p2);
 
+Console.Write("Press a key to begin!");
+Console.ReadKey();
+Console.Clear();
+
 game.Run();
 
 string CreateTrueProgrammer()
