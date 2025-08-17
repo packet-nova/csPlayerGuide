@@ -37,23 +37,32 @@ namespace Level52TheFinalBattle.Battle
         public void StatusBanner(Battle battle)
         {
             ConsoleColor prevColor = Console.ForegroundColor;
-            Console.ForegroundColor = ConsoleColor.Cyan;
-            Console.WriteLine($"=================================================================================");
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.WriteLine($"====================================================");
             Console.WriteLine("HEROES:");
             PrintEntities(battle.HeroEntities);
-            Console.WriteLine();
-            Console.WriteLine($"---------------------------------------------------------------------------------");
-            Console.WriteLine();
+            Console.WriteLine($"----------------------------------------------------");
             Console.WriteLine("MONSTERS:");
             PrintEntities(battle.MonsterEntities);
-            Console.WriteLine($"=================================================================================");
+            Console.WriteLine($"====================================================");
+
             Console.ForegroundColor = prevColor;
 
             void PrintEntities(IReadOnlyList<IBattleEntity> entityList)
             {
                 foreach (IBattleEntity entity in entityList)
                 {
-                    Console.WriteLine($"{entity.Name} HP: {entity.CurrentHP}/{entity.MaxHP}");
+                    if (entity == battle.CurrentEntity)
+                    {
+                        ConsoleColor prevColor = Console.ForegroundColor;
+                        Console.ForegroundColor = ConsoleColor.Green;
+                        Console.WriteLine($"--> {entity.Name} HP: {entity.CurrentHP}/{entity.MaxHP}");
+                        Console.ForegroundColor = prevColor;
+                    }
+                    else
+                    {
+                        Console.WriteLine($"{entity.Name} HP: {entity.CurrentHP}/{entity.MaxHP}");
+                    }
                 }
             }
         }

@@ -11,6 +11,7 @@ namespace Level52TheFinalBattle.Battle
         private readonly InputHandler _inputHandler;
         private BattleParty _activeParty;
 
+        public IBattleEntity? CurrentEntity { get; private set; }
         public IReadOnlyList<IBattleEntity> AllBattleEntities => [.. MonsterEntities, .. HeroEntities];
         public IReadOnlyList<IBattleEntity> HeroEntities => _heroParty.Entities;
         public IReadOnlyList<IBattleEntity> MonsterEntities => _monsterParty.Entities;
@@ -91,7 +92,7 @@ namespace Level52TheFinalBattle.Battle
 
             foreach (var entity in _activeParty.Entities)
             {
-                _consoleLogger.TurnNotification(entity);
+                CurrentEntity = entity;
                 _consoleLogger.StatusBanner(this);
 
                 if (_activeParty.Controller is HumanPlayer)
