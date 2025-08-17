@@ -9,5 +9,6 @@ namespace Level52TheFinalBattle.Battle
         void LogKill(IBattleEntity entity);
         void PlayerWinBattle();
         void PlayerLoseBattle();
+        void StatusBanner(Battle battle);
     }
 }

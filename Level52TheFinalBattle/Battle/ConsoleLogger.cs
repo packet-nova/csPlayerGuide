@@ -11,9 +11,8 @@ namespace Level52TheFinalBattle.Battle
         public void TurnNotification(IBattleEntity entity)
         {
             ConsoleColor previousColor = Console.ForegroundColor;
-            Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine($"It is {entity.Name}'s turn.");
-            Console.WriteLine();
             Console.ForegroundColor = previousColor;
         }
 
@@ -33,6 +32,30 @@ namespace Level52TheFinalBattle.Battle
         public void PlayerLoseBattle()
         {
             Console.WriteLine("You lost the battle!");
+        }
+
+        public void StatusBanner(Battle battle)
+        {
+            ConsoleColor prevColor = Console.ForegroundColor;
+            Console.ForegroundColor = ConsoleColor.Cyan;
+            Console.WriteLine($"=================================================================================");
+            Console.WriteLine("HEROES:");
+            PrintEntities(battle.HeroEntities);
+            Console.WriteLine();
+            Console.WriteLine($"---------------------------------------------------------------------------------");
+            Console.WriteLine();
+            Console.WriteLine("MONSTERS:");
+            PrintEntities(battle.MonsterEntities);
+            Console.WriteLine($"=================================================================================");
+            Console.ForegroundColor = prevColor;
+
+            void PrintEntities(IReadOnlyList<IBattleEntity> entityList)
+            {
+                foreach (IBattleEntity entity in entityList)
+                {
+                    Console.WriteLine($"{entity.Name} HP: {entity.CurrentHP}/{entity.MaxHP}");
+                }
+            }
         }
     }
 }

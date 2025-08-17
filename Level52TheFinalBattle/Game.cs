@@ -28,16 +28,7 @@ public class Game
                 _ => throw new InvalidOperationException($"No battle implemented for battle tier: {_battleTier}.")
             };
 
-            Console.Write($"Loading battle {_battleTier}");
-            Thread.Sleep(250);
-            Console.Write(".");
-            Thread.Sleep(250);
-            Console.Write(".");
-            Thread.Sleep(250);
-            Console.Write(".");
-            Console.WriteLine();
-            Console.WriteLine();
-
+            LoadBattleText();
 
             while (_currentBattle.IsActive)
             {
@@ -56,5 +47,17 @@ public class Game
             _battleTier++;
         }
         Console.WriteLine("You won the game. There are no more battles.");
+    }
+
+    public void LoadBattleText()
+    {
+        Console.Write($"Loading battle {_battleTier}");
+        Thread.Sleep(250);
+        Console.Write(".");
+        Thread.Sleep(250);
+        Console.Write(".");
+        Thread.Sleep(250);
+        Console.Write(".");
+        Console.Clear();
     }
 }

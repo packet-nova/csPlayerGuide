@@ -92,6 +92,7 @@ namespace Level52TheFinalBattle.Battle
             foreach (var entity in _activeParty.Entities)
             {
                 _consoleLogger.TurnNotification(entity);
+                _consoleLogger.StatusBanner(this);
 
                 if (_activeParty.Controller is HumanPlayer)
                 {
