@@ -9,7 +9,7 @@ namespace Level52TheFinalBattle.Battle
         private readonly BattleParty _monsterParty;
         private readonly IBattleLogger _consoleLogger;
         private readonly InputHandler _inputHandler;
-        private BattleParty _activeParty;
+        private BattleParty _currentParty;
 
         public IBattleEntity? CurrentEntity { get; private set; }
         public IReadOnlyList<IBattleEntity> AllBattleEntities => [.. MonsterEntities, .. HeroEntities];
@@ -21,7 +21,7 @@ namespace Level52TheFinalBattle.Battle
         {
             _heroParty = heroParty;
             _monsterParty = monsterParty;
-            _activeParty = heroParty;
+            _currentParty = heroParty;
             _consoleLogger = logger;
             _inputHandler = new InputHandler();
         }
@@ -88,14 +88,14 @@ namespace Level52TheFinalBattle.Battle
         {
             // The enemy party is relative to the current active party.
             // If the current active party is _heroParty, the enemy party is _monsterParty and vice-versa.
-            var enemyParty = _activeParty == _heroParty ? _monsterParty : _heroParty;
+            var enemyParty = _currentParty == _heroParty ? _monsterParty : _heroParty;
 
-            foreach (var entity in _activeParty.Entities)
+            foreach (var entity in _currentParty.Entities)
             {
                 CurrentEntity = entity;
                 _consoleLogger.StatusBanner(this);
 
-                if (_activeParty.Controller is HumanPlayer)
+                if (_currentParty.Controller is HumanPlayer)
                 {
                     GetHumanPlayerAction(entity);
                 }
@@ -116,7 +116,7 @@ namespace Level52TheFinalBattle.Battle
                 _consoleLogger.PlayerLoseBattle();
             }
 
-            _activeParty = enemyParty;
+            _currentParty = enemyParty;
         }
 
         /// <summary>
@@ -151,7 +151,7 @@ namespace Level52TheFinalBattle.Battle
         /// </summary>
         public void GetComputerPlayerAction(IBattleEntity source)
         {
-            var enemyParty = _activeParty == _heroParty ? _monsterParty : _heroParty;
+            var enemyParty = _currentParty == _heroParty ? _monsterParty : _heroParty;
             Random rng = new();
             if (source.BattleCommands.Count > 0)
             {
