@@ -1,4 +1,5 @@
 ﻿using Level52TheFinalBattle.BattleCommands;
+using Level52TheFinalBattle.Item;
 
 namespace Level52TheFinalBattle.BattleEntities
 {
@@ -30,6 +31,14 @@ namespace Level52TheFinalBattle.BattleEntities
             else
             {
                 Console.WriteLine($"{Name} HP is now {CurrentHP}/{MaxHP}.");
+            }
+        }
+        public void Heal(IHealing item)
+        {
+            CurrentHP += item.HealingAmount;
+            if (CurrentHP > MaxHP)
+            {
+                CurrentHP = MaxHP;
             }
         }
     }

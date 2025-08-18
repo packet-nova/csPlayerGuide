@@ -1,5 +1,6 @@
 ﻿using Level52TheFinalBattle.BattleEntities;
 using Level52TheFinalBattle.BattleCommands;
+using Level52TheFinalBattle.Item;
 
 namespace Level52TheFinalBattle.Battle
 {
@@ -24,6 +25,9 @@ namespace Level52TheFinalBattle.Battle
             _currentParty = heroParty;
             _consoleLogger = logger;
             _inputHandler = new InputHandler();
+            _heroParty.Items.Add(new LesserHealingPotion());
+            _heroParty.Items.Add(new LesserHealingPotion());
+            _heroParty.Items.Add(new LesserHealingPotion());
         }
 
         /// <summary>
@@ -93,10 +97,10 @@ namespace Level52TheFinalBattle.Battle
             foreach (var entity in _currentParty.Entities)
             {
                 CurrentEntity = entity;
-                _consoleLogger.StatusBanner(this);
 
                 if (_currentParty.Controller is HumanPlayer)
                 {
+                    _consoleLogger.StatusBanner(this);
                     GetHumanPlayerAction(entity);
                 }
                 else

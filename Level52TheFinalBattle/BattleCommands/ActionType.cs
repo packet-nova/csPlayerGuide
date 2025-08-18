@@ -5,7 +5,7 @@
         Attack,
         Nothing,
         //Magic,
-        //Item,
+        Item,
         //Escape
     }
 }

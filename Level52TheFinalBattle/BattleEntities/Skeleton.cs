@@ -12,8 +12,8 @@ namespace Level52TheFinalBattle.BattleEntities
             BattleCommands = [new BoneCrunch()];
             Name = RandomName();
         }
-    
-    private string RandomName()
+
+        private string RandomName()
         {
             Random random = new();
             List<string> names = [
@@ -21,7 +21,7 @@ namespace Level52TheFinalBattle.BattleEntities
                 "Albert Spinestein",
                 "Spooky McBoneface",
                 "Napoleon Bonepart"];
-            
+
             return names[random.Next(names.Count)];
         }
     }

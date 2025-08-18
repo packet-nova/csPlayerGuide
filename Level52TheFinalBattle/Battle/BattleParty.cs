@@ -1,4 +1,5 @@
 ﻿using Level52TheFinalBattle.BattleEntities;
+using Level52TheFinalBattle.Item;
 
 namespace Level52TheFinalBattle.Battle
 {
@@ -18,6 +19,8 @@ namespace Level52TheFinalBattle.Battle
         /// Returns a bool indicating whether the this Battle Party contains any entities.
         /// </summary>
         public bool IsEmpty => Entities.Count == 0;
+
+        public List<InventoryItem> Items = [];
 
         public BattleParty(List<IBattleEntity> entities, Player controller)
         {
