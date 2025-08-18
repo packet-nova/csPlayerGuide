@@ -28,6 +28,7 @@ namespace Level52TheFinalBattle.Battle
             _heroParty.Items.Add(new LesserHealingPotion());
             _heroParty.Items.Add(new LesserHealingPotion());
             _heroParty.Items.Add(new LesserHealingPotion());
+            _monsterParty.Items.Add(new LesserHealingPotion());
         }
 
         /// <summary>
@@ -134,6 +135,7 @@ namespace Level52TheFinalBattle.Battle
             {
                 case ActionType.Attack:
                     var attackChoice = _inputHandler.SelectAttack(source);
+
                     if (attackChoice.RequiresTarget)
                     {
                         var target = _inputHandler.SelectTarget(AllBattleEntities);
@@ -144,6 +146,18 @@ namespace Level52TheFinalBattle.Battle
                         Console.WriteLine($"{source.Name} uses {attackChoice.DisplayName}.");
                     }
                     break;
+                
+                case ActionType.Item:
+                    var itemChoice = _inputHandler.SelectItem(_currentParty);
+
+                    if (itemChoice is IHealing healingItem)
+                    {
+                        var target = _inputHandler.SelectTarget(AllBattleEntities);
+                        healingItem.Execute(target);
+                        _currentParty.Items.Remove(itemChoice);
+                    }
+                    break;
+                
                 case ActionType.Nothing:
                     Console.WriteLine($"{source.Name} does nothing.");
                     break;

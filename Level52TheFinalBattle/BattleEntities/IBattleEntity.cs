@@ -18,5 +18,6 @@ namespace Level52TheFinalBattle.BattleEntities
         /// Reduces the health of the entity by the specified damage value.
         /// </summary>
         void TakeDamage(int damageValue);
+        void Heal(int amount);
     }
 }

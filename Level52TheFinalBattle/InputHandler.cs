@@ -1,5 +1,7 @@
 ﻿using Level52TheFinalBattle.BattleEntities;
 using Level52TheFinalBattle.BattleCommands;
+using Level52TheFinalBattle.Battle;
+using Level52TheFinalBattle.Item;
 
 public class InputHandler
 {
@@ -41,6 +43,19 @@ public class InputHandler
         Console.WriteLine();
 
         return attackActions.ElementAt(choice - 1);
+    }
+
+    public InventoryItem SelectItem(BattleParty party)
+    {
+        int i = 1;
+        foreach (var item in party.Items)
+        {
+            Console.WriteLine($"{i}. {item.Name}");
+            i++;
+        }
+        int choice = GetValidInput("> ", 1, party.Items.Count);
+        Console.WriteLine();
+        return party.Items[choice - 1];
     }
 
     /// <summary>

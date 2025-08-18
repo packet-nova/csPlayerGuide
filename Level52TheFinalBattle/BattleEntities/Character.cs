@@ -24,22 +24,12 @@ namespace Level52TheFinalBattle.BattleEntities
         public void TakeDamage(int damageValue)
         {
             CurrentHP -= damageValue;
-            if (CurrentHP <= 0)
-            {
-                CurrentHP = 0;
-            }
-            else
-            {
-                Console.WriteLine($"{Name} HP is now {CurrentHP}/{MaxHP}.");
-            }
+            CurrentHP = CurrentHP < 0 ? 0 : CurrentHP;
         }
-        public void Heal(IHealing item)
+        public void Heal(int healingValue)
         {
-            CurrentHP += item.HealingAmount;
-            if (CurrentHP > MaxHP)
-            {
-                CurrentHP = MaxHP;
-            }
+            CurrentHP += healingValue;
+            CurrentHP = CurrentHP > MaxHP ? MaxHP : CurrentHP;
         }
     }
 }

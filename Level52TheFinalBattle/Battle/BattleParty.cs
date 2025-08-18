@@ -16,11 +16,11 @@ namespace Level52TheFinalBattle.Battle
         public Player Controller { get; }
 
         /// <summary>
-        /// Returns a bool indicating whether the this Battle Party contains any entities.
+        /// Returns a bool indicating whether this party contains any entities.
         /// </summary>
         public bool IsEmpty => Entities.Count == 0;
 
-        public List<InventoryItem> Items = [];
+        public List<InventoryItem> Items { get; } = [];
 
         public BattleParty(List<IBattleEntity> entities, Player controller)
         {

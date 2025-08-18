@@ -6,6 +6,12 @@ namespace Level52TheFinalBattle.Item
     {
         public override int HealingAmount => 10;
 
-        public override string Name => "Minor Healing Potion";
+        public override string Name => "Lesser Healing Potion";
+        public override void Execute(IBattleEntity target)
+        {
+            Console.WriteLine($"{target.Name} is healed by {Name} for {HealingAmount}.");
+            target.Heal(HealingAmount);
+        }
+
     }
 }
