@@ -1,6 +1,6 @@
-﻿using Level52TheFinalBattle.BattleCommands;
+﻿using Level52TheFinalBattle.BattleEntities;
 
-namespace Level52TheFinalBattle.BattleEntities
+namespace Level52TheFinalBattle.BattleCommands
 {
     public class InfectiousBite : IBattleCommand
     {
