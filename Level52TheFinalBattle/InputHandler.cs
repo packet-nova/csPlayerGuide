@@ -34,6 +34,7 @@ public class InputHandler
             .ToList();
         
         Console.WriteLine("Which attack?");
+        
         for (int i = 0; i < attackActions.Count; i++)
         {
             Console.WriteLine($"{i + 1}. {attackActions[i].DisplayName}");
@@ -48,11 +49,13 @@ public class InputHandler
     public InventoryItem SelectItem(BattleParty party)
     {
         int i = 1;
+        
         foreach (var item in party.Items)
         {
             Console.WriteLine($"{i}. {item.Name}");
             i++;
         }
+        
         int choice = GetValidInput("> ", 1, party.Items.Count);
         Console.WriteLine();
         return party.Items[choice - 1];

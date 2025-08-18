@@ -1,4 +1,5 @@
 ﻿using Level52TheFinalBattle.BattleEntities;
+using Level52TheFinalBattle.Item;
 
 namespace Level52TheFinalBattle.Item
 {
@@ -12,6 +13,12 @@ namespace Level52TheFinalBattle.Item
             Console.WriteLine($"{target.Name} is healed by {Name} for {HealingAmount}.");
             target.Heal(HealingAmount);
         }
-
     }
 }
+
+/*
+  InventoryItem
+      HealingPotion : IHealing
+               LesserHealingPotion
+               MajorHealingPotion
+ */

@@ -170,14 +170,29 @@ namespace Level52TheFinalBattle.Battle
         public void GetComputerPlayerAction(IBattleEntity source)
         {
             var enemyParty = _currentParty == _heroParty ? _monsterParty : _heroParty;
+            var party = GetPartyFor(source);
+            
             Random rng = new();
-            if (source.BattleCommands.Count > 0)
+            
+            bool shouldHeal = source.CurrentHP <= source.MaxHP / 2
+                              && party.Items.Any(item => item is HealingPotion)
+                              && rng.Next(4) == 0; // 25% chance
+
+            if (shouldHeal)
+            {
+                var healPotion = party.Items.OfType<HealingPotion>().First();
+                healPotion.Execute(source);
+                party.Items.Remove(healPotion);
+            }
+
+            else if (source.BattleCommands.Count > 0)
             {
                 var targetIndex = rng.Next(enemyParty.Entities.Count);
                 var target = enemyParty.Entities[targetIndex];
                 IBattleCommand attackChoice = source.BattleCommands[0];
                 attackChoice.Execute(source, target);
             }
+            
             else
             {
                 Console.WriteLine($"{source.Name} does nothing.");
