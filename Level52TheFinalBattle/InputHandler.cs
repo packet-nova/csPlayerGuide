@@ -32,9 +32,9 @@ public class InputHandler
         var attackActions = entity.BattleCommands
             .Where(action => action.Category == ActionType.Attack)
             .ToList();
-        
+
         Console.WriteLine("Which attack?");
-        
+
         for (int i = 0; i < attackActions.Count; i++)
         {
             Console.WriteLine($"{i + 1}. {attackActions[i].DisplayName}");
@@ -48,14 +48,14 @@ public class InputHandler
 
     public InventoryItem SelectItem(BattleParty party)
     {
+        var consumables = party.Items.OfType<IConsumable>();
         int i = 1;
-        
-        foreach (var item in party.Items)
+
+        foreach (var item in consumables)
         {
-            Console.WriteLine($"{i}. {item.Name}");
+            Console.WriteLine($"{i}. {(item as InventoryItem)?.Name}");
             i++;
         }
-        
         int choice = GetValidInput("> ", 1, party.Items.Count);
         Console.WriteLine();
         return party.Items[choice - 1];
