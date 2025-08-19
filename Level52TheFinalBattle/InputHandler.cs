@@ -19,8 +19,9 @@ public class InputHandler
         }
 
         int choice = GetValidInput("> ", 1, actionTypes.Length);
-
+        Console.WriteLine($"You chose: {actionTypes[choice - 1]}");
         Console.WriteLine();
+        
         return actionTypes[choice - 1];
     }
 
@@ -41,6 +42,7 @@ public class InputHandler
         }
 
         int choice = GetValidInput("> ", 1, attackActions.Count);
+        Console.WriteLine($"You chose: {attackActions.ElementAt(choice - 1).DisplayName}");
         Console.WriteLine();
 
         return attackActions.ElementAt(choice - 1);
@@ -48,17 +50,20 @@ public class InputHandler
 
     public InventoryItem SelectItem(BattleParty party)
     {
-        var consumables = party.Items.OfType<IConsumable>();
+        var consumables = party.Items.OfType<IConsumable>().Cast<InventoryItem>();
         int i = 1;
 
         foreach (var item in consumables)
         {
-            Console.WriteLine($"{i}. {(item as InventoryItem)?.Name}");
+            Console.WriteLine($"{i}. {item.Name}");
             i++;
         }
-        int choice = GetValidInput("> ", 1, party.Items.Count);
+        
+        int choice = GetValidInput("> ", 1, i - 1);
+        Console.WriteLine($"You chose: {consumables.ElementAt(choice - 1).Name}");
         Console.WriteLine();
-        return party.Items[choice - 1];
+        
+        return consumables.ElementAt(choice - 1);
     }
 
     /// <summary>
@@ -73,6 +78,7 @@ public class InputHandler
         }
 
         int choice = GetValidInput("> ", 1, allEntities.Count);
+        Console.WriteLine($"You chose: {allEntities.ElementAt(choice - 1).Name}");
         Console.WriteLine();
 
         return allEntities[choice - 1];
