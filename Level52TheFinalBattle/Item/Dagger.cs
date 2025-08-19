@@ -1,6 +1,11 @@
-﻿namespace Level52TheFinalBattle.Item
+﻿using Level52TheFinalBattle.BattleCommands;
+
+namespace Level52TheFinalBattle.Item
 {
-    public class Dagger
+    public class Dagger : Weapon
     {
+        public override IBattleCommand ProvidedSkill => new Stab();
+
+        public override string Name => "Dagger";
     }
 }

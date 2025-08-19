@@ -5,7 +5,7 @@
         Attack,
         //Magic,
         Item,
-        Equipment,
+        EquipItem,
         //Escape
         Nothing
     }

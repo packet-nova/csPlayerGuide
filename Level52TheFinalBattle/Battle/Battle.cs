@@ -43,6 +43,7 @@ namespace Level52TheFinalBattle.Battle
             var heroParty = new BattleParty([trueProgrammer], heroPlayer);
             var monsterParty = new BattleParty([skeleton], monsterPlayer);
             var consoleLogger = new ConsoleLogger();
+            skeleton.EquipGear(new Dagger());
 
             return new Battle(heroParty, monsterParty, consoleLogger);
         }
@@ -57,6 +58,9 @@ namespace Level52TheFinalBattle.Battle
             var heroParty = new BattleParty([trueProgrammer], heroPlayer);
             var monsterParty = new BattleParty([skeleton, skeleton2], monsterPlayer);
             var consoleLogger = new ConsoleLogger();
+
+            monsterParty.Items.Add(new Dagger());
+            monsterParty.Items.Add(new Dagger());
 
             return new Battle(heroParty, monsterParty, consoleLogger);
         }
