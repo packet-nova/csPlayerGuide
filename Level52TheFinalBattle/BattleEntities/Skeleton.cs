@@ -20,6 +20,7 @@ namespace Level52TheFinalBattle.BattleEntities
                 "Teddy Bonesevelt",
                 "Albert Spinestein",
                 "Spooky McBoneface",
+                "Thomas Dedison",
                 "Napoleon Bonepart"];
 
             return names[random.Next(names.Count)];

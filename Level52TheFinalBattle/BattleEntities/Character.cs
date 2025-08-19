@@ -39,7 +39,7 @@ namespace Level52TheFinalBattle.BattleEntities
         /// <remarks>This method iterates through all equipped items and adds their provided skills to the
         /// <see cref="BattleCommands"/> collection if they are not already present.  It ensures that each skill is
         /// added only once.</remarks>
-        public void AddCommandsFromGear()
+        public void AddBattleCommandsFromGear()
         {
             foreach (IEquippable equipment in EquippedItems)
             {

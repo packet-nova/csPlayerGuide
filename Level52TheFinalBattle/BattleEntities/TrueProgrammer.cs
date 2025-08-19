@@ -12,7 +12,7 @@ namespace Level52TheFinalBattle.BattleEntities
             Name = name;
             EquippedItems.Add(new Sword());
             BattleCommands = [new Punch()];
-            AddCommandsFromGear();
+            AddBattleCommandsFromGear();
         }
     }
 }
