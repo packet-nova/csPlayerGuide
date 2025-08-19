@@ -5,9 +5,6 @@ using Level52TheFinalBattle.Item;
 
 public class InputHandler
 {
-    /// <summary>
-    /// Displays the list of available actions for the specified battle entity and prompts the user to choose one.
-    /// </summary>
     public ActionType SelectActionCategory()
     {
         var actionTypes = Enum.GetValues<ActionType>();
@@ -25,9 +22,6 @@ public class InputHandler
         return actionTypes[choice - 1];
     }
 
-    /// <summary>
-    /// Displays a list of attack actions available to the specified battle entity and prompts the user to select one.
-    /// </summary>
     public IBattleCommand SelectAttack(IBattleEntity entity)
     {
         var attackActions = entity.BattleCommands
@@ -66,9 +60,6 @@ public class InputHandler
         return consumables.ElementAt(choice - 1);
     }
 
-    /// <summary>
-    /// Prompts the user to select a target from a list of available battle entities.
-    /// </summary>
     public IBattleEntity SelectTarget(IReadOnlyList<IBattleEntity> allEntities)
     {
         Console.WriteLine("Choose a target: ");
@@ -84,9 +75,6 @@ public class InputHandler
         return allEntities[choice - 1];
     }
 
-    /// <summary>
-    /// Prompts the user for input and validates that it is an integer within the specified range.
-    /// </summary>
     public int GetValidInput(string prompt, int minValue, int maxValue)
     {
         while (true)
