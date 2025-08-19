@@ -3,9 +3,10 @@
     public enum ActionType
     {
         Attack,
-        Nothing,
         //Magic,
         Item,
+        Equipment,
         //Escape
+        Nothing
     }
 }

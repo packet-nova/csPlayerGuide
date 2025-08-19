@@ -21,5 +21,8 @@ namespace Level52TheFinalBattle.BattleEntities
         /// </summary>
         void TakeDamage(int damageValue);
         void Heal(int amount);
+        void AddCommandsFromGear();
+        void EquipGear(IEquippable equipment);
+        void UnequipGear(IEquippable equipment);
     }
 }
