@@ -1,4 +1,5 @@
 ﻿using Level52TheFinalBattle.BattleCommands;
+using Level52TheFinalBattle.Item;
 
 namespace Level52TheFinalBattle.BattleEntities
 {
@@ -9,7 +10,8 @@ namespace Level52TheFinalBattle.BattleEntities
         public TrueProgrammer(string name)
         {
             Name = name;
-            BattleCommands = [new Punch()];
+            EquippedItems.Add(new Sword());
+            BattleCommands = [new Punch(), EquippedItems.ElementAt(0).ProvidedSkill];
         }
     }
 }

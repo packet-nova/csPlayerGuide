@@ -13,12 +13,13 @@ namespace Level52TheFinalBattle.BattleEntities
 
         public bool IsDead => CurrentHP <= 0;
 
-        public virtual List<IBattleCommand> BattleCommands { get; protected set; }
+        public virtual List<IEquippable> EquippedItems { get; protected set; } = [];
+
+        public virtual List<IBattleCommand> BattleCommands { get; protected set; } = [];
 
         public Character()
         {
             CurrentHP = MaxHP;
-            BattleCommands = [];
         }
 
         public void TakeDamage(int damageValue)

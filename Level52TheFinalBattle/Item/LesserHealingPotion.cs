@@ -15,10 +15,3 @@ namespace Level52TheFinalBattle.Item
         }
     }
 }
-
-/*
-  InventoryItem
-      HealingPotion : IHealing
-               LesserHealingPotion
-               MajorHealingPotion
- */

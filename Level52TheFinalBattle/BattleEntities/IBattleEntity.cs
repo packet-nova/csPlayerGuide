@@ -1,4 +1,5 @@
 ﻿using Level52TheFinalBattle.BattleCommands;
+using Level52TheFinalBattle.Item;
 
 namespace Level52TheFinalBattle.BattleEntities
 {
@@ -13,6 +14,7 @@ namespace Level52TheFinalBattle.BattleEntities
         /// Gets the collection of battle commands available for use in combat scenarios.
         /// </summary>
         List<IBattleCommand> BattleCommands { get; }
+        List<IEquippable> EquippedItems { get; }
 
         /// <summary>
         /// Reduces the health of the entity by the specified damage value.
