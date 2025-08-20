@@ -128,9 +128,6 @@ namespace Level52TheFinalBattle.Battle
             _currentParty = enemyParty;
         }
 
-        /// <summary>
-        /// Prompts the human player to select an action for the specified battle entity.
-        /// </summary>
         public void HumanPlayerTurn(IBattleEntity source)
         {
             var actionType = _inputHandler.SelectActionCategory();
@@ -168,9 +165,6 @@ namespace Level52TheFinalBattle.Battle
             }
         }
 
-        /// <summary>
-        /// Determines and executes the action for a computer-controlled player during a battle.
-        /// </summary>
         public void ComputerPlayerTurn(IBattleEntity source)
         {
             var enemyParty = _currentParty == _heroParty ? _monsterParty : _heroParty;
