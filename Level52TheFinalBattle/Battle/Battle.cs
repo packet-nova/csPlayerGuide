@@ -106,11 +106,11 @@ namespace Level52TheFinalBattle.Battle
                 if (_currentParty.Controller is HumanPlayer)
                 {
                     _consoleLogger.StatusBanner(this);
-                    GetHumanPlayerAction(entity);
+                    HumanPlayerTurn(entity);
                 }
                 else
                 {
-                    GetComputerPlayerAction(entity);
+                    ComputerPlayerTurn(entity);
                 }
             }
 
@@ -131,7 +131,7 @@ namespace Level52TheFinalBattle.Battle
         /// <summary>
         /// Prompts the human player to select an action for the specified battle entity.
         /// </summary>
-        public void GetHumanPlayerAction(IBattleEntity source)
+        public void HumanPlayerTurn(IBattleEntity source)
         {
             var actionType = _inputHandler.SelectActionCategory();
 
@@ -171,7 +171,7 @@ namespace Level52TheFinalBattle.Battle
         /// <summary>
         /// Determines and executes the action for a computer-controlled player during a battle.
         /// </summary>
-        public void GetComputerPlayerAction(IBattleEntity source)
+        public void ComputerPlayerTurn(IBattleEntity source)
         {
             var enemyParty = _currentParty == _heroParty ? _monsterParty : _heroParty;
             var party = GetPartyFor(source);

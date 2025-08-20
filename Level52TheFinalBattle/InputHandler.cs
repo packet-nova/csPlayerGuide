@@ -37,7 +37,6 @@ public class InputHandler
             .ToList();
 
         Console.WriteLine("Which attack?");
-
         for (int i = 0; i < attackActions.Count; i++)
         {
             Console.WriteLine($"{i + 1}. {attackActions[i].Name}");
