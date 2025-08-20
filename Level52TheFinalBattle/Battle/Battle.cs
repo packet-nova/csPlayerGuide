@@ -158,6 +158,12 @@ namespace Level52TheFinalBattle.Battle
                         _currentParty.Items.Remove(itemChoice);
                     }
                     break;
+
+                case ActionType.EquipItem:
+                    var equipmentChoice = _inputHandler.SelectEquipment(_currentParty);
+                    _currentParty.Items.Remove((InventoryItem)equipmentChoice);
+                    source.EquipGear(equipmentChoice);
+                    break;
                 
                 case ActionType.Nothing:
                     Console.WriteLine($"{source.Name} does nothing.");

@@ -81,6 +81,23 @@ public class InputHandler
 
         return allEntities[choice - 1];
     }
+    public IEquippable SelectEquipment(BattleParty party)
+    {
+        var equipment = party.Items.OfType<IEquippable>().ToList();
+        int i = 1;
+
+        foreach (var item in equipment)
+        {
+            Console.WriteLine($"{i}. {item.Name}");
+            i++;
+        }
+
+        int choice = GetValidInput("> ", 1, i - 1);
+        Console.WriteLine($"You chose: {equipment.ElementAt(choice - 1).Name}");
+        Console.WriteLine();
+
+        return equipment.ElementAt(choice - 1);
+    }
 
     public int GetValidInput(string prompt, int minValue, int maxValue)
     {
