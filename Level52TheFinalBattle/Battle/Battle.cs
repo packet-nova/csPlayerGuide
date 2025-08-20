@@ -142,6 +142,7 @@ namespace Level52TheFinalBattle.Battle
                         var target = _inputHandler.SelectTarget(AllBattleEntities);
                         attackChoice.Execute(source, target);
                     }
+                    
                     else
                     {
                         Console.WriteLine($"{source.Name} uses {attackChoice.Name}.");
@@ -155,16 +156,26 @@ namespace Level52TheFinalBattle.Battle
                     {
                         var target = _inputHandler.SelectTarget(AllBattleEntities);
                         healingItem.Execute(target);
-                        _currentParty.Items.Remove(itemChoice);
+                        _currentParty.Items.Remove((InventoryItem)itemChoice);
                     }
                     break;
 
                 case ActionType.EquipItem:
                     var equipmentChoice = _inputHandler.SelectEquipment(_currentParty);
-                    _currentParty.Items.Remove((InventoryItem)equipmentChoice);
-                    source.EquipGear(equipmentChoice);
+                    
+                    if (equipmentChoice != null)
+                    {
+                        _currentParty.Items.Remove((InventoryItem)equipmentChoice);
+                        source.EquipGear(equipmentChoice);
+                    }
+                    
+                    else
+                    {
+                        HumanPlayerTurn(source);
+                        return;
+                    }
                     break;
-                
+
                 case ActionType.Nothing:
                     Console.WriteLine($"{source.Name} does nothing.");
                     break;

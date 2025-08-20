@@ -49,9 +49,9 @@ public class InputHandler
         return attackActions.ElementAt(choice - 1);
     }
 
-    public InventoryItem SelectItem(BattleParty party)
+    public IConsumable SelectItem(BattleParty party)
     {
-        var consumables = party.Items.OfType<IConsumable>().Cast<InventoryItem>().ToList();
+        var consumables = party.Items.OfType<IConsumable>().ToList();
         int i = 1;
 
         foreach (var item in consumables)
@@ -81,9 +81,16 @@ public class InputHandler
 
         return allEntities[choice - 1];
     }
-    public IEquippable SelectEquipment(BattleParty party)
+    public IEquippable? SelectEquipment(BattleParty party)
     {
         var equipment = party.Items.OfType<IEquippable>().ToList();
+        
+        if (equipment.Count == 0)
+        {
+            Console.Write("No equipment available to equip. Press any key to go back...");
+            Console.ReadKey();
+            return null;
+        }
         int i = 1;
 
         foreach (var item in equipment)
