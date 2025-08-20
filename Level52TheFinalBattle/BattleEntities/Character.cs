@@ -33,9 +33,9 @@ namespace Level52TheFinalBattle.BattleEntities
         {
             foreach (IEquippable equipment in EquippedItems)
             {
-                if (!BattleCommands.Contains(equipment.ProvidedSkill))
+                if (!BattleCommands.Contains(equipment.ProvidedCommand))
                 {
-                    BattleCommands.Add(equipment.ProvidedSkill);
+                    BattleCommands.Add(equipment.ProvidedCommand);
                 }
             }
         }
@@ -44,16 +44,16 @@ namespace Level52TheFinalBattle.BattleEntities
         {
             EquippedItems.Add(equipment);
 
-            if (!BattleCommands.Contains(equipment.ProvidedSkill))
+            if (!BattleCommands.Contains(equipment.ProvidedCommand))
             {
-                BattleCommands.Add(equipment.ProvidedSkill);
+                BattleCommands.Add(equipment.ProvidedCommand);
             }
         }
 
         public void UnequipGear(IEquippable equipment)
         {
             EquippedItems.Remove(equipment);
-            BattleCommands.Remove(equipment.ProvidedSkill);
+            BattleCommands.Remove(equipment.ProvidedCommand);
         }
     }
 }

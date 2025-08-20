@@ -5,20 +5,28 @@ using Level52TheFinalBattle.Item;
 
 public class InputHandler
 {
+    private static readonly Dictionary<ActionType, string> ActionTypeDisplayName = new()
+    {
+        { ActionType.Attack, "Attack" },
+        { ActionType.Item, "Use Item" },
+        { ActionType.EquipItem, "Equip Item" },
+        { ActionType.Nothing, "Do Nothing" }
+    };
+
     public ActionType SelectActionCategory()
     {
         var actionTypes = Enum.GetValues<ActionType>();
 
         Console.WriteLine("What do you want to do?");
-        for (int i = 0; i < Enum.GetNames<ActionType>().Length; i++)
+        for (int i = 0; i < actionTypes.Length; i++)
         {
-            Console.WriteLine($"{i + 1}. {actionTypes[i]}");
+            Console.WriteLine($"{i + 1}. {ActionTypeDisplayName[actionTypes[i]]}");
         }
 
         int choice = GetValidInput("> ", 1, actionTypes.Length);
-        Console.WriteLine($"You chose: {actionTypes[choice - 1]}");
+        Console.WriteLine($"You chose: {ActionTypeDisplayName[actionTypes[choice - 1]]}");
         Console.WriteLine();
-        
+
         return actionTypes[choice - 1];
     }
 
@@ -32,11 +40,11 @@ public class InputHandler
 
         for (int i = 0; i < attackActions.Count; i++)
         {
-            Console.WriteLine($"{i + 1}. {attackActions[i].DisplayName}");
+            Console.WriteLine($"{i + 1}. {attackActions[i].Name}");
         }
 
         int choice = GetValidInput("> ", 1, attackActions.Count);
-        Console.WriteLine($"You chose: {attackActions.ElementAt(choice - 1).DisplayName}");
+        Console.WriteLine($"You chose: {attackActions.ElementAt(choice - 1).Name}");
         Console.WriteLine();
 
         return attackActions.ElementAt(choice - 1);
@@ -44,7 +52,7 @@ public class InputHandler
 
     public InventoryItem SelectItem(BattleParty party)
     {
-        var consumables = party.Items.OfType<IConsumable>().Cast<InventoryItem>();
+        var consumables = party.Items.OfType<IConsumable>().Cast<InventoryItem>().ToList();
         int i = 1;
 
         foreach (var item in consumables)
@@ -52,11 +60,11 @@ public class InputHandler
             Console.WriteLine($"{i}. {item.Name}");
             i++;
         }
-        
+
         int choice = GetValidInput("> ", 1, i - 1);
         Console.WriteLine($"You chose: {consumables.ElementAt(choice - 1).Name}");
         Console.WriteLine();
-        
+
         return consumables.ElementAt(choice - 1);
     }
 

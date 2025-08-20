@@ -5,7 +5,7 @@ public class UnravelingAttack : IBattleCommand
 {
     public ActionType Category => ActionType.Attack;
 
-    public string DisplayName => "Unraveling Attack";
+    public string Name => "Unraveling Attack";
 
     public bool RequiresTarget => true;
 
@@ -15,7 +15,7 @@ public class UnravelingAttack : IBattleCommand
     {
         Random random = new();
         int damage = random.Next(3);
-        Console.WriteLine($"{source.Name}'s {DisplayName} deals {damage} damage to {target.Name}.");
+        Console.WriteLine($"{source.Name}'s {Name} deals {damage} damage to {target.Name}.");
         target.TakeDamage(damage);
     }
 }

@@ -6,7 +6,7 @@ namespace Level52TheFinalBattle.BattleCommands
     {
         public ActionType Category => ActionType.Attack;
 
-        public string DisplayName => "Bone Crunch";
+        public string Name => "Bone Crunch";
 
         public bool RequiresTarget { get; } = true;
 
@@ -16,7 +16,7 @@ namespace Level52TheFinalBattle.BattleCommands
         {
             Random random = new();
             int damage = random.Next(2);
-            Console.WriteLine($"{source.Name}'s {DisplayName} deals {damage} damage to {target.Name}.");
+            Console.WriteLine($"{source.Name}'s {Name} deals {damage} damage to {target.Name}.");
             target.TakeDamage(damage);
         }
     }

@@ -147,7 +147,7 @@ namespace Level52TheFinalBattle.Battle
                     }
                     else
                     {
-                        Console.WriteLine($"{source.Name} uses {attackChoice.DisplayName}.");
+                        Console.WriteLine($"{source.Name} uses {attackChoice.Name}.");
                     }
                     break;
                 

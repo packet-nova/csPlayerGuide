@@ -6,7 +6,7 @@ namespace Level52TheFinalBattle.BattleCommands
     {
         public ActionType Category => ActionType.Attack;
 
-        public string DisplayName => "Stab";
+        public string Name => "Stab";
 
         public bool RequiresTarget => true;
 
@@ -14,7 +14,7 @@ namespace Level52TheFinalBattle.BattleCommands
 
         public void Execute(IBattleEntity source, IBattleEntity target)
         {
-            Console.WriteLine($"{source.Name}'s {DisplayName} deals {BaseDamage} damage to {target.Name}.");
+            Console.WriteLine($"{source.Name}'s {Name} deals {BaseDamage} damage to {target.Name}.");
             target.TakeDamage(BaseDamage);
         }
     }

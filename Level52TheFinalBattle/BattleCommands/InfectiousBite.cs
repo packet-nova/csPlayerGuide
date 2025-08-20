@@ -6,7 +6,7 @@ namespace Level52TheFinalBattle.BattleCommands
     {
         public ActionType Category => ActionType.Attack;
 
-        public string DisplayName => "Infectious Bite";
+        public string Name => "Infectious Bite";
 
         public bool RequiresTarget => true;
 
@@ -16,7 +16,7 @@ namespace Level52TheFinalBattle.BattleCommands
         {
             ConsoleColor prevColor = Console.ForegroundColor;
             Console.ForegroundColor = ConsoleColor.Green;
-            Console.WriteLine($"{source.Name}'s {DisplayName} deals {BaseDamage} damage to {target.Name}.");
+            Console.WriteLine($"{source.Name}'s {Name} deals {BaseDamage} damage to {target.Name}.");
             Console.ForegroundColor = prevColor;
             target.TakeDamage(BaseDamage);
         }
