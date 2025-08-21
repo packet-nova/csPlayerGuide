@@ -136,7 +136,8 @@ namespace Level52TheFinalBattle.Battle
             switch (actionType)
             {
                 case ActionType.Attack:
-                    var attackChoice = _inputHandler.SelectAttack(source);
+                    //var attackChoice = _inputHandler.SelectAttack(source);
+                    var attackChoice = _inputHandler.SelectFromList(source.BattleCommands, command => command.Name);
 
                     if (attackChoice.RequiresTarget)
                     {
@@ -151,7 +152,8 @@ namespace Level52TheFinalBattle.Battle
                     break;
                 
                 case ActionType.Item:
-                    var itemChoice = _inputHandler.SelectItem(_currentParty);
+                    //var itemChoice = _inputHandler.SelectItem(_currentParty);
+                    var itemChoice = _inputHandler.SelectFromList(_currentParty.Items, item => item.Name);
 
                     if (itemChoice is IHealing healingItem)
                     {

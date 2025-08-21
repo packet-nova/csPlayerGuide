@@ -3,6 +3,7 @@ using Level52TheFinalBattle.BattleCommands;
 using Level52TheFinalBattle.BattleEntities;
 using Level52TheFinalBattle.Item;
 using System.IO;
+using System.Reflection.Metadata.Ecma335;
 
 public class InputHandler
 {
@@ -63,24 +64,26 @@ public class InputHandler
 
         return allEntities[choice - 1];
     }
+    
+    // Replaced this method call with the generic: SelectFromList<>()
+    //
+    //public IConsumable SelectItem(BattleParty party)
+    //{
+    //    var consumables = party.Items.OfType<IConsumable>().ToList();
+    //    int i = 1;
 
-    public IConsumable SelectItem(BattleParty party)
-    {
-        var consumables = party.Items.OfType<IConsumable>().ToList();
-        int i = 1;
+    //    foreach (var item in consumables)
+    //    {
+    //        Console.WriteLine($"{i}. {item.Name}");
+    //        i++;
+    //    }
 
-        foreach (var item in consumables)
-        {
-            Console.WriteLine($"{i}. {item.Name}");
-            i++;
-        }
+    //    int choice = GetValidInput("> ", 1, i - 1);
+    //    Console.WriteLine($"You chose: {consumables.ElementAt(choice - 1).Name}");
+    //    Console.WriteLine();
 
-        int choice = GetValidInput("> ", 1, i - 1);
-        Console.WriteLine($"You chose: {consumables.ElementAt(choice - 1).Name}");
-        Console.WriteLine();
-
-        return consumables.ElementAt(choice - 1);
-    }
+    //    return consumables.ElementAt(choice - 1);
+    //}
 
     public IEquippable? SelectEquipment(BattleParty party)
     {
@@ -123,21 +126,19 @@ public class InputHandler
         }
     }
 
-    //public T SelectFromList<T>(IEnumerable<T> items)
-    //{
-    //    var list = items.ToList();
-    //    int i = 1;
+    public T SelectFromList<T>(IEnumerable<T> items, Func<T, string> getDisplayName)
+    {
+        var list = items.ToList();
 
-    //    for (int i = 0; i < list.Count; i++)
-    //    {
-    //        Console.WriteLine($"{i}. {list[i].Name}");
-    //        i++;
-    //    }
+        for (int i = 0; i < list.Count; i++)
+        {
+            Console.WriteLine($"{i + 1}. {getDisplayName(list[i])}");
+        }
 
-    //    int choice = GetValidInput("> ", 1, i - 1);
-    //    Console.WriteLine($"You chose: {list.ElementAt(choice - 1).Name}");
-    //    Console.WriteLine();
+        int choice = GetValidInput("> ", 1, list.Count);
+        Console.WriteLine($"You chose: {getDisplayName(list[choice - 1])}");
+        Console.WriteLine();
 
-    //    return list.ElementAt(choice - 1);
-    //}
+        return list.ElementAt(choice - 1);
+    }
 }
