@@ -1,7 +1,8 @@
-﻿using Level52TheFinalBattle.BattleEntities;
+﻿using Level52TheFinalBattle.Battle;
 using Level52TheFinalBattle.BattleCommands;
-using Level52TheFinalBattle.Battle;
+using Level52TheFinalBattle.BattleEntities;
 using Level52TheFinalBattle.Item;
+using System.IO;
 
 public class InputHandler
 {
@@ -15,15 +16,15 @@ public class InputHandler
 
     public ActionType SelectActionCategory()
     {
-        var actionTypes = Enum.GetValues<ActionType>();
+        var actionTypes = ActionTypeDisplayName.Keys.ToList();
 
         Console.WriteLine("What do you want to do?");
-        for (int i = 0; i < actionTypes.Length; i++)
+        for (int i = 0; i < actionTypes.Count; i++)
         {
             Console.WriteLine($"{i + 1}. {ActionTypeDisplayName[actionTypes[i]]}");
         }
 
-        int choice = GetValidInput("> ", 1, actionTypes.Length);
+        int choice = GetValidInput("> ", 1, actionTypes.Count);
         Console.WriteLine($"You chose: {ActionTypeDisplayName[actionTypes[choice - 1]]}");
         Console.WriteLine();
 
@@ -48,6 +49,20 @@ public class InputHandler
 
         return attackActions.ElementAt(choice - 1);
     }
+    public IBattleEntity SelectTarget(IReadOnlyList<IBattleEntity> allEntities)
+    {
+        Console.WriteLine("Choose a target: ");
+        for (int i = 0; i < allEntities.Count; i++)
+        {
+            Console.WriteLine($"{i + 1}. {allEntities[i].Name} ({allEntities[i].CurrentHP}/{allEntities[i].MaxHP} HP)");
+        }
+
+        int choice = GetValidInput("> ", 1, allEntities.Count);
+        Console.WriteLine($"You chose: {allEntities.ElementAt(choice - 1).Name}");
+        Console.WriteLine();
+
+        return allEntities[choice - 1];
+    }
 
     public IConsumable SelectItem(BattleParty party)
     {
@@ -67,20 +82,6 @@ public class InputHandler
         return consumables.ElementAt(choice - 1);
     }
 
-    public IBattleEntity SelectTarget(IReadOnlyList<IBattleEntity> allEntities)
-    {
-        Console.WriteLine("Choose a target: ");
-        for (int i = 0; i < allEntities.Count; i++)
-        {
-            Console.WriteLine($"{i + 1}. {allEntities[i].Name} ({allEntities[i].CurrentHP}/{allEntities[i].MaxHP} HP)");
-        }
-
-        int choice = GetValidInput("> ", 1, allEntities.Count);
-        Console.WriteLine($"You chose: {allEntities.ElementAt(choice - 1).Name}");
-        Console.WriteLine();
-
-        return allEntities[choice - 1];
-    }
     public IEquippable? SelectEquipment(BattleParty party)
     {
         var equipment = party.Items.OfType<IEquippable>().ToList();
@@ -121,4 +122,22 @@ public class InputHandler
             Console.WriteLine($"Input must be a number between {minValue} and {maxValue}.");
         }
     }
+
+    //public T SelectFromList<T>(IEnumerable<T> items)
+    //{
+    //    var list = items.ToList();
+    //    int i = 1;
+
+    //    for (int i = 0; i < list.Count; i++)
+    //    {
+    //        Console.WriteLine($"{i}. {list[i].Name}");
+    //        i++;
+    //    }
+
+    //    int choice = GetValidInput("> ", 1, i - 1);
+    //    Console.WriteLine($"You chose: {list.ElementAt(choice - 1).Name}");
+    //    Console.WriteLine();
+
+    //    return list.ElementAt(choice - 1);
+    //}
 }
