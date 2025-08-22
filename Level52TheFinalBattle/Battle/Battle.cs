@@ -130,21 +130,17 @@ namespace Level52TheFinalBattle.Battle
 
         public void HumanPlayerTurn(IBattleEntity source)
         {
+            var enemyParty = _currentParty == _heroParty ? _monsterParty : _heroParty;
             var actionType = _inputHandler.SelectActionCategory();
 
             switch (actionType)
             {
                 case ActionType.Attack:
-                    //var attackChoice = _inputHandler.SelectAttack(source);
                     var attackChoice = _inputHandler.SelectFromList(source.BattleCommands, command => command.Name);
 
                     if (attackChoice.RequiresTarget)
                     {
-                        //var target = _inputHandler.SelectTarget(AllBattleEntities);
-                        var target = _inputHandler.SelectFromList(
-                            this.AllBattleEntities,
-                            entity => $"{entity.Name} HP: {entity.CurrentHP}/{entity.MaxHP}");
-
+                        var target = SelectFromAllList();
                         attackChoice.Execute(source, target);
                     }
 
@@ -152,10 +148,10 @@ namespace Level52TheFinalBattle.Battle
                     {
                         Console.WriteLine($"{source.Name} uses {attackChoice.Name}.");
                     }
+
                     break;
 
                 case ActionType.Item:
-                    //var itemChoice = _inputHandler.SelectItem(_currentParty);
                     var itemChoice = _inputHandler.SelectFromList(_currentParty.Items, item => item.Name);
 
                     if (itemChoice is IHealing healingItem)
@@ -168,6 +164,7 @@ namespace Level52TheFinalBattle.Battle
                         healingItem.Execute(target);
                         _currentParty.Items.Remove((InventoryItem)itemChoice);
                     }
+
                     break;
 
                 case ActionType.EquipItem:
@@ -184,6 +181,7 @@ namespace Level52TheFinalBattle.Battle
                         HumanPlayerTurn(source);
                         return;
                     }
+
                     break;
 
                 case ActionType.Nothing:
