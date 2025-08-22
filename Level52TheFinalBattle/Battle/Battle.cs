@@ -1,7 +1,6 @@
 ﻿using Level52TheFinalBattle.BattleEntities;
 using Level52TheFinalBattle.BattleCommands;
 using Level52TheFinalBattle.Item;
-using System.Diagnostics.CodeAnalysis;
 
 namespace Level52TheFinalBattle.Battle
 {
@@ -141,23 +140,31 @@ namespace Level52TheFinalBattle.Battle
 
                     if (attackChoice.RequiresTarget)
                     {
-                        var target = _inputHandler.SelectTarget(AllBattleEntities);
+                        //var target = _inputHandler.SelectTarget(AllBattleEntities);
+                        var target = _inputHandler.SelectFromList(
+                            this.AllBattleEntities,
+                            entity => $"{entity.Name} HP: {entity.CurrentHP}/{entity.MaxHP}");
+
                         attackChoice.Execute(source, target);
                     }
-                    
+
                     else
                     {
                         Console.WriteLine($"{source.Name} uses {attackChoice.Name}.");
                     }
                     break;
-                
+
                 case ActionType.Item:
                     //var itemChoice = _inputHandler.SelectItem(_currentParty);
                     var itemChoice = _inputHandler.SelectFromList(_currentParty.Items, item => item.Name);
 
                     if (itemChoice is IHealing healingItem)
                     {
-                        var target = _inputHandler.SelectTarget(AllBattleEntities);
+                        //var target = _inputHandler.SelectTarget(AllBattleEntities);
+                        var target = _inputHandler.SelectFromList(
+                            this.AllBattleEntities,
+                            entity => $"{entity.Name} HP: {entity.CurrentHP}/{entity.MaxHP}");
+
                         healingItem.Execute(target);
                         _currentParty.Items.Remove((InventoryItem)itemChoice);
                     }
@@ -165,13 +172,13 @@ namespace Level52TheFinalBattle.Battle
 
                 case ActionType.EquipItem:
                     var equipmentChoice = _inputHandler.SelectEquipment(_currentParty);
-                    
+
                     if (equipmentChoice != null)
                     {
                         _currentParty.Items.Remove((InventoryItem)equipmentChoice);
                         source.EquipGear(equipmentChoice);
                     }
-                    
+
                     else
                     {
                         HumanPlayerTurn(source);
@@ -189,9 +196,9 @@ namespace Level52TheFinalBattle.Battle
         {
             var enemyParty = _currentParty == _heroParty ? _monsterParty : _heroParty;
             var party = GetPartyFor(source);
-            
+
             Random rng = new();
-            
+
             bool shouldHeal = source.CurrentHP <= source.MaxHP / 2
                               && party.Items.Any(item => item is HealingPotion)
                               && rng.Next(4) == 0; // 25% chance
@@ -210,7 +217,7 @@ namespace Level52TheFinalBattle.Battle
                 IBattleCommand attackChoice = source.BattleCommands[0];
                 attackChoice.Execute(source, target);
             }
-            
+
             else
             {
                 Console.WriteLine($"{source.Name} does nothing.");
@@ -230,5 +237,17 @@ namespace Level52TheFinalBattle.Battle
                 }
             }
         }
+
+        public IBattleEntity SelectFromHeroList() => _inputHandler.SelectFromList(
+            this.HeroEntities,
+            entity => $"{entity.Name} HP: {entity.CurrentHP}/{entity.MaxHP}");
+
+        public IBattleEntity SelectFromMonsterList() => _inputHandler.SelectFromList(
+            this.MonsterEntities,
+            entity => $"{entity.Name} HP: {entity.CurrentHP}/{entity.MaxHP}");
+
+        public IBattleEntity SelectFromAllList() => _inputHandler.SelectFromList(
+            this.AllBattleEntities,
+            entity => $"{entity.Name} HP: {entity.CurrentHP}/{entity.MaxHP}");
     }
 }

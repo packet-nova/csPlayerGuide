@@ -32,39 +32,44 @@ public class InputHandler
         return actionTypes[choice - 1];
     }
 
-    public IBattleCommand SelectAttack(IBattleEntity entity)
-    {
-        var attackActions = entity.BattleCommands
-            .Where(action => action.Category == ActionType.Attack)
-            .ToList();
+    // Replaced this method call with the generic: SelectFromList<>()
+    //
+    //public IBattleCommand SelectAttack(IBattleEntity entity)
+    //{
+    //    var attackActions = entity.BattleCommands
+    //        .Where(action => action.Category == ActionType.Attack)
+    //        .ToList();
 
-        Console.WriteLine("Which attack?");
-        for (int i = 0; i < attackActions.Count; i++)
-        {
-            Console.WriteLine($"{i + 1}. {attackActions[i].Name}");
-        }
+    //    Console.WriteLine("Which attack?");
+    //    for (int i = 0; i < attackActions.Count; i++)
+    //    {
+    //        Console.WriteLine($"{i + 1}. {attackActions[i].Name}");
+    //    }
 
-        int choice = GetValidInput("> ", 1, attackActions.Count);
-        Console.WriteLine($"You chose: {attackActions.ElementAt(choice - 1).Name}");
-        Console.WriteLine();
+    //    int choice = GetValidInput("> ", 1, attackActions.Count);
+    //    Console.WriteLine($"You chose: {attackActions.ElementAt(choice - 1).Name}");
+    //    Console.WriteLine();
 
-        return attackActions.ElementAt(choice - 1);
-    }
-    public IBattleEntity SelectTarget(IReadOnlyList<IBattleEntity> allEntities)
-    {
-        Console.WriteLine("Choose a target: ");
-        for (int i = 0; i < allEntities.Count; i++)
-        {
-            Console.WriteLine($"{i + 1}. {allEntities[i].Name} ({allEntities[i].CurrentHP}/{allEntities[i].MaxHP} HP)");
-        }
+    //    return attackActions.ElementAt(choice - 1);
+    //}
 
-        int choice = GetValidInput("> ", 1, allEntities.Count);
-        Console.WriteLine($"You chose: {allEntities.ElementAt(choice - 1).Name}");
-        Console.WriteLine();
+    // Replaced this method call with the generic: SelectFromList<>()
+    //
+    //public IBattleEntity SelectTarget(IReadOnlyList<IBattleEntity> allEntities)
+    //{
+    //    Console.WriteLine("Choose a target: ");
+    //    for (int i = 0; i < allEntities.Count; i++)
+    //    {
+    //        Console.WriteLine($"{i + 1}. {allEntities[i].Name} ({allEntities[i].CurrentHP}/{allEntities[i].MaxHP} HP)");
+    //    }
 
-        return allEntities[choice - 1];
-    }
-    
+    //    int choice = GetValidInput("> ", 1, allEntities.Count);
+    //    Console.WriteLine($"You chose: {allEntities.ElementAt(choice - 1).Name}");
+    //    Console.WriteLine();
+
+    //    return allEntities[choice - 1];
+    //}
+
     // Replaced this method call with the generic: SelectFromList<>()
     //
     //public IConsumable SelectItem(BattleParty party)
