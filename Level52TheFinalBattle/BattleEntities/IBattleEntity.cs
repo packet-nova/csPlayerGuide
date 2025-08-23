@@ -1,4 +1,5 @@
-﻿using Level52TheFinalBattle.BattleCommands;
+﻿using Level52TheFinalBattle.Battle;
+using Level52TheFinalBattle.BattleCommands;
 using Level52TheFinalBattle.Item;
 
 namespace Level52TheFinalBattle.BattleEntities
@@ -16,7 +17,7 @@ namespace Level52TheFinalBattle.BattleEntities
         void TakeDamage(int damageValue);
         void Heal(int amount);
         void AddBattleCommandsFromGear();
-        void EquipGear(IEquippable equipment);
-        void UnequipGear(IEquippable equipment);
+        void EquipGear(IEquippable equipment, BattleParty party);
+        void UnequipGear(IEquippable equipment, BattleParty party);
     }
 }

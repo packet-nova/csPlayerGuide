@@ -32,9 +32,6 @@ namespace Level52TheFinalBattle.Battle
             _monsterParty.Items.Add(new LesserHealingPotion());
         }
 
-        /// <summary>
-        /// Creates a basic battle scenario between a hero and a skeleton monster.
-        /// </summary>
         public static Battle SingleSkeletonBattle(
         TrueProgrammer trueProgrammer,
         Player heroPlayer,
@@ -44,7 +41,7 @@ namespace Level52TheFinalBattle.Battle
             var heroParty = new BattleParty([trueProgrammer], heroPlayer);
             var monsterParty = new BattleParty([skeleton], monsterPlayer);
             var consoleLogger = new ConsoleLogger();
-            skeleton.EquipGear(new Dagger());
+            skeleton.EquippedItems.Add  (new Dagger());
 
             return new Battle(heroParty, monsterParty, consoleLogger);
         }
@@ -91,9 +88,6 @@ namespace Level52TheFinalBattle.Battle
             return new Battle(heroParty, monsterParty, consoleLogger);
         }
 
-        /// <summary>
-        /// Executes a single turn in the battle, allowing each entity in the active party to perform an action.
-        /// </summary>
         public void ExecuteTurn()
         {
             // The enemy party is relative to the current active party.
@@ -157,10 +151,6 @@ namespace Level52TheFinalBattle.Battle
 
                     if (itemChoice is IHealing healingItem)
                     {
-                        //var target = _inputHandler.SelectTarget(AllBattleEntities);
-                        //var target = _inputHandler.SelectFromList(
-                        //    this.AllBattleEntities,
-                        //    entity => $"{entity.Name} HP: {entity.CurrentHP}/{entity.MaxHP}");
                         var target = SelectFromAllList();
 
                         healingItem.Execute(target);
@@ -170,13 +160,12 @@ namespace Level52TheFinalBattle.Battle
                     break;
 
                 case ActionType.EquipItem:
-                    //var equipmentChoice = _inputHandler.SelectEquipment(_currentParty);
                     var equipmentChoice = _inputHandler.SelectFromList(_currentParty.Items.OfType<IEquippable>(), equipment => equipment.Name);
 
                     if (equipmentChoice != null)
                     {
                         _currentParty.Items.Remove((InventoryItem)equipmentChoice);
-                        source.EquipGear(equipmentChoice);
+                        source.EquipGear(equipmentChoice, GetPartyFor(source));
                     }
 
                     else
@@ -213,10 +202,10 @@ namespace Level52TheFinalBattle.Battle
             if (!isEquipped && halfChance && party.Items.OfType<IEquippable>().Any())
             {
                 var equipChoice = party.Items.OfType<IEquippable>().First();
-                source.EquipGear(equipChoice);
+                source.EquipGear(equipChoice, GetPartyFor(source));
             }
 
-            if (shouldHeal && party.Items.OfType<HealingPotion>().Any())
+            else if (shouldHeal && party.Items.OfType<HealingPotion>().Any())
             {
                 var healPotion = party.Items.OfType<HealingPotion>().First();
                 healPotion.Execute(source);

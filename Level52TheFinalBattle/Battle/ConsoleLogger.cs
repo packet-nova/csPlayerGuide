@@ -57,12 +57,12 @@ namespace Level52TheFinalBattle.Battle
                     {
                         ConsoleColor prevColor = Console.ForegroundColor;
                         Console.ForegroundColor = ConsoleColor.Green;
-                        Console.WriteLine($"--> {entity.Name} HP: {entity.CurrentHP}/{entity.MaxHP}");
+                        Console.WriteLine($"--> {entity.Name} ({entity.CurrentHP}/{entity.MaxHP} HP)");
                         Console.ForegroundColor = prevColor;
                     }
                     else
                     {
-                        Console.WriteLine($"{entity.Name} HP: {entity.CurrentHP}/{entity.MaxHP}");
+                        Console.WriteLine($"{entity.Name} ({entity.CurrentHP}/{entity.MaxHP} HP)");
                     }
                 }
             }

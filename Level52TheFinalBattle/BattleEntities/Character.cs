@@ -1,4 +1,5 @@
-﻿using Level52TheFinalBattle.BattleCommands;
+﻿using Level52TheFinalBattle.Battle;
+using Level52TheFinalBattle.BattleCommands;
 using Level52TheFinalBattle.Item;
 
 namespace Level52TheFinalBattle.BattleEntities
@@ -41,9 +42,16 @@ namespace Level52TheFinalBattle.BattleEntities
             }
         }
 
-        public void EquipGear(IEquippable equipment)
+        public void EquipGear(IEquippable equipment, BattleParty party)
         {
+            if (IsEquipped)
+            {
+                var currentEquipment = EquippedItems.First();
+                UnequipGear(currentEquipment, party);
+            }
+
             EquippedItems.Add(equipment);
+            Console.WriteLine($"{this.Name} equips {equipment.Name}.");
 
             if (!BattleCommands.Contains(equipment.ProvidedCommand))
             {
@@ -51,9 +59,11 @@ namespace Level52TheFinalBattle.BattleEntities
             }
         }
 
-        public void UnequipGear(IEquippable equipment)
+        public void UnequipGear(IEquippable equipment, BattleParty party)
         {
             EquippedItems.Remove(equipment);
+            party.Items.Add((InventoryItem)equipment);
+            Console.WriteLine($"{this.Name} unequips {equipment.Name}.");
             BattleCommands.Remove(equipment.ProvidedCommand);
         }
     }
