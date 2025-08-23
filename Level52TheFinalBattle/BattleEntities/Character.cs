@@ -9,6 +9,7 @@ namespace Level52TheFinalBattle.BattleEntities
         public abstract int MaxHP { get; }
         public virtual int CurrentHP { get; protected set; }
         public bool IsDead => CurrentHP <= 0;
+        public bool IsEquipped => EquippedItems != null && EquippedItems.Count > 0;
         public virtual List<IEquippable> EquippedItems { get; protected set; } = [];
         public virtual List<IBattleCommand> BattleCommands { get; protected set; } = [];
 

@@ -1,6 +1,7 @@
 ﻿using Level52TheFinalBattle.BattleEntities;
 using Level52TheFinalBattle.BattleCommands;
 using Level52TheFinalBattle.Item;
+using System.Threading.Tasks.Sources;
 
 namespace Level52TheFinalBattle.Battle
 {
@@ -157,9 +158,10 @@ namespace Level52TheFinalBattle.Battle
                     if (itemChoice is IHealing healingItem)
                     {
                         //var target = _inputHandler.SelectTarget(AllBattleEntities);
-                        var target = _inputHandler.SelectFromList(
-                            this.AllBattleEntities,
-                            entity => $"{entity.Name} HP: {entity.CurrentHP}/{entity.MaxHP}");
+                        //var target = _inputHandler.SelectFromList(
+                        //    this.AllBattleEntities,
+                        //    entity => $"{entity.Name} HP: {entity.CurrentHP}/{entity.MaxHP}");
+                        var target = SelectFromAllList();
 
                         healingItem.Execute(target);
                         _currentParty.Items.Remove((InventoryItem)itemChoice);
@@ -168,7 +170,8 @@ namespace Level52TheFinalBattle.Battle
                     break;
 
                 case ActionType.EquipItem:
-                    var equipmentChoice = _inputHandler.SelectEquipment(_currentParty);
+                    //var equipmentChoice = _inputHandler.SelectEquipment(_currentParty);
+                    var equipmentChoice = _inputHandler.SelectFromList(_currentParty.Items.OfType<IEquippable>(), equipment => equipment.Name);
 
                     if (equipmentChoice != null)
                     {
@@ -192,16 +195,28 @@ namespace Level52TheFinalBattle.Battle
 
         public void ComputerPlayerTurn(IBattleEntity source)
         {
+            Random rng = new();
             var enemyParty = _currentParty == _heroParty ? _monsterParty : _heroParty;
             var party = GetPartyFor(source);
-
-            Random rng = new();
-
+            bool halfChance = rng.Next(2) == 0; // 50% chance
+            
+            bool isEquipped = false;
+            if (source is Character character)
+            {
+                isEquipped = character.IsEquipped;
+            }
+            
             bool shouldHeal = source.CurrentHP <= source.MaxHP / 2
                               && party.Items.Any(item => item is HealingPotion)
                               && rng.Next(4) == 0; // 25% chance
 
-            if (shouldHeal)
+            if (!isEquipped && halfChance && party.Items.OfType<IEquippable>().Any())
+            {
+                var equipChoice = party.Items.OfType<IEquippable>().First();
+                source.EquipGear(equipChoice);
+            }
+
+            if (shouldHeal && party.Items.OfType<HealingPotion>().Any())
             {
                 var healPotion = party.Items.OfType<HealingPotion>().First();
                 healPotion.Execute(source);
@@ -212,7 +227,7 @@ namespace Level52TheFinalBattle.Battle
             {
                 var targetIndex = rng.Next(enemyParty.Entities.Count);
                 var target = enemyParty.Entities[targetIndex];
-                IBattleCommand attackChoice = source.BattleCommands[0];
+                IBattleCommand attackChoice = source.BattleCommands[rng.Next(source.BattleCommands.Count)];
                 attackChoice.Execute(source, target);
             }
 
