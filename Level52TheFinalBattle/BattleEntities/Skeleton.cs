@@ -2,10 +2,11 @@
 
 namespace Level52TheFinalBattle.BattleEntities
 {
-    public class Skeleton : Character
+    public class Skeleton : Monster
     {
         public override string Name { get; }
         public override int MaxHP { get; } = 5;
+        public override int Challenge => 1;
 
         public Skeleton()
         {
