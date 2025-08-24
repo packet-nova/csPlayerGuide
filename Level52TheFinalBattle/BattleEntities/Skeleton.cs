@@ -5,7 +5,7 @@ namespace Level52TheFinalBattle.BattleEntities
     public class Skeleton : Character
     {
         public override string Name { get; }
-        public override int MaxHP { get; } = 1;
+        public override int MaxHP { get; } = 5;
 
         public Skeleton()
         {
