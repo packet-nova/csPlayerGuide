@@ -1,7 +1,6 @@
 ﻿using Level52TheFinalBattle.BattleEntities;
 using Level52TheFinalBattle.BattleCommands;
 using Level52TheFinalBattle.Item;
-using System.Threading.Tasks.Sources;
 
 namespace Level52TheFinalBattle.Battle
 {
@@ -18,6 +17,7 @@ namespace Level52TheFinalBattle.Battle
         public IReadOnlyList<IBattleEntity> HeroEntities => _heroParty.Entities;
         public IReadOnlyList<IBattleEntity> MonsterEntities => _monsterParty.Entities;
         public bool IsActive => !_heroParty.IsEmpty && !_monsterParty.IsEmpty;
+        public string PartyName => _currentParty == _heroParty ? "Heroes" : "Monsters";
 
         public Battle(BattleParty heroParty, BattleParty monsterParty, IBattleLogger logger)
         {
@@ -41,7 +41,7 @@ namespace Level52TheFinalBattle.Battle
             var heroParty = new BattleParty([trueProgrammer], heroPlayer);
             var monsterParty = new BattleParty([skeleton], monsterPlayer);
             var consoleLogger = new ConsoleLogger();
-            skeleton.EquippedItems.Add  (new Dagger());
+            skeleton.EquippedItems.Add(new Dagger());
 
             return new Battle(heroParty, monsterParty, consoleLogger);
         }
@@ -97,23 +97,24 @@ namespace Level52TheFinalBattle.Battle
             foreach (var entity in _currentParty.Entities)
             {
                 CurrentEntity = entity;
+                _consoleLogger.StatusBanner(this);
 
                 if (_currentParty.Controller is HumanPlayer)
                 {
-                    _consoleLogger.StatusBanner(this);
                     HumanPlayerTurn(entity);
                 }
-                
+
                 else
                 {
                     ComputerPlayerTurn(entity);
                 }
-                
+
                 HandleDead();
             }
 
             if (_monsterParty.IsEmpty)
             {
+                LootItems(_currentParty, enemyParty);
                 _consoleLogger.PlayerWinBattle();
             }
             else if (_heroParty.IsEmpty)
@@ -187,19 +188,20 @@ namespace Level52TheFinalBattle.Battle
             }
         }
 
+
         public void ComputerPlayerTurn(IBattleEntity source)
         {
             Random rng = new();
             var enemyParty = _currentParty == _heroParty ? _monsterParty : _heroParty;
             var party = GetPartyFor(source);
             bool halfChance = rng.Next(2) == 0; // 50% chance
-            
+
             bool isEquipped = false;
             if (source is Character character)
             {
                 isEquipped = character.IsEquipped;
             }
-            
+
             bool shouldHeal = source.CurrentHP <= source.MaxHP / 2
                               && party.Items.Any(item => item is HealingPotion)
                               && rng.Next(4) == 0; // 25% chance
@@ -242,6 +244,19 @@ namespace Level52TheFinalBattle.Battle
                     _consoleLogger.LogKill(entity);
                     GetPartyFor(entity).Entities.Remove(entity);
                 }
+            }
+        }
+
+        public void LootItems(BattleParty currentParty, BattleParty enemyParty)
+        {
+            foreach (var item in enemyParty.Items.ToList())
+            {
+                currentParty.Items.Add(item);
+                enemyParty.Items.Remove(item);
+                ConsoleColor prevColor = Console.ForegroundColor;
+                Console.ForegroundColor = ConsoleColor.Cyan;
+                Console.WriteLine($"The {PartyName.ToLower()} looted {item.Name}.");
+                Console.ForegroundColor = prevColor;
             }
         }
 
