@@ -103,13 +103,14 @@ namespace Level52TheFinalBattle.Battle
                     _consoleLogger.StatusBanner(this);
                     HumanPlayerTurn(entity);
                 }
+                
                 else
                 {
                     ComputerPlayerTurn(entity);
                 }
+                
+                HandleDead();
             }
-
-            HandleDead();
 
             if (_monsterParty.IsEmpty)
             {
@@ -119,6 +120,10 @@ namespace Level52TheFinalBattle.Battle
             {
                 _consoleLogger.PlayerLoseBattle();
             }
+
+            Console.Write("Press a key to continue...");
+            Console.ReadKey();
+            Console.Clear();
 
             _currentParty = enemyParty;
         }

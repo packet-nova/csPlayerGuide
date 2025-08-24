@@ -30,6 +30,7 @@ namespace Level52TheFinalBattle.Battle
         {
             Console.WriteLine("You won the battle!");
         }
+
         public void PlayerLoseBattle()
         {
             Console.WriteLine("You lost the battle!");
@@ -53,16 +54,21 @@ namespace Level52TheFinalBattle.Battle
             {
                 foreach (IBattleEntity entity in entityList)
                 {
+                    string showEquipment = entity.EquippedItems.Count > 0
+                        ? $"Equipment: {entity.EquippedItems[0].Name}"
+                        : "Equipment: None";
+
                     if (entity == battle.CurrentEntity)
                     {
                         ConsoleColor prevColor = Console.ForegroundColor;
                         Console.ForegroundColor = ConsoleColor.Green;
-                        Console.WriteLine($"--> {entity.Name} ({entity.CurrentHP}/{entity.MaxHP} HP)");
+                        Console.WriteLine($"--> {entity.Name} ({entity.CurrentHP}/{entity.MaxHP} HP) ({showEquipment})");
                         Console.ForegroundColor = prevColor;
                     }
+
                     else
                     {
-                        Console.WriteLine($"{entity.Name} ({entity.CurrentHP}/{entity.MaxHP} HP)");
+                        Console.WriteLine($"{entity.Name} ({entity.CurrentHP}/{entity.MaxHP} HP) ({showEquipment})");
                     }
                 }
             }
