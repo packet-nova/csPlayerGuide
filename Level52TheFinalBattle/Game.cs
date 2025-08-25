@@ -1,5 +1,6 @@
 ﻿using Level52TheFinalBattle.Battle;
 using Level52TheFinalBattle.BattleEntities;
+using Level52TheFinalBattle.Item;
 
 public class Game
 {
@@ -20,6 +21,9 @@ public class Game
     {
         BattleGenerator battleGenerator = new();
         BattleParty heroParty = new([_trueProgrammer], _heroPlayer);
+        heroParty.Items.Add(new LesserHealingPotion());
+        heroParty.Items.Add(new LesserHealingPotion());
+        heroParty.Items.Add(new LesserHealingPotion());
 
         while (_battleTier <= 3)
         {
