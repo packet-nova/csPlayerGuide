@@ -26,10 +26,6 @@ namespace Level52TheFinalBattle.Battle
             _currentParty = heroParty;
             _consoleLogger = logger;
             _inputHandler = new InputHandler();
-            _heroParty.Items.Add(new LesserHealingPotion());
-            _heroParty.Items.Add(new LesserHealingPotion());
-            _heroParty.Items.Add(new LesserHealingPotion());
-            _monsterParty.Items.Add(new LesserHealingPotion());
         }
 
         public static Battle SingleSkeletonBattle(
