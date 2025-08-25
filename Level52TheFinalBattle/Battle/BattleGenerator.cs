@@ -5,8 +5,6 @@ namespace Level52TheFinalBattle.Battle
 {
     public class BattleGenerator
     {
-        private readonly Random rng = new();
-
         public BattleData GenerateBattle(
             BattleParty heroParty,
             Player heroController,
