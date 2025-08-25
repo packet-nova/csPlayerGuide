@@ -2,8 +2,6 @@
 using Level52TheFinalBattle.BattleCommands;
 using Level52TheFinalBattle.BattleEntities;
 using Level52TheFinalBattle.Item;
-using System.IO;
-using System.Reflection.Metadata.Ecma335;
 
 public class InputHandler
 {
@@ -30,89 +28,6 @@ public class InputHandler
         Console.WriteLine();
 
         return actionTypes[choice - 1];
-    }
-
-    // Replaced this method call with the generic: SelectFromList<>()
-    //
-    //public IBattleCommand SelectAttack(IBattleEntity entity)
-    //{
-    //    var attackActions = entity.BattleCommands
-    //        .Where(action => action.Category == ActionType.Attack)
-    //        .ToList();
-
-    //    Console.WriteLine("Which attack?");
-    //    for (int i = 0; i < attackActions.Count; i++)
-    //    {
-    //        Console.WriteLine($"{i + 1}. {attackActions[i].Name}");
-    //    }
-
-    //    int choice = GetValidInput("> ", 1, attackActions.Count);
-    //    Console.WriteLine($"You chose: {attackActions.ElementAt(choice - 1).Name}");
-    //    Console.WriteLine();
-
-    //    return attackActions.ElementAt(choice - 1);
-    //}
-
-    // Replaced this method call with the generic: SelectFromList<>()
-    //
-    //public IBattleEntity SelectTarget(IReadOnlyList<IBattleEntity> allEntities)
-    //{
-    //    Console.WriteLine("Choose a target: ");
-    //    for (int i = 0; i < allEntities.Count; i++)
-    //    {
-    //        Console.WriteLine($"{i + 1}. {allEntities[i].Name} ({allEntities[i].CurrentHP}/{allEntities[i].MaxHP} HP)");
-    //    }
-
-    //    int choice = GetValidInput("> ", 1, allEntities.Count);
-    //    Console.WriteLine($"You chose: {allEntities.ElementAt(choice - 1).Name}");
-    //    Console.WriteLine();
-
-    //    return allEntities[choice - 1];
-    //}
-
-    // Replaced this method call with the generic: SelectFromList<>()
-    //
-    //public IConsumable SelectItem(BattleParty party)
-    //{
-    //    var consumables = party.Items.OfType<IConsumable>().ToList();
-    //    int i = 1;
-
-    //    foreach (var item in consumables)
-    //    {
-    //        Console.WriteLine($"{i}. {item.Name}");
-    //        i++;
-    //    }
-
-    //    int choice = GetValidInput("> ", 1, i - 1);
-    //    Console.WriteLine($"You chose: {consumables.ElementAt(choice - 1).Name}");
-    //    Console.WriteLine();
-
-    //    return consumables.ElementAt(choice - 1);
-    //}
-
-    public IEquippable? SelectEquipment(BattleParty party)
-    {
-        var equipment = party.Items.OfType<IEquippable>().ToList();
-        
-        if (equipment.Count == 0)
-        {
-            Console.Write("No equipment available to equip. Press any key to go back...");
-            Console.ReadKey();
-            return null;
-        }
-        int i = 1;
-
-        foreach (var item in equipment)
-        {
-            Console.WriteLine($"{i}. {item.Name}");
-            i++;
-        }
-
-        int choice = GetValidInput("> ", 1, i - 1);
-        Console.WriteLine($"You chose: {equipment.ElementAt(choice - 1).Name}");
-        Console.WriteLine();
-
-        return equipment.ElementAt(choice - 1);
     }
 
     public int GetValidInput(string prompt, int minValue, int maxValue)

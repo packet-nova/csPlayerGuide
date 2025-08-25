@@ -10,7 +10,7 @@ namespace Level52TheFinalBattle.BattleCommands
 
         public bool RequiresTarget => true;
 
-        public int BaseDamage => 2;
+        public int BaseDamage => 1;
 
         public void Execute(IBattleEntity source, IBattleEntity target)
         {
