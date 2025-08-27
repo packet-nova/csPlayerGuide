@@ -51,6 +51,11 @@ namespace Level52TheFinalBattle.BattleEntities
                 UnequipGear(currentEquipment, party);
             }
 
+            if (equipment is InventoryItem inventoryItem)
+            {
+                party.Items.Remove(inventoryItem);
+            }
+
             EquippedItems.Add(equipment);
             Console.WriteLine($"{this.Name} equips {equipment.Name}.");
 

@@ -30,7 +30,6 @@ namespace Level52TheFinalBattle.Battle
                     character.Items.Clear();
                 }
             }
-
         }
     }
 }

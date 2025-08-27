@@ -17,7 +17,7 @@ namespace Level52TheFinalBattle.Battle
         public IReadOnlyList<IBattleEntity> HeroEntities => _heroParty.Entities;
         public IReadOnlyList<IBattleEntity> MonsterEntities => _monsterParty.Entities;
         public bool IsActive => !_heroParty.IsEmpty && !_monsterParty.IsEmpty;
-        public string PartyName => _currentParty == _heroParty ? "Heroes" : "Monsters";
+        public string CurrentPartyName => _currentParty == _heroParty ? "Heroes" : "Monsters";
 
         public Battle(BattleParty heroParty, BattleParty monsterParty, IBattleLogger logger)
         {
@@ -255,9 +255,10 @@ namespace Level52TheFinalBattle.Battle
         {
             foreach (var item in entity.EquippedItems)
             {
-                if (item is InventoryItem lootable)
+                if (item is InventoryItem looted)
                 {
-                    _currentParty.Items.Add(lootable);
+                    _currentParty.Items.Add(looted);
+                    Console.WriteLine($"The {CurrentPartyName} looted {looted.Name} from {entity.Name}.");
                 }
             }
             entity.EquippedItems.Clear();
@@ -265,13 +266,13 @@ namespace Level52TheFinalBattle.Battle
 
         public void LootItems(BattleParty currentParty, BattleParty enemyParty)
         {
-            foreach (var item in enemyParty.Items.ToList())
+            foreach (var looted in enemyParty.Items.ToList())
             {
-                currentParty.Items.Add(item);
-                enemyParty.Items.Remove(item);
+                currentParty.Items.Add(looted);
+                enemyParty.Items.Remove(looted);
                 ConsoleColor prevColor = Console.ForegroundColor;
                 Console.ForegroundColor = ConsoleColor.Cyan;
-                Console.WriteLine($"The {PartyName.ToLower()} looted {item.Name}.");
+                Console.WriteLine($"The {CurrentPartyName.ToLower()} looted {looted.Name}.");
                 Console.ForegroundColor = prevColor;
             }
         }
