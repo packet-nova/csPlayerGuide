@@ -34,17 +34,19 @@ namespace Level52TheFinalBattle.BattleEntities
             bool potionChance = rng.Next(2) == 0;
             bool daggerChance = rng.Next(2) == 0;
 
+            Items.Add(new Bone());
+
             if (potionChance)
             {
-                InventoryItems.Add(new LesserHealingPotion());
+                Items.Add(new LesserHealingPotion());
             }
 
             if (daggerChance)
             {
-                InventoryItems.Add(new Dagger());
+                Items.Add(new Dagger());
             }
 
-            if (!InventoryItems.OfType<Dagger>().Any())
+            if (!Items.OfType<Dagger>().Any())
             {
                 EquippedItems.Add(new Dagger());
             }

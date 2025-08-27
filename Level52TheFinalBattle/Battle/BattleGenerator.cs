@@ -22,15 +22,6 @@ namespace Level52TheFinalBattle.Battle
 
             var monsterParty = new BattleParty(monsters, monsterController);
 
-            foreach (var monster in monsters)
-            {
-                if (monster is Character character)
-                {
-                    monsterParty.Items.AddRange(character.InventoryItems);
-                    character.InventoryItems.Clear();
-                }
-            }
-
             return new BattleData()
             {
                 HeroParty = heroParty,

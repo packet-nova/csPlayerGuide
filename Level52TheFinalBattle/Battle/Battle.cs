@@ -106,24 +106,22 @@ namespace Level52TheFinalBattle.Battle
                 }
 
                 HandleDead();
+
+                if (_monsterParty.IsEmpty)
+                {
+                    LootItems(_currentParty, enemyParty);
+                    _consoleLogger.PlayerWinBattle();
+                }
+
+                else if (_heroParty.IsEmpty)
+                {
+                    _consoleLogger.PlayerLoseBattle();
+                }
+
                 Console.Write("Press a key to continue...");
                 Console.ReadKey();
                 Console.Clear();
             }
-
-            if (_monsterParty.IsEmpty)
-            {
-                LootItems(_currentParty, enemyParty);
-                _consoleLogger.PlayerWinBattle();
-            }
-            else if (_heroParty.IsEmpty)
-            {
-                _consoleLogger.PlayerLoseBattle();
-            }
-
-            //Console.Write("Press a key to continue...");
-            //Console.ReadKey();
-            //Console.Clear();
 
             _currentParty = enemyParty;
         }
@@ -238,12 +236,31 @@ namespace Level52TheFinalBattle.Battle
         {
             foreach (var entity in AllBattleEntities)
             {
+                BattleParty entityParty = GetPartyFor(entity);
+
                 if (entity.IsDead)
                 {
                     _consoleLogger.LogKill(entity);
-                    GetPartyFor(entity).Entities.Remove(entity);
+
+                    if (entityParty != _currentParty)
+                    {
+                        LootEquippedItems(entity);
+                    }
+                        entityParty.Entities.Remove(entity);
                 }
             }
+        }
+
+        public void LootEquippedItems(IBattleEntity entity)
+        {
+            foreach (var item in entity.EquippedItems)
+            {
+                if (item is InventoryItem lootable)
+                {
+                    _currentParty.Items.Add(lootable);
+                }
+            }
+            entity.EquippedItems.Clear();
         }
 
         public void LootItems(BattleParty currentParty, BattleParty enemyParty)

@@ -17,6 +17,20 @@ namespace Level52TheFinalBattle.Battle
         {
             Entities = entities;
             Controller = controller;
+            SetupInventory();
+        }
+
+        private void SetupInventory()
+        {
+            foreach (var entity in Entities)
+            {
+                if (entity is Character character)
+                {
+                    Items.AddRange(character.Items);
+                    character.Items.Clear();
+                }
+            }
+
         }
     }
 }

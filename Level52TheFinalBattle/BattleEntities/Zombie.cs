@@ -1,4 +1,5 @@
 ﻿using Level52TheFinalBattle.BattleCommands;
+using Level52TheFinalBattle.Item;
 
 namespace Level52TheFinalBattle.BattleEntities
 {
@@ -11,6 +12,7 @@ namespace Level52TheFinalBattle.BattleEntities
         public Zombie()
         {
             BattleCommands = [new InfectiousBite()];
+            Items.Add(new RottenFlesh());
         }
     }
 }
