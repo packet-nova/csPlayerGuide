@@ -16,7 +16,7 @@ namespace Level52TheFinalBattle.Battle
             {
                 1 => CreateEasyMonsters(),
                 2 => [.. CreateEasyMonsters(), .. CreateEasyMonsters()],
-                3 => [new TheCodedOne()],
+                3 => [new TheUncodedOne()],
                 _ => throw new InvalidOperationException($"No battle implemented for battle tier: {battleTier}.")
             };
 

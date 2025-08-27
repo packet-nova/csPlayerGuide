@@ -76,7 +76,7 @@ namespace Level52TheFinalBattle.Battle
         Player heroPlayer,
         Player monsterPlayer)
         {
-            var codedOne = new TheCodedOne();
+            var codedOne = new TheUncodedOne();
             var heroParty = new BattleParty([trueProgrammer], heroPlayer);
             var monsterParty = new BattleParty([codedOne], monsterPlayer);
             var consoleLogger = new ConsoleLogger();
