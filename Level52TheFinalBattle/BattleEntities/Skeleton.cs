@@ -1,4 +1,5 @@
 ﻿using Level52TheFinalBattle.BattleCommands;
+using Level52TheFinalBattle.Item;
 
 namespace Level52TheFinalBattle.BattleEntities
 {
@@ -12,6 +13,7 @@ namespace Level52TheFinalBattle.BattleEntities
         {
             BattleCommands = [new BoneCrunch()];
             Name = RandomName();
+            SetStartingInventory();
         }
 
         private string RandomName()
@@ -25,6 +27,27 @@ namespace Level52TheFinalBattle.BattleEntities
                 "Napoleon Bonepart"];
 
             return names[random.Next(names.Count)];
+        }
+        private void SetStartingInventory()
+        {
+            Random rng = new();
+            bool potionChance = rng.Next(2) == 0;
+            bool daggerChance = rng.Next(2) == 0;
+
+            if (potionChance)
+            {
+                InventoryItems.Add(new LesserHealingPotion());
+            }
+
+            if (daggerChance)
+            {
+                InventoryItems.Add(new Dagger());
+            }
+
+            if (!InventoryItems.OfType<Dagger>().Any())
+            {
+                EquippedItems.Add(new Dagger());
+            }
         }
     }
 }

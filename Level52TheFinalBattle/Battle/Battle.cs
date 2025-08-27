@@ -106,6 +106,9 @@ namespace Level52TheFinalBattle.Battle
                 }
 
                 HandleDead();
+                Console.Write("Press a key to continue...");
+                Console.ReadKey();
+                Console.Clear();
             }
 
             if (_monsterParty.IsEmpty)
@@ -118,9 +121,9 @@ namespace Level52TheFinalBattle.Battle
                 _consoleLogger.PlayerLoseBattle();
             }
 
-            Console.Write("Press a key to continue...");
-            Console.ReadKey();
-            Console.Clear();
+            //Console.Write("Press a key to continue...");
+            //Console.ReadKey();
+            //Console.Clear();
 
             _currentParty = enemyParty;
         }

@@ -14,13 +14,22 @@ namespace Level52TheFinalBattle.Battle
         {
             List<IBattleEntity> monsters = battleTier switch
             {
-                1 => CreateEasyBattle(),
-                //2 => [new Skeleton(), new Zombie()],
-                //3 => [new TheCodedOne()],
+                1 => CreateEasyMonsters(),
+                2 => [.. CreateEasyMonsters(), .. CreateEasyMonsters()],
+                3 => [new TheCodedOne()],
                 _ => throw new InvalidOperationException($"No battle implemented for battle tier: {battleTier}.")
             };
 
             var monsterParty = new BattleParty(monsters, monsterController);
+
+            foreach (var monster in monsters)
+            {
+                if (monster is Character character)
+                {
+                    monsterParty.Items.AddRange(character.InventoryItems);
+                    character.InventoryItems.Clear();
+                }
+            }
 
             return new BattleData()
             {
@@ -29,7 +38,7 @@ namespace Level52TheFinalBattle.Battle
             };
         }
 
-        public List<IBattleEntity> CreateEasyBattle()
+        public List<IBattleEntity> CreateEasyMonsters()
         {
             List<IBattleEntity> monsters = [];
             int count = rng.Next(1, 3);

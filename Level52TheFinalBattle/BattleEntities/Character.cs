@@ -13,6 +13,7 @@ namespace Level52TheFinalBattle.BattleEntities
         public bool IsEquipped => EquippedItems != null && EquippedItems.Count > 0;
         public virtual List<IEquippable> EquippedItems { get; protected set; } = [];
         public virtual List<IBattleCommand> BattleCommands { get; protected set; } = [];
+        public virtual List<InventoryItem> InventoryItems { get; protected set; } = [];
 
         public Character()
         {
