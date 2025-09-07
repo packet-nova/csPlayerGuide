@@ -19,4 +19,3 @@ public class UnravelingAttack : IBattleCommand
         target.TakeDamage(damage);
     }
 }
-

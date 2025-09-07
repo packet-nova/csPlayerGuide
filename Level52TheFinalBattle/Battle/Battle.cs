@@ -1,5 +1,5 @@
-﻿using Level52TheFinalBattle.BattleEntities;
-using Level52TheFinalBattle.BattleCommands;
+﻿using Level52TheFinalBattle.BattleCommands;
+using Level52TheFinalBattle.BattleEntities;
 using Level52TheFinalBattle.Item;
 
 namespace Level52TheFinalBattle.Battle
@@ -246,7 +246,7 @@ namespace Level52TheFinalBattle.Battle
                     {
                         LootEquippedItems(entity);
                     }
-                        entityParty.Entities.Remove(entity);
+                    entityParty.Entities.Remove(entity);
                 }
             }
         }
@@ -272,7 +272,7 @@ namespace Level52TheFinalBattle.Battle
                 enemyParty.Items.Remove(looted);
                 ConsoleColor prevColor = Console.ForegroundColor;
                 Console.ForegroundColor = ConsoleColor.Cyan;
-                Console.WriteLine($"The {CurrentPartyName.ToLower()} looted {looted.Name}.");
+                Console.WriteLine($"The {CurrentPartyName} looted {looted.Name}.");
                 Console.ForegroundColor = prevColor;
             }
         }
