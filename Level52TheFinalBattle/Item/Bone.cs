@@ -1,6 +1,4 @@
-﻿using Level52TheFinalBattle.Item;
-
-namespace Level52TheFinalBattle.BattleEntities
+﻿namespace Level52TheFinalBattle.Item
 {
     public class Bone : InventoryItem
     {
