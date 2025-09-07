@@ -1,4 +1,5 @@
 ﻿using Level52TheFinalBattle.BattleCommands;
+using Level52TheFinalBattle.Item;
 
 namespace Level52TheFinalBattle.BattleEntities
 {
@@ -10,6 +11,8 @@ namespace Level52TheFinalBattle.BattleEntities
         public VinFletcher()
         {
             BattleCommands = [new Punch()];
+            EquippedItems = [new VinsBow()];
+            AddBattleCommandsFromGear();
         }
     }
 }

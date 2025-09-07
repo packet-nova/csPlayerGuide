@@ -20,7 +20,7 @@ public class Game
     public void Run()
     {
         BattleGenerator battleGenerator = new();
-        BattleParty heroParty = new([_trueProgrammer], _heroPlayer);
+        BattleParty heroParty = new([_trueProgrammer, new VinFletcher()], _heroPlayer);
         heroParty.Items.Add(new LesserHealingPotion());
         heroParty.Items.Add(new LesserHealingPotion());
         heroParty.Items.Add(new LesserHealingPotion());
