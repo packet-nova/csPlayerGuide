@@ -8,15 +8,15 @@ namespace Level52TheFinalBattle.Battle
     {
         private readonly BattleParty _heroParty;
         private readonly BattleParty _monsterParty;
-        private BattleParty _currentParty;
         private readonly IBattleLogger _consoleLogger;
         private readonly InputHandler _inputHandler;
+        private BattleParty _currentParty;
 
         public IBattleEntity? CurrentEntity { get; private set; }
         public IReadOnlyList<IBattleEntity> AllBattleEntities => [.. MonsterEntities, .. HeroEntities];
         public IReadOnlyList<IBattleEntity> HeroEntities => _heroParty.Entities;
         public IReadOnlyList<IBattleEntity> MonsterEntities => _monsterParty.Entities;
-        public bool IsActive => !_heroParty.IsEmpty && !_monsterParty.IsEmpty;
+        public bool IsActive => _heroParty.Entities.Count > 0 && _monsterParty.Entities.Count > 0;
         public string CurrentPartyName => _currentParty == _heroParty ? "Heroes" : "Monsters";
 
         public Battle(BattleParty heroParty, BattleParty monsterParty, IBattleLogger logger)
@@ -107,15 +107,17 @@ namespace Level52TheFinalBattle.Battle
 
                 HandleDead();
 
-                if (_monsterParty.IsEmpty)
+                if (_monsterParty.Entities.Count == 0)
                 {
                     LootItems(_currentParty, enemyParty);
                     _consoleLogger.PlayerWinBattle();
+                    return;
                 }
 
-                else if (_heroParty.IsEmpty)
+                else if (_heroParty.Entities.Count == 0)
                 {
                     _consoleLogger.PlayerLoseBattle();
+                    return;
                 }
 
                 Console.Write("Press a key to continue...");

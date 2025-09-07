@@ -33,7 +33,7 @@ namespace Level52TheFinalBattle.Battle
         {
             List<IBattleEntity> monsters = [];
             int count = rng.Next(1, 3);
-            Console.WriteLine($"DEBUG: Creating {count} monsters");
+            Console.WriteLine($"DEBUG: Creating {count} monster(s)");
 
             for (int i = 0; i < count; i++)
             {
@@ -47,8 +47,8 @@ namespace Level52TheFinalBattle.Battle
 
                 else
                 {
-                    monsters.Add(new Zombie());
-                    Console.WriteLine($"DEBUG: Added Zombie");
+                    monsters.Add(new StoneAmarok());
+                    Console.WriteLine($"DEBUG: Added Stone Amarok");
                 }
             }
             Console.WriteLine("DEBUG: Press any key to continue...");

@@ -15,10 +15,16 @@ namespace Level52TheFinalBattle.BattleCommands
 
         public void Execute(IBattleEntity source, IBattleEntity target)
         {
+            int damage = BaseDamage;
+
             if (IsHit)
             {
-                Console.WriteLine($"{source.Name}'s {Name} deals {BaseDamage} damage to {target.Name}.");
-                target.TakeDamage(BaseDamage);
+                if (target is StoneAmarok amarok && amarok.Armor != null)
+                {
+                    damage = amarok.Armor.ModifyDamage(amarok, BaseDamage);
+                }
+                Console.WriteLine($"{source.Name}'s {Name} deals {damage} damage to {target.Name}.");
+                target.TakeDamage(damage);
             }
             else
             {

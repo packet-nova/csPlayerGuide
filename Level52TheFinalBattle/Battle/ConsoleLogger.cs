@@ -61,7 +61,7 @@ namespace Level52TheFinalBattle.Battle
                     if (entity == battle.CurrentEntity)
                     {
                         ConsoleColor prevColor = Console.ForegroundColor;
-                        Console.ForegroundColor = ConsoleColor.Green;
+                        Console.ForegroundColor = ConsoleColor.DarkGreen;
                         Console.WriteLine($"--> {entity.Name} ({entity.CurrentHP}/{entity.MaxHP} HP) ({showEquipment})");
                         Console.ForegroundColor = prevColor;
                     }
