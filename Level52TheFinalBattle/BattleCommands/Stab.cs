@@ -2,20 +2,9 @@
 
 namespace Level52TheFinalBattle.BattleCommands
 {
-    internal class Stab : IBattleCommand
+    internal class Stab : Attack
     {
-        public ActionType Category => ActionType.Attack;
-
-        public string Name => "Stab";
-
-        public bool RequiresTarget => true;
-
-        public int BaseDamage => 1;
-
-        public void Execute(IBattleEntity source, IBattleEntity target)
-        {
-            Console.WriteLine($"{source.Name}'s {Name} deals {BaseDamage} damage to {target.Name}.");
-            target.TakeDamage(BaseDamage);
-        }
+        public override string Name => "Stab";
+        public override int BaseDamage => 1;
     }
 }
