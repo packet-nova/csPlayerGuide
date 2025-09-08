@@ -23,13 +23,13 @@ namespace Level52TheFinalBattle.BattleEntities
         public void TakeDamage(int damageValue)
         {
             CurrentHP -= damageValue;
-            CurrentHP = CurrentHP < 0 ? 0 : CurrentHP;
+            CurrentHP = Math.Max(0, CurrentHP);
         }
 
         public void Heal(int healingValue)
         {
             CurrentHP += healingValue;
-            CurrentHP = CurrentHP > MaxHP ? MaxHP : CurrentHP;
+            CurrentHP = Math.Min(MaxHP, CurrentHP);
         }
 
         public void AddBattleCommandsFromGear()
