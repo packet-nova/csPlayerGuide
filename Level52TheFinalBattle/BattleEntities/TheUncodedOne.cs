@@ -8,6 +8,10 @@ namespace Level52TheFinalBattle.BattleEntities
         public override string Name { get; } = "The Uncoded One";
         public override int MaxHP { get; } = 30;
         public override int Challenge => 3;
-        public override List<IBattleCommand> BattleCommands { get; protected set; } = [new UnravelingAttack()];
+        
+        public TheUncodedOne()
+        {
+            BattleCommands = [new UnravelingAttack()];
+        }
     }
 }

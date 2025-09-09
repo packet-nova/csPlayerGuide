@@ -28,62 +28,6 @@ namespace Level52TheFinalBattle.Battle
             _inputHandler = new InputHandler();
         }
 
-        public static Battle SingleSkeletonBattle(
-        TrueProgrammer trueProgrammer,
-        Player heroPlayer,
-        Player monsterPlayer)
-        {
-            var skeleton = new Skeleton();
-            var heroParty = new BattleParty([trueProgrammer], heroPlayer);
-            var monsterParty = new BattleParty([skeleton], monsterPlayer);
-            var consoleLogger = new ConsoleLogger();
-            skeleton.EquippedItems.Add(new Dagger());
-
-            return new Battle(heroParty, monsterParty, consoleLogger);
-        }
-
-        public static Battle TwoSkeletonBattle(
-        TrueProgrammer trueProgrammer,
-        Player heroPlayer,
-        Player monsterPlayer)
-        {
-            var skeleton = new Skeleton();
-            var skeleton2 = new Skeleton();
-            var heroParty = new BattleParty([trueProgrammer], heroPlayer);
-            var monsterParty = new BattleParty([skeleton, skeleton2], monsterPlayer);
-            var consoleLogger = new ConsoleLogger();
-
-            monsterParty.Items.Add(new Dagger());
-            monsterParty.Items.Add(new Dagger());
-
-            return new Battle(heroParty, monsterParty, consoleLogger);
-        }
-        public static Battle ZombieBattle(
-        TrueProgrammer trueProgrammer,
-        Player heroPlayer,
-        Player monsterPlayer)
-        {
-            var zombie = new Zombie();
-            var heroParty = new BattleParty([trueProgrammer], heroPlayer);
-            var monsterParty = new BattleParty([zombie], monsterPlayer);
-            var consoleLogger = new ConsoleLogger();
-
-            return new Battle(heroParty, monsterParty, consoleLogger);
-        }
-
-        public static Battle CodedOneBattle(
-        TrueProgrammer trueProgrammer,
-        Player heroPlayer,
-        Player monsterPlayer)
-        {
-            var codedOne = new TheUncodedOne();
-            var heroParty = new BattleParty([trueProgrammer], heroPlayer);
-            var monsterParty = new BattleParty([codedOne], monsterPlayer);
-            var consoleLogger = new ConsoleLogger();
-
-            return new Battle(heroParty, monsterParty, consoleLogger);
-        }
-
         public void ExecuteTurn()
         {
             // The enemy party is relative to the current active party.

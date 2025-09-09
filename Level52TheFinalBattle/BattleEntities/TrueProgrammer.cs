@@ -1,4 +1,5 @@
-﻿using Level52TheFinalBattle.BattleCommands;
+﻿using Level52TheFinalBattle.Battle;
+using Level52TheFinalBattle.BattleCommands;
 using Level52TheFinalBattle.Item;
 
 namespace Level52TheFinalBattle.BattleEntities
@@ -10,8 +11,9 @@ namespace Level52TheFinalBattle.BattleEntities
         public TrueProgrammer(string name)
         {
             Name = name;
-            EquippedItems.Add(new Sword());
+            EquippedItems = [new Sword()];
             BattleCommands = [new Punch()];
+            DamageModifiers = [new ObjectSight()];
             AddBattleCommandsFromGear();
         }
     }

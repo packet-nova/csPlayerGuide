@@ -1,4 +1,5 @@
 ﻿using Level52TheFinalBattle.BattleEntities;
+using Level52TheFinalBattle.Item;
 
 namespace Level52TheFinalBattle.Battle
 {
@@ -20,6 +21,7 @@ namespace Level52TheFinalBattle.Battle
             };
 
             var monsterParty = new BattleParty(monsters, monsterController);
+            monsterParty.Items.Add(new LesserHealingPotion());
 
             return new BattleData()
             {

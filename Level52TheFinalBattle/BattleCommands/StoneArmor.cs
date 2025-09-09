@@ -13,7 +13,7 @@ namespace Level52TheFinalBattle.BattleCommands
                 return damage;
             }
             Console.WriteLine($"{target.Name}'s {Name} reduces the damage done by 1.");
-            return damage - 1;
+            return Math.Max(0, damage - 1);
         }
     }
 }
