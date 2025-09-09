@@ -1,6 +1,5 @@
 ﻿using Level52TheFinalBattle.BattleEntities;
 
-
 namespace Level52TheFinalBattle.Battle
 {
     public class BattleGenerator
