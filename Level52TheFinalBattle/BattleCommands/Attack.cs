@@ -6,7 +6,7 @@ namespace Level52TheFinalBattle.BattleCommands
     {
         public abstract string Name { get; }
         public abstract int BaseDamage { get; }
-        public abstract DamageType Type { get; }
+        public abstract DamageType DamageType { get; }
 
         protected readonly Random _rng = new();
         public virtual double ChanceToHit => 1.0;
@@ -22,9 +22,9 @@ namespace Level52TheFinalBattle.BattleCommands
             {
                 foreach (var modifiers in target.DamageModifiers)
                 {
-                    damage = modifiers.ModifyDamage(source, target, damage);
+                    damage = modifiers.ModifyDamage(source, target, damage, DamageType);
                 }
-                Console.WriteLine($"{source.Name}'s {Name} deals {damage} damage to {target.Name}.");
+                Console.WriteLine($"{source.Name}'s {Name} deals {damage} {DamageType} damage to {target.Name}.");
                 target.TakeDamage(damage);
             }
             else

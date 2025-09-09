@@ -4,8 +4,7 @@
     {
         public override string Name => "Quick Shot";
         public override int BaseDamage => 3;
-        public override DamageType Type => DamageType.Physical;
-
+        public override DamageType DamageType => DamageType.Physical;
         public override double ChanceToHit => .5;
     }
 }

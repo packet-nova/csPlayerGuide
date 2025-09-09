@@ -7,6 +7,6 @@ namespace Level52TheFinalBattle.BattleCommands
         public override string Name => "Punch";
         public override int BaseDamage => 1;
 
-        public override DamageType Type => DamageType.Physical;
+        public override DamageType DamageType => DamageType.Physical;
     }
 }
