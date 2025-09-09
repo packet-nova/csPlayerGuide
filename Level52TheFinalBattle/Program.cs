@@ -1,5 +1,7 @@
 ﻿using Level52TheFinalBattle.BattleEntities;
 
+Console.Title = "The Final Battle";
+
 TrueProgrammer trueProgrammer = new(CreateTrueProgrammer());
 
 Console.WriteLine("What type of game do you want to play?");
