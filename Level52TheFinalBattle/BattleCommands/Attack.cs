@@ -19,9 +19,9 @@ namespace Level52TheFinalBattle.BattleCommands
 
             if (IsHit)
             {
-                if (target is StoneAmarok amarok && amarok.Armor != null)
+                foreach (var modifiers in target.DamageModifiers)
                 {
-                    damage = amarok.Armor.ModifyDamage(amarok, BaseDamage);
+                    damage = modifiers.ModifyDamage(source, target, damage);
                 }
                 Console.WriteLine($"{source.Name}'s {Name} deals {damage} damage to {target.Name}.");
                 target.TakeDamage(damage);

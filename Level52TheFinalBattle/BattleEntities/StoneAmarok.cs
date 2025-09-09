@@ -1,4 +1,5 @@
-﻿using Level52TheFinalBattle.BattleCommands;
+﻿using Level52TheFinalBattle.Battle;
+using Level52TheFinalBattle.BattleCommands;
 
 namespace Level52TheFinalBattle.BattleEntities
 {
@@ -8,6 +9,6 @@ namespace Level52TheFinalBattle.BattleEntities
         public override int MaxHP => 4;
         public override int Challenge => 2;
         public override List<IBattleCommand> BattleCommands { get; protected set; } = [new Bite()];
-        public StoneArmor Armor => new();
+        public override List<IDamageModifier> DamageModifiers { get; protected set; } = [new StoneArmor()];
     }
 }

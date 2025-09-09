@@ -13,6 +13,8 @@ namespace Level52TheFinalBattle.BattleEntities
 
         List<IBattleCommand> BattleCommands { get; }
         List<IEquippable> EquippedItems { get; }
+        List<IDamageModifier> DamageModifiers { get; }
+
 
         void TakeDamage(int damageValue);
         void Heal(int amount);
