@@ -6,5 +6,6 @@ namespace Level52TheFinalBattle.BattleCommands
     {
         public override string Name => "Infectious Bite";
         public override int BaseDamage => 1;
+        public override DamageType Type => DamageType.Physical;
     }
 }

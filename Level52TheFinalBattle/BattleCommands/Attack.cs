@@ -6,6 +6,7 @@ namespace Level52TheFinalBattle.BattleCommands
     {
         public abstract string Name { get; }
         public abstract int BaseDamage { get; }
+        public abstract DamageType Type { get; }
 
         protected readonly Random _rng = new();
         public virtual double ChanceToHit => 1.0;

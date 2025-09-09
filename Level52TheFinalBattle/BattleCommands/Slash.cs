@@ -6,5 +6,6 @@ namespace Level52TheFinalBattle.BattleCommands
     {
         public override string Name => "Slash";
         public override int BaseDamage => 2;
+        public override DamageType Type => DamageType.Physical;
     }
 }

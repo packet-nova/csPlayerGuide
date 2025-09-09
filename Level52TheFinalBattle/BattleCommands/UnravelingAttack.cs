@@ -1,11 +1,9 @@
-﻿using Level52TheFinalBattle.BattleEntities;
-using Level52TheFinalBattle.BattleCommands;
-
-namespace Level52TheFinalBattle.BattleCommands
+﻿namespace Level52TheFinalBattle.BattleCommands
 {
     public class UnravelingAttack : Attack
     {
         public override string Name => "Unraveling Attack";
-        public override int BaseDamage => _rng.Next(3);
+        public override int BaseDamage => _rng.Next(4);
+        public override DamageType Type => DamageType.Decoding;
     }
 }

@@ -1,9 +1,9 @@
-﻿
-namespace Level52TheFinalBattle.BattleCommands
+﻿namespace Level52TheFinalBattle.BattleCommands
 {
     public class Bite : Attack
     {
         public override string Name => "Bite";
         public override int BaseDamage => 1;
+        public override DamageType Type => DamageType.Physical;
     }
 }
