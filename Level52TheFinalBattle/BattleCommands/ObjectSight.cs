@@ -1,7 +1,6 @@
-﻿using Level52TheFinalBattle.BattleCommands;
-using Level52TheFinalBattle.BattleEntities;
+﻿using Level52TheFinalBattle.BattleEntities;
 
-namespace Level52TheFinalBattle.Battle
+namespace Level52TheFinalBattle.BattleCommands
 {
     public class ObjectSight : IDamageModifier
     {

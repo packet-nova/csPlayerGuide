@@ -1,5 +1,4 @@
-﻿using Level52TheFinalBattle.Battle;
-using Level52TheFinalBattle.BattleEntities;
+﻿using Level52TheFinalBattle.BattleEntities;
 
 namespace Level52TheFinalBattle.BattleCommands
 {
