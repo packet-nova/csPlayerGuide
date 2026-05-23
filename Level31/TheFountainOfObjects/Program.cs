@@ -38,7 +38,6 @@ public interface IInteractable
 }
 
 public record struct Location(int x, int y);
-
 public enum Direction { North, South, East, West }
 public enum RoomType { Empty, Entrance, Fountain, Encounter, Pit, MapBoundary }
 public enum GameDifficulty { Easy, Medium, Hard }
