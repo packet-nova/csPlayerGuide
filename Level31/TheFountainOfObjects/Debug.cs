@@ -2,10 +2,6 @@
 {
     public static bool Enabled { get; set; } = false;
 
-
-    /// <summary>
-    /// Prints out debug information to the console.
-    /// </summary>
     public static void DebugOutput(Game game)
     {
         if (!Enabled) return;

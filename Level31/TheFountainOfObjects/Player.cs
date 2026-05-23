@@ -26,12 +26,6 @@
         CheckDirection(game, Direction.West, new Location(Location.x, Location.y - 1));
     }
 
-    /// <summary>
-    /// Checks what's in a specific direction and reports it to the player.
-    /// </summary>
-    /// <param name="game">The current game state</param>
-    /// <param name="direction">The direction to check</param>
-    /// <param name="locationToCheck">The location coordinates to examine</param>
     private void CheckDirection(Game game, Direction direction, Location locationToCheck)
     {
         if (!game.Map.IsOutOfBounds(locationToCheck.x, locationToCheck.y))

@@ -15,9 +15,6 @@
         _maelstrom = game.Maelstrom;
     }
 
-    /// <summary>
-    /// Processes the player's action based on the input string.
-    /// </summary>
     public void ProcessAction(string input)
     {
         // Process movement commands
@@ -29,12 +26,9 @@
             _player.Move(Direction.East, _map);
         else if (input == "move west" || input == "w" || input == "west")
             _player.Move(Direction.West, _map);
-
-        // Player look command
         else if (input == "look" || input == "l")
             _player.Look(_game);
 
-        // Process additional commands
         else if (input == "help" || input == "h") GameUI.HelpMessage();
         else if (input == "debug")
         {

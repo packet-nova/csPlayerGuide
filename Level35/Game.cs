@@ -6,7 +6,7 @@
     public Player P1;
     public Player P2;
 
-    private int cookie;
+    private int _cookie;
 
     public Game()
     {
@@ -15,7 +15,7 @@
         P2 = new("Player 2");
         CurrentPlayer = P1;
         Random random = new();
-        cookie = random.Next(10);
+        _cookie = random.Next(10);
     }
 
     public void Run()
@@ -49,7 +49,7 @@
             Console.WriteLine("Number must be between 0 and 9.");
         }
 
-        else if (intChoice == cookie)
+        else if (intChoice == _cookie)
         {
             IsGameOver = true;
             Console.WriteLine($"You ate the oatmeal raisin cookie. You lose!");
